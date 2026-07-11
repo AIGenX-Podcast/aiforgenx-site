@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>James's Lemonade Stand Tycoon</title>
+    <style>
+        body {
+            background-color: #FFF200; /* Bright Yellow */
+            font-family: 'Comic Sans MS', 'Chalkboard SE', sans-serif;
+            text-align: center;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .game-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: #FFFFFF;
+            border: 8px solid #FF1493; /* Bright Pink */
+            border-radius: 20px;
+            padding: 20px;
+            box-shadow: 0 10px 0 #CC0066;
+        }
+
+        h1 {
+            color: #FF1493;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 2.2em;
+            margin-top: 0;
+        }
+
+        .header-stats {
+            background: #FF1493;
+            color: #FFF200;
+            padding: 15px;
+            border-radius: 10px;
+            display: flex;
+            justify-content: space-between;
+            font-size: 1.2em;
+            font-weight: bold;
+            text-shadow: 1px 1px 2px #000;
+        }
+
+        .panels {
+            display: flex;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .panel {
+            flex: 1;
+            background: #FFE6F2;
+            border: 4px solid #FF1493;
+            border-radius: 15px;
+            padding: 20px;
+            text-align: left;
+        }
+
+        .panel h2 {
+            text-align: center;
+            background: #FFF200;
+            color: #FF1493;
+            margin: -20px -20px 20px -20px;
+            padding: 10px;
+            border-radius: 10px 10px 0 0;
+            border-bottom: 4px solid #FF1493;
+        }
+
+        .slider-group {
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+
+        input[type="range"] {
+            width: 100%;
+            accent-color: #FF1493;
+            cursor: pointer;
+        }
+
+        .cost-display {
+            color: #FF1493;
+            font-size: 1.4em;
+            text-align: center;
+        }
+
+        .action-btn {
+            background: #FF1493;
+            color: #FFF200;
+            font-size: 1.5em;
+            padding: 15px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            width: 100%;
+            font-weight: bold;
+            box-shadow: 0 5px 0 #CC0066;
+            text-transform: uppercase;
+            transition: transform 0.1s;
+        }
+
+        .action-btn:active {
+            transform: translateY(5px);
+            box-shadow: none;
+        }
+
+        .action-btn:disabled {
+            background: #ccc;
+            color: #666;
+            box-shadow: 0 5px 0 #999;
+            cursor: not-allowed;
+        }
+
+        .summary-line {
+            display: flex;
+            justify-content: space-between;
+            font-size: 1.1em;
+            margin-bottom: 10px;
+        }
+
+        .divider {
+            height: 2px;
+            background: #FF1493;
+            margin: 15px 0;
+        }
+
+        .profit-loss {
+            font-size: 1.8em;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        #warning {
+            color: red;
+            text-align: center;
+            font-weight: bold;
+            height: 20px;
+        }
+
+        @media (max-width: 600px) {
+            .panels {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="game-container">
+        <h1>🍋 James's Lemonade Stand Tycoon 🍋</h1>
+        
+        <div class="header-stats">
+            <span id="day-display">Day: 1</span>
+            <span id="weather-display">Weather: ☀️ Sunny</span>
+            <span id="cash-display">Cash: $75.00</span>
+        </div>
+
+        <div class="panels">
+            <!-- SETUP PANEL -->
+            <div class="panel">
+                <h2>Day Setup</h2>
+                
+                <div class="slider-group">
+                    <label>Set Price per Cup: $<span id="price-val">1.50</span></label>
+                    <input type="range" id="price" min="0.50" max="5.00" step="0.10" value="1.50" oninput="updateUI()">
+                </div>
+
+                <h3>Buy Supplies</h3>
+                
+                <div class="slider-group">
+                    <label>Lemons ($0.20): <span id="lemons-val">30</span></label>
+                    <input type="range" id="lemons" min="0" max="100" value="30" oninput="updateUI()">
+                </div>
+
+                <div class="slider-group">
+                    <label>Sugar ($0.15): <span id="sugar-val">20</span></label>
+                    <input type="range" id="sugar" min="0" max="100" value="20" oninput="updateUI()">
+                </div>
+
+                <div class="slider-group">
+                    <label>Ice ($0.10): <span id="ice-val">100</span></label>
+                    <input type="range" id="ice" min="0" max="200" value="100" oninput="updateUI()">
+                </div>
+
+                <h3 class="cost-display">Total Cost: $<span id="cost-display">19.00</span></h3>
+                <p id="warning"></p>
+
+                <button id="start-btn" class="action-btn" onclick="startDay()">START DAY!</button>
+            </div>
+
+            <!-- SUMMARY PANEL -->
+            <div class="panel">
+                <h2>Daily Summary</h2>
+                <div id="summary-content">
+                    <p style="text-align: center; font-style: italic; color: #666;">Set your price and buy supplies to see how much you make today!</p>
+                </div>
+                <button id="next-day-btn" class="action-btn" style="display:none; margin-top: 20px; background: #FFF200; color: #FF1493; box-shadow: 0 5px 0 #CCB100;" onclick="nextDay()">NEXT DAY ➡️</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let day = 1;
+        let cash = 75.00;
+        let currentWeather = "☀️ Sunny";
+        const weatherTypes = ["☀️ Sunny", "☁️ Cloudy", "🌧️ Rainy", "🔥 Heatwave"];
+
+        function updateUI() {
+            const price = parseFloat(document.getElementById('price').value).toFixed(2);
+            const lemons = parseInt(document.getElementById('lemons').value);
+            const sugar = parseInt(document.getElementById('sugar').value);
+            const ice = parseInt(document.getElementById('ice').value);
+
+            document.getElementById('price-val').innerText = price;
+            document.getElementById('lemons-val').innerText = lemons;
+            document.getElementById('sugar-val').innerText = sugar;
+            document.getElementById('ice-val').innerText = ice;
+
+            const cost = (lemons * 0.20) + (sugar * 0.15) + (ice * 0.10);
+            document.getElementById('cost-display').innerText = cost.toFixed(2);
+
+            const startBtn = document.getElementById('start-btn');
+            if (cost > cash) {
+                document.getElementById('warning').innerText = "Not enough cash! Lower your supplies.";
+                startBtn.disabled = true;
+            } else {
+                document.getElementById('warning').innerText = "";
+                startBtn.disabled = false;
+            }
+        }
+
+        function startDay() {
+            const price = parseFloat(document.getElementById('price').value);
+            const lemons = parseInt(document.getElementById('lemons').value);
+            const sugar = parseInt(document.getElementById('sugar').value);
+            const ice = parseInt(document.getElementById('ice').value);
+
+            const cost = (lemons * 0.20) + (sugar * 0.15) + (ice * 0.10);
+
+            // Deduct cost upfront
+            cash -= cost;
+
+            // RECIPE LOGIC: Assume it takes 1 Lemon, 1 Sugar, and 2 Ice to make 1 Cup of Lemonade
+            const possibleCups = Math.floor(Math.min(lemons, sugar, ice / 2));
+
+            // DEMAND LOGIC: Random base demand + weather modifier - price modifier
+            let demand = Math.floor(Math.random() * 20) + 10; 
+
+            if (currentWeather.includes("Sunny")) demand += 15;
+            if (currentWeather.includes("Heatwave")) demand += 35;
+            if (currentWeather.includes("Rainy")) demand -= 15;
+            if (currentWeather.includes("Cloudy")) demand -= 5;
+
+            // Lower price = higher demand
+            if (price <= 1.00) demand += 20;
+            else if (price >= 2.50) demand -= 15;
+            else if (price >= 4.00) demand -= 30;
+
+            if (demand < 0) demand = 0;
+
+            // You can only sell what you have supplies for
+            const cupsSold = Math.min(demand, possibleCups);
+            const revenue = cupsSold * price;
+            const profit = revenue - cost;
+
+            // Add revenue to cash
+            cash += revenue;
+
+            // Render the Summary
+            let profitColor = profit >= 0 ? '#00cc00' : '#ff0000';
+            
+            document.getElementById('summary-content').innerHTML = `
+                <div class="summary-line"><span><strong>Cups Made:</strong></span> <span>${possibleCups}</span></div>
+                <div class="summary-line"><span><strong>Cups Sold:</strong></span> <span>${cupsSold}</span></div>
+                <div class="summary-line"><span><strong>Customer Demand:</strong></span> <span>${demand}</span></div>
+                <div class="divider"></div>
+                <div class="summary-line"><span><strong>Revenue:</strong></span> <span>$${revenue.toFixed(2)}</span></div>
+                <div class="summary-line"><span><strong>Expenses:</strong></span> <span>$${cost.toFixed(2)}</span></div>
+                <div class="divider"></div>
+                <div class="profit-loss" style="color: ${profitColor};">
+                    ${profit >= 0 ? 'PROFIT:' : 'LOSS:'} $${Math.abs(profit).toFixed(2)}
+                </div>
+            `;
+
+            document.getElementById('cash-display').innerText = `Cash: $${cash.toFixed(2)}`;
+            document.getElementById('start-btn').disabled = true;
+            document.getElementById('next-day-btn').style.display = "block";
+            
+            // Disable sliders during the day
+            document.getElementById('price').disabled = true;
+            document.getElementById('lemons').disabled = true;
+            document.getElementById('sugar').disabled = true;
+            document.getElementById('ice').disabled = true;
+        }
+
+        function nextDay() {
+            day++;
+            currentWeather = weatherTypes[Math.floor(Math.random() * weatherTypes.length)];
+
+            document.getElementById('day-display').innerText = `Day: ${day}`;
+            document.getElementById('weather-display').innerText = `Weather: ${currentWeather}`;
+
+            document.getElementById('summary-content').innerHTML = `
+                <p style="text-align: center; font-style: italic; color: #666;">Set your price and buy supplies to see how much you make today!</p>
+            `;
+            
+            document.getElementById('start-btn').disabled = false;
+            document.getElementById('next-day-btn').style.display = "none";
+
+            // Re-enable sliders
+            document.getElementById('price').disabled = false;
+            document.getElementById('lemons').disabled = false;
+            document.getElementById('sugar').disabled = false;
+            document.getElementById('ice').disabled = false;
+            
+            updateUI(); // Re-check if they have enough cash for default slider values
+        }
+
+        // Initialize on load
+        updateUI();
+    </script>
+</body>
+</html>
