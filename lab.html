@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My AI Lab — AI for GenX | Marisa Wilson</title>
+<meta name="description" content="Things I've built. Live AI tools and interactive projects made and shipped by Marisa Wilson, creator of AI for GenX.">
+<link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,500&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --brand-black:#000; --brand-teal:#3C7F72; --brand-rust:#992800;
+    --brand-red-orange:#D34A23; --brand-amber:#FFAF00; --brand-cream:#EFE2DD;
+    --brand-sage:#6D9E8F; --brand-burnt-orange:#C86701; --brand-coral:#ED8042;
+    --brand-soft-gold:#FDD476; --ink:#191412; --muted-on-black:#C9BFB9; --muted-on-cream:#5D534E;
+    --display:"Abril Fatface","Bodoni 72",Didot,Georgia,serif;
+    --editorial:"Cormorant Garamond",Georgia,serif;
+    --body:"Poppins",Avenir,"Segoe UI",system-ui,sans-serif;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;}}
+  body{font-family:var(--body);background:var(--brand-black);color:#fff;font-weight:300;line-height:1.7;-webkit-font-smoothing:antialiased;}
+  .stripe-bar{background:linear-gradient(to bottom,#3C7F72 25%,#992800 25% 50%,#D34A23 50% 75%,#FFAF00 75%);height:16px;width:100%;}
+  .stripe-rule{background:linear-gradient(to bottom,#3C7F72 25%,#992800 25% 50%,#D34A23 50% 75%,#FFAF00 75%);height:8px;width:88px;border:none;margin:0;}
+  .wrap{max-width:1060px;margin:0 auto;padding:0 24px;}
+
+  /* Nav */
+  nav{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;padding:22px 0;}
+  .wordmark img{height:52px;width:auto;display:block;}
+  nav ul{display:flex;gap:26px;list-style:none;flex-wrap:wrap;align-items:center;}
+  nav ul a{color:var(--muted-on-black);text-decoration:none;font-size:0.78rem;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;}
+  nav ul a:hover,nav ul a:focus-visible{color:var(--brand-amber);}
+  nav ul a.lab-link{color:var(--brand-amber);font-weight:600;}
+  nav ul a.lab-link[aria-current="page"]{border-bottom:2px solid var(--brand-amber);padding-bottom:3px;}
+
+  /* Header */
+  header.lab-hero{padding:64px 0 40px;}
+  .eyebrow{font-size:0.75rem;font-weight:600;letter-spacing:0.24em;text-transform:uppercase;color:var(--brand-amber);margin-bottom:20px;}
+  header.lab-hero h1{font-family:var(--display);font-weight:400;font-size:clamp(2.4rem,6vw,4.2rem);line-height:1.06;text-wrap:balance;margin-bottom:24px;}
+  header.lab-hero p{font-size:1.05rem;max-width:60ch;color:var(--muted-on-black);}
+  header.lab-hero p strong{color:#fff;font-weight:500;}
+
+  /* Card grid */
+  .lab-grid{display:grid;grid-template-columns:1fr 1fr;gap:32px;padding:24px 0 72px;}
+  @media (max-width:760px){.lab-grid{grid-template-columns:1fr;}}
+  .lab-card{background:var(--brand-cream);color:var(--ink);border-radius:6px;overflow:hidden;display:flex;flex-direction:column;}
+  .lab-thumb{width:100%;aspect-ratio:16/10;display:block;}
+  .lab-body{padding:28px 28px 30px;display:flex;flex-direction:column;flex:1;}
+  .lab-tag{font-size:0.68rem;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:var(--brand-rust);margin-bottom:12px;}
+  .lab-card h2{font-family:var(--display);font-weight:400;font-size:1.7rem;line-height:1.1;margin-bottom:12px;}
+  .lab-card p{font-size:0.95rem;color:var(--muted-on-cream);margin-bottom:24px;}
+  .lab-card p strong{color:var(--ink);font-weight:500;}
+  .lab-cta{margin-top:auto;}
+  .btn{display:inline-block;text-decoration:none;font-weight:600;font-size:0.9rem;letter-spacing:0.02em;padding:13px 26px;border-radius:2px;transition:transform 120ms ease,background 120ms ease;}
+  .btn:hover,.btn:focus-visible{transform:translateY(-2px);}
+  .btn-teal{background:var(--brand-teal);color:#fff;}
+  .btn-teal:hover,.btn-teal:focus-visible{background:var(--brand-sage);}
+  .btn-rust{background:var(--brand-rust);color:#fff;}
+  .btn-rust:hover,.btn-rust:focus-visible{background:var(--brand-burnt-orange);}
+
+  /* Footer */
+  footer{padding:32px 0 44px;font-size:0.82rem;color:var(--muted-on-black);}
+  footer a{color:var(--brand-teal);text-decoration:none;}
+  footer a:hover{color:var(--brand-amber);}
+  .foot-inner{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;}
+</style>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%23000'/%3E%3Crect x='10' y='16' width='44' height='8' fill='%233C7F72'/%3E%3Crect x='10' y='26' width='44' height='8' fill='%23992800'/%3E%3Crect x='10' y='36' width='44' height='8' fill='%23D34A23'/%3E%3Crect x='10' y='46' width='44' height='8' fill='%23FFAF00'/%3E%3C/svg%3E">
+<meta property="og:title" content="My AI Lab — AI for GenX">
+<meta property="og:description" content="Live AI tools and interactive projects, designed, built, and shipped by Marisa Wilson.">
+<meta property="og:url" content="https://aiforgenxpodcast.com/lab.html">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://aiforgenxpodcast.com/assets/og.png">
+</head>
+<body>
+
+<div class="stripe-bar"></div>
+
+<div class="wrap">
+  <nav aria-label="Main">
+    <a class="wordmark" href="index.html"><img src="assets/logo.png" alt="AI for GenX"></a>
+    <ul>
+      <li><a href="index.html#darlene">Ask Darlene</a></li>
+      <li><a href="index.html#read">Read</a></li>
+      <li><a href="index.html#watch">Watch &amp; Listen</a></li>
+      <li><a href="index.html#about">About</a></li>
+      <li><a href="index.html#connect">Connect</a></li>
+      <li><a class="lab-link" href="lab.html" aria-current="page">My AI Lab</a></li>
+    </ul>
+  </nav>
+</div>
+
+<header class="lab-hero wrap">
+  <hr class="stripe-rule" style="margin-bottom:20px;">
+  <p class="eyebrow">My AI Lab</p>
+  <h1>Things I've built.</h1>
+  <p>
+    I learn AI by making things with it, in public. These are live tools and projects
+    I designed, built, and shipped myself. <strong>Poke around. They all work.</strong>
+    More arrive as I build them.
+  </p>
+</header>
+
+<!--
+  ADD A TOOL LATER:
+  Copy one entire <article class="lab-card"> ... </article> block below.
+  Swap four things: the thumbnail SVG, the <h2> title, the <p> description,
+  and the button's href + label. Commit to GitHub and Vercel redeploys itself.
+  Keep it to real, working, shipped things.
+-->
+<section class="wrap lab-grid" aria-label="Projects">
+
+  <!-- CARD: Ask Darlene -->
+  <article class="lab-card">
+    <svg class="lab-thumb" viewBox="0 0 320 200" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Ask Darlene">
+      <rect width="320" height="200" fill="#3C7F72"/>
+      <rect y="0" width="320" height="6" fill="#992800"/><rect y="6" width="320" height="6" fill="#D34A23"/><rect y="12" width="320" height="6" fill="#FFAF00"/>
+      <!-- speech bubble -->
+      <rect x="72" y="52" width="176" height="86" rx="18" fill="#EFE2DD"/>
+      <path d="M104 138 L104 164 L134 138 Z" fill="#EFE2DD"/>
+      <!-- prompt spark -->
+      <g stroke="#D34A23" stroke-width="7" stroke-linecap="round">
+        <line x1="160" y1="70" x2="160" y2="120"/><line x1="135" y1="95" x2="185" y2="95"/>
+        <line x1="143" y1="78" x2="177" y2="112"/><line x1="177" y1="78" x2="143" y2="112"/>
+      </g>
+      <circle cx="160" cy="95" r="6" fill="#FFAF00"/>
+    </svg>
+    <div class="lab-body">
+      <p class="lab-tag">Live tool · AI helper</p>
+      <h2>Ask Darlene</h2>
+      <p>
+        You know what you want AI to do, you just don't know how to ask. Darlene helps
+        you shape the words so the robot gets it the first time. <strong>Free, no signup.</strong>
+      </p>
+      <!-- NOTE: update this href to https://darlene.aiforgenxpodcast.com once the subdomain is wired -->
+      <div class="lab-cta"><a class="btn btn-teal" href="https://darlene-prompt-prototype-lime.vercel.app/">Open Ask Darlene</a></div>
+    </div>
+  </article>
+
+  <!-- CARD: Lake Tahoe Treasures -->
+  <article class="lab-card">
+    <svg class="lab-thumb" viewBox="0 0 320 200" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Lake Tahoe Treasures">
+      <rect width="320" height="200" fill="#FDD476"/>
+      <circle cx="248" cy="52" r="26" fill="#FFAF00"/>
+      <!-- back mountains -->
+      <path d="M0 128 L70 66 L128 112 L196 58 L260 112 L320 78 L320 200 L0 200 Z" fill="#C86701"/>
+      <!-- front mountains -->
+      <path d="M0 150 L58 104 L120 150 L182 100 L250 150 L320 116 L320 200 L0 200 Z" fill="#992800"/>
+      <!-- lake -->
+      <rect x="0" y="150" width="320" height="50" fill="#3C7F72"/>
+      <path d="M40 168 q18 8 36 0 M120 178 q18 8 36 0 M212 166 q18 8 36 0" stroke="#EFE2DD" stroke-width="3" fill="none" opacity="0.7"/>
+      <!-- pin -->
+      <path d="M160 92 c-13 0 -22 10 -22 23 c0 16 22 37 22 37 c0 0 22 -21 22 -37 c0 -13 -9 -23 -22 -23 Z" fill="#EFE2DD"/>
+      <circle cx="160" cy="114" r="8" fill="#992800"/>
+    </svg>
+    <div class="lab-body">
+      <p class="lab-tag">Interactive map · Civic project</p>
+      <h2>Lake Tahoe Treasures</h2>
+      <p>
+        An illustrated, interactive map of eleven beloved Tahoe spots, each paired with
+        the nonprofit that keeps it wild. <strong>Find the place you love. Meet its people.</strong>
+      </p>
+      <div class="lab-cta"><a class="btn btn-rust" href="https://aigenx-podcast.github.io/tahoe-map/">Explore the map</a></div>
+    </div>
+  </article>
+
+</section>
+
+<div class="stripe-bar"></div>
+<footer>
+  <div class="wrap foot-inner">
+    <span>© 2026 Marisa Wilson · AI for GenX</span>
+    <span><a href="index.html">← Back to home</a></span>
+  </div>
+</footer>
+</body>
+</html>

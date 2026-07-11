@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI for GenX — AI literacy for Generation X | Marisa Wilson</title>
+<meta name="description" content="AI literacy for GenX. No hype, no jargon, just real talk. Try Ask Darlene, read the weekly newsletter, and catch the AI for GenX podcast with Marisa Wilson.">
+<meta property="og:title" content="AI for GenX — Pull up a chair. Let's figure this out together.">
+<meta property="og:description" content="AI literacy for Generation X. Try Ask Darlene, read the newsletter, watch the podcast.">
+<meta property="og:url" content="https://aiforgenxpodcast.com/">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%23000'/%3E%3Crect x='10' y='16' width='44' height='8' fill='%233C7F72'/%3E%3Crect x='10' y='26' width='44' height='8' fill='%23992800'/%3E%3Crect x='10' y='36' width='44' height='8' fill='%23D34A23'/%3E%3Crect x='10' y='46' width='44' height='8' fill='%23FFAF00'/%3E%3C/svg%3E">
+<meta property="og:image" content="https://aiforgenxpodcast.com/assets/og.png">
+</head>
+<body>
+<link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,500&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --brand-black: #000000;
+    --brand-teal: #3C7F72;
+    --brand-rust: #992800;
+    --brand-red-orange: #D34A23;
+    --brand-amber: #FFAF00;
+    --brand-cream: #EFE2DD;
+    --brand-sage: #6D9E8F;
+    --brand-burnt-orange: #C86701;
+    --brand-coral: #ED8042;
+    --brand-soft-gold: #FDD476;
+    --ink-on-cream: #191412;
+    --muted-on-black: #C9BFB9;
+    --muted-on-cream: #5D534E;
+    --display: "Abril Fatface", "Bodoni 72", Didot, Georgia, serif;
+    --editorial: "Cormorant Garamond", Georgia, "Times New Roman", serif;
+    --body: "Poppins", Avenir, "Segoe UI", system-ui, sans-serif;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after { animation: none !important; transition: none !important; }
+  }
+
+  body {
+    font-family: var(--body);
+    background: var(--brand-black);
+    color: #FFFFFF;
+    font-weight: 300;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .stripe-bar {
+    background: linear-gradient(to bottom,
+      #3C7F72 25%, #992800 25% 50%, #D34A23 50% 75%, #FFAF00 75%);
+    height: 16px;
+    width: 100%;
+  }
+  .stripe-rule {
+    background: linear-gradient(to bottom,
+      #3C7F72 25%, #992800 25% 50%, #D34A23 50% 75%, #FFAF00 75%);
+    height: 8px;
+    width: 88px;
+    border: none;
+    margin: 0;
+  }
+
+  .wrap { max-width: 1060px; margin: 0 auto; padding: 0 24px; }
+
+  /* ---------- Nav ---------- */
+  nav {
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 16px; flex-wrap: wrap;
+    padding: 22px 0;
+  }
+  .wordmark {
+    font-family: var(--display);
+    font-size: 1.35rem;
+    color: #FFFFFF;
+    text-decoration: none;
+    letter-spacing: 0.01em;
+    display: flex; align-items: center; gap: 10px;
+  }
+  nav ul { display: flex; gap: 26px; list-style: none; flex-wrap: wrap; }
+  nav ul a {
+    color: var(--muted-on-black); text-decoration: none;
+    font-size: 0.78rem; font-weight: 500;
+    letter-spacing: 0.14em; text-transform: uppercase;
+  }
+  nav ul a:hover, nav ul a:focus-visible { color: var(--brand-amber); }
+  nav ul a.lab-link { color: var(--brand-amber); font-weight: 600; }
+
+  /* ---------- Hero ---------- */
+  .hero { padding: 72px 0 96px; }
+  .eyebrow {
+    font-size: 0.75rem; font-weight: 600;
+    letter-spacing: 0.24em; text-transform: uppercase;
+    color: var(--brand-teal);
+    margin-bottom: 22px;
+  }
+  .hero .eyebrow { color: var(--brand-amber); }
+  .hero h1 {
+    font-family: var(--display);
+    font-weight: 400;
+    font-size: clamp(2.6rem, 7vw, 5rem);
+    line-height: 1.06;
+    text-wrap: balance;
+    max-width: 15ch;
+    margin-bottom: 30px;
+  }
+  .hero h1 em {
+    font-style: normal;
+    color: var(--brand-teal);
+  }
+  .hero p.lede {
+    font-size: 1.06rem;
+    max-width: 56ch;
+    color: var(--muted-on-black);
+    margin-bottom: 40px;
+  }
+  .hero p.lede strong { color: #FFFFFF; font-weight: 500; }
+
+  .btn-row { display: flex; gap: 16px; flex-wrap: wrap; align-items: center; }
+  .btn {
+    display: inline-block;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.92rem;
+    letter-spacing: 0.02em;
+    padding: 15px 32px;
+    border-radius: 2px;
+    transition: transform 120ms ease, background 120ms ease, color 120ms ease;
+  }
+  .btn:hover, .btn:focus-visible { transform: translateY(-2px); }
+  .btn-amber { background: var(--brand-amber); color: var(--brand-black); }
+  .btn-amber:hover, .btn-amber:focus-visible { background: var(--brand-soft-gold); }
+  .btn-outline { border: 2px solid var(--brand-teal); color: #FFFFFF; }
+  .btn-outline:hover, .btn-outline:focus-visible { background: var(--brand-teal); }
+  .btn-teal { background: var(--brand-teal); color: #FFFFFF; }
+  .btn-teal:hover, .btn-teal:focus-visible { background: var(--brand-sage); }
+
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 48px;
+    align-items: center;
+  }
+  .hero-mic { justify-self: end; }
+  @media (max-width: 820px) {
+    .hero-grid { grid-template-columns: 1fr; }
+    .hero-mic { display: none; }
+  }
+
+  /* ---------- Sections ---------- */
+  section { padding: 88px 0; }
+  .on-cream { background: var(--brand-cream); color: var(--ink-on-cream); }
+  .on-cream .eyebrow { color: var(--brand-rust); }
+  h2 {
+    font-family: var(--display);
+    font-weight: 400;
+    font-size: clamp(1.9rem, 4.5vw, 3rem);
+    line-height: 1.12;
+    text-wrap: balance;
+    margin: 18px 0 22px;
+  }
+  .section-head .stripe-rule { margin-bottom: 6px; }
+  .section-copy { max-width: 58ch; font-size: 1rem; }
+  .on-cream .section-copy { color: var(--muted-on-cream); }
+  .section-copy strong { font-weight: 500; }
+  .on-cream .section-copy strong { color: var(--ink-on-cream); }
+
+  /* ---------- Darlene ---------- */
+  .darlene-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 56px;
+    align-items: center;
+  }
+  @media (max-width: 820px) { .darlene-grid { grid-template-columns: 1fr; } }
+  .darlene-card {
+    background: var(--brand-black);
+    color: #FFFFFF;
+    padding: 40px 36px 36px;
+    border-radius: 4px;
+    position: relative;
+    overflow: hidden;
+  }
+  .darlene-card::before {
+    content: "";
+    position: absolute; top: 0; left: 0; right: 0;
+    height: 12px;
+    background: linear-gradient(to bottom,
+      #3C7F72 25%, #992800 25% 50%, #D34A23 50% 75%, #FFAF00 75%);
+  }
+  .darlene-card .q {
+    font-family: var(--editorial);
+    font-size: 1.5rem;
+    font-style: italic;
+    line-height: 1.45;
+    margin: 14px 0 20px;
+  }
+  .darlene-card .who {
+    font-size: 0.72rem; font-weight: 600;
+    letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--brand-amber);
+  }
+  .darlene-meta {
+    margin-top: 26px;
+    font-size: 0.85rem;
+    color: var(--muted-on-cream);
+  }
+
+  /* ---------- Media embeds ---------- */
+  .embed-frame {
+    border: 2px solid var(--brand-teal);
+    border-radius: 4px;
+    overflow: hidden;
+    background: #0d0d0d;
+  }
+  .video-shell { position: relative; padding-top: 56.25%; }
+  .video-shell iframe {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%; border: 0;
+  }
+  .substack-shell iframe {
+    display: block; width: 100%; height: 320px; border: 0; background: var(--brand-cream);
+  }
+  .media-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 56px;
+    align-items: start;
+  }
+  @media (max-width: 820px) { .media-grid { grid-template-columns: 1fr; } }
+  .platform-links { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 22px; }
+  .platform-links a {
+    color: #FFFFFF; text-decoration: none;
+    font-size: 0.8rem; font-weight: 500;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    border: 1px solid var(--brand-sage);
+    border-radius: 2px;
+    padding: 9px 16px;
+    transition: background 120ms ease;
+  }
+  .platform-links a:hover, .platform-links a:focus-visible {
+    background: var(--brand-teal); border-color: var(--brand-teal);
+  }
+  .under-embed { margin-top: 18px; font-size: 0.88rem; color: var(--muted-on-black); }
+  .under-embed a { color: var(--brand-amber); }
+
+  /* ---------- About ---------- */
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.4fr;
+    gap: 56px;
+    align-items: center;
+  }
+  @media (max-width: 820px) { .about-grid { grid-template-columns: 1fr; } }
+  .about-photo {
+    width: 100%;
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+    border-radius: 4px;
+    border-bottom: 10px solid;
+    border-image: linear-gradient(to right, #3C7F72 25%, #992800 25% 50%, #D34A23 50% 75%, #FFAF00 75%) 1;
+  }
+  .about-photo-fallback {
+    width: 100%;
+    aspect-ratio: 4 / 5;
+    border-radius: 4px;
+    background: var(--brand-teal);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .pull-quote {
+    font-family: var(--editorial);
+    font-size: clamp(1.5rem, 3vw, 2.1rem);
+    font-style: italic;
+    line-height: 1.4;
+    max-width: 26ch;
+    color: var(--ink-on-cream);
+    margin-top: 28px;
+  }
+
+  /* ---------- Connect / footer ---------- */
+  .connect { text-align: left; }
+  .social-row { display: flex; gap: 14px; flex-wrap: wrap; margin: 30px 0 10px; }
+  .social-row a {
+    color: var(--muted-on-black); text-decoration: none;
+    font-size: 0.8rem; font-weight: 500;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    padding: 8px 0;
+    border-bottom: 2px solid transparent;
+  }
+  .social-row a:hover, .social-row a:focus-visible {
+    color: var(--brand-amber); border-bottom-color: var(--brand-amber);
+  }
+  footer {
+    padding: 34px 0 44px;
+    font-size: 0.82rem;
+    color: var(--muted-on-black);
+  }
+  footer a { color: var(--brand-teal); text-decoration: none; }
+  footer a:hover { color: var(--brand-amber); }
+  .foot-inner { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+</style>
+
+<div class="stripe-bar"></div>
+
+<div class="wrap">
+  <nav aria-label="Main">
+    <a class="wordmark" href="#top"><img src="assets/logo.png" alt="AI for GenX" style="height:52px; width:auto; display:block;"></a>
+    <ul>
+      <li><a href="#darlene">Ask Darlene</a></li>
+      <li><a href="#read">Read</a></li>
+      <li><a href="#watch">Watch &amp; Listen</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#connect">Connect</a></li>
+      <li><a class="lab-link" href="lab.html">My AI Lab</a></li>
+    </ul>
+  </nav>
+</div>
+
+<header class="hero wrap" id="top">
+  <div class="hero-grid">
+    <div>
+      <p class="eyebrow">AI literacy for Generation X</p>
+      <h1>Pull up a chair. Let's figure <em>this</em> out together.</h1>
+      <p class="lede">
+        I'm Marisa Wilson. I spend my week testing AI tools, reading the research,
+        and translating all of it into plain English for the generation that programmed
+        the VCR for the whole family. <strong>No hype. No jargon. Just real talk.</strong>
+      </p>
+      <div class="btn-row">
+        <a class="btn btn-amber" href="https://darlene-prompt-prototype-lime.vercel.app/">Try Ask Darlene</a>
+        <a class="btn btn-outline" href="https://aigenx.substack.com/?utm_source=website&utm_medium=hero">Read the newsletter</a>
+      </div>
+    </div>
+    <div class="hero-mic" aria-hidden="true">
+      <!-- Vintage mic brand mark -->
+      <svg width="150" height="260" viewBox="0 0 150 260" xmlns="http://www.w3.org/2000/svg" role="img">
+        <rect x="45" y="10" width="60" height="100" rx="30" fill="none" stroke="#3C7F72" stroke-width="5"/>
+        <line x1="55" y1="34" x2="95" y2="34" stroke="#3C7F72" stroke-width="4"/>
+        <line x1="55" y1="50" x2="95" y2="50" stroke="#992800" stroke-width="4"/>
+        <line x1="55" y1="66" x2="95" y2="66" stroke="#D34A23" stroke-width="4"/>
+        <line x1="55" y1="82" x2="95" y2="82" stroke="#FFAF00" stroke-width="4"/>
+        <path d="M25 95 a50 50 0 0 0 100 0" fill="none" stroke="#FFFFFF" stroke-width="5" stroke-linecap="round"/>
+        <line x1="75" y1="145" x2="75" y2="195" stroke="#FFFFFF" stroke-width="5"/>
+        <line x1="45" y1="200" x2="105" y2="200" stroke="#FFFFFF" stroke-width="5" stroke-linecap="round"/>
+        <rect x="20" y="228" width="110" height="5" fill="#3C7F72"/>
+        <rect x="20" y="235" width="110" height="5" fill="#992800"/>
+        <rect x="20" y="242" width="110" height="5" fill="#D34A23"/>
+        <rect x="20" y="249" width="110" height="5" fill="#FFAF00"/>
+      </svg>
+    </div>
+  </div>
+</header>
+
+<section class="on-cream" id="darlene">
+  <div class="wrap darlene-grid">
+    <div>
+      <div class="section-head">
+        <hr class="stripe-rule">
+        <p class="eyebrow">The app everyone asks me about</p>
+        <h2>Meet Darlene.</h2>
+      </div>
+      <p class="section-copy">
+        You know what you want AI to do. You just don't know how to ask for it.
+        Darlene does. Tell her what you're working on and she'll help you shape
+        the words, so the robot finally understands what you meant the first time.
+      </p>
+      <p class="section-copy" style="margin-top:14px;">
+        <strong>Free. No signup. No data harvesting.</strong> I designed, tested,
+        and shipped her myself, because prompting shouldn't require a computer
+        science degree or a 22-year-old explaining it to you slowly.
+      </p>
+      <div class="btn-row" style="margin-top:32px;">
+        <a class="btn btn-teal" href="https://darlene-prompt-prototype-lime.vercel.app/">Open Ask Darlene</a>
+      </div>
+    </div>
+    <div>
+      <div class="darlene-card">
+        <p class="who">• Darlene / Your prompt-savvy friend</p>
+        <p class="q">"Honey, stop apologizing to the chatbot. Tell me what you actually need and we'll get you there."</p>
+        <hr class="stripe-rule">
+      </div>
+      <p class="darlene-meta">Built solo. A/B tested, including the humor. Live in production since July 2026.</p>
+    </div>
+  </div>
+</section>
+
+<section id="read">
+  <div class="wrap media-grid">
+    <div>
+      <div class="section-head">
+        <hr class="stripe-rule">
+        <p class="eyebrow">Read</p>
+        <h2>Weekly essays on AI, written for humans.</h2>
+      </div>
+      <p class="section-copy" style="color:var(--muted-on-black);">
+        Every week on Substack I take one AI topic that sounds intimidating and
+        make it make sense. For people who remember when "Google" wasn't a verb
+        and "the cloud" was just weather. <strong style="color:#fff;">Subscribing is free.</strong>
+      </p>
+      <div class="btn-row" style="margin-top:28px;">
+        <a class="btn btn-amber" href="https://aigenx.substack.com/subscribe?utm_source=website&utm_medium=read">Subscribe free</a>
+      </div>
+      <p class="under-embed">
+        Prefer to browse first? <a href="https://aigenx.substack.com/archive?utm_source=website&utm_medium=archive">Read the archive</a>.
+      </p>
+    </div>
+    <div>
+      <div class="embed-frame substack-shell">
+        <iframe src="https://aigenx.substack.com/embed?utm_source=website&utm_medium=embed" title="Subscribe to AI for GenX on Substack" loading="lazy"></iframe>
+      </div>
+      <p class="under-embed">Type your email above and you're in. That's the whole process.</p>
+    </div>
+  </div>
+</section>
+
+<section class="on-cream" id="watch" style="background:var(--brand-cream); color:var(--ink-on-cream);">
+  <div class="wrap">
+    <div class="section-head">
+      <hr class="stripe-rule">
+      <p class="eyebrow">Watch &amp; Listen</p>
+      <h2>The AI for GenX Podcast.</h2>
+    </div>
+    <p class="section-copy" style="margin-bottom:36px;">
+      Come sit with me a moment. New episodes land here automatically,
+      so what you see below is always the latest.
+    </p>
+    <div class="embed-frame video-shell">
+      <iframe
+        src="https://www.youtube.com/embed/videoseries?list=UUohrkrk56FC0I0spK-0fD7g"
+        title="AI for GenX Podcast, latest episodes on YouTube"
+        loading="lazy"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen></iframe>
+    </div>
+    <div class="platform-links" style="margin-top:28px;">
+      <a href="https://www.youtube.com/@AIGenX.Podcast" style="color:var(--ink-on-cream); border-color:var(--brand-teal);">YouTube</a>
+      <a href="https://open.spotify.com/show/6L6VlJIqWGmcHl85nDT6Is" style="color:var(--ink-on-cream); border-color:var(--brand-teal);">Spotify</a>
+      <a href="https://podcasts.apple.com/us/podcast/ai-for-genx-podcast/id1886824309" style="color:var(--ink-on-cream); border-color:var(--brand-teal);">Apple Podcasts</a>
+    </div>
+  </div>
+</section>
+
+<section id="about" style="background:#0d0d0d;">
+  <div class="wrap about-grid">
+    <div style="display:flex; flex-direction:column; align-items:center; gap:22px;">
+      <!-- To swap in a higher-res photo later, replace assets/marisa.png with any square image. -->
+      <img src="assets/marisa.png" alt="Marisa Wilson, laughing, holding an AI for GenX coffee mug"
+           style="width:min(320px, 80%); aspect-ratio:1; border-radius:50%; object-fit:cover; display:block;">
+      <hr class="stripe-rule">
+    </div>
+    <div>
+      <div class="section-head">
+        <hr class="stripe-rule">
+        <p class="eyebrow" style="color:var(--brand-amber);">About</p>
+        <h2>I'm not a tech bro. I'm your sharpest friend with coffee.</h2>
+      </div>
+      <p class="section-copy" style="color:var(--muted-on-black);">
+        Twenty-plus years in content marketing and digital design, in three languages,
+        across everything from global tech launches to scrappy startups. I've learned
+        every new technology wave since dial-up the same way: hands on, in public,
+        until it made sense. Now I'm doing that with AI, and bringing my generation
+        with me.
+      </p>
+      <p class="pull-quote" style="color:#FFFFFF;">
+        "You are not behind. Nobody handed you the manual. That's what I'm for."
+      </p>
+      <div class="btn-row" style="margin-top:30px;">
+        <a class="btn btn-outline" href="https://www.linkedin.com/in/marisawilson/">Connect on LinkedIn</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="connect" class="connect">
+  <div class="wrap">
+    <div class="section-head">
+      <hr class="stripe-rule">
+      <p class="eyebrow">Connect</p>
+      <h2>Come find me.</h2>
+    </div>
+    <p class="section-copy" style="color:var(--muted-on-black);">
+      Daily experiments and honest reactions on Instagram. Everything else, everywhere else.
+      For workshops, speaking, or anything that starts with "would you be open to,"
+      email works best.
+    </p>
+    <div class="social-row">
+      <a href="https://www.instagram.com/aigenx.podcast/">Instagram</a>
+      <a href="https://www.tiktok.com/@aigenx.podcast">TikTok</a>
+      <a href="https://www.youtube.com/@AIGenX.Podcast">YouTube</a>
+      <a href="https://www.facebook.com/aiforgenx">Facebook</a>
+      <a href="https://x.com/AIGenX_">X</a>
+    </div>
+    <div class="btn-row" style="margin-top:22px;">
+      <a class="btn btn-outline" href="mailto:aigenx.podcast@gmail.com">aigenx.podcast@gmail.com</a>
+    </div>
+  </div>
+</section>
+
+<div class="stripe-bar"></div>
+<footer>
+  <div class="wrap foot-inner">
+    <span>© 2026 Marisa Wilson · AI for GenX</span>
+    <span>Built with my AI team. Yes, they have names. <a href="https://aigenx.substack.com/?utm_source=website&utm_medium=footer">That story is coming.</a></span>
+  </div>
+</footer>
+
+</body>
+</html>
