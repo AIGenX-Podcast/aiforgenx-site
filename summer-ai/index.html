@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Summer AI Card Set for High School Summer — AI for GenX</title>
+<link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --brand-black: #000000;
+    --brand-teal: #3C7F72;
+    --brand-rust: #992800;
+    --brand-red-orange: #D34A23;
+    --brand-amber: #FFAF00;
+    --brand-cream: #EFE2DD;
+    --brand-sage: #6D9E8F;
+    --brand-burnt-orange: #C86701;
+    --brand-coral: #ED8042;
+    --brand-soft-gold: #FDD476;
+    --ink: #1c1c1c;
+    --muted: #6f6a64;
+    --hair: #e8e3dd;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body {
+    background: #e6e2dd;
+    font-family: 'Poppins', system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    padding: 24px 0;
+  }
+
+  .sheet {
+    width: 8.5in;
+    margin: 0 auto 28px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .card {
+    background: #ffffff;
+    width: 8.5in;
+    height: 5.5in;
+    display: flex;
+    overflow: hidden;
+    box-shadow: 0 6px 28px rgba(0,0,0,0.13);
+    margin: 10px auto;
+  }
+
+  /* ── LEFT SPINE ── */
+  .spine {
+    flex: none;
+    width: 2.5in;
+    padding: 26px 22px 20px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+  }
+  .spine.dark  { color: #fff; }
+  .spine.light { color: var(--brand-black); }
+
+  .spine::after {
+    content: '';
+    position: absolute;
+    top: 0; bottom: 0; right: 0;
+    width: 5px;
+    background: linear-gradient(to bottom,
+      var(--brand-teal) 25%,
+      var(--brand-rust) 25% 50%,
+      var(--brand-red-orange) 50% 75%,
+      var(--brand-amber) 75%);
+  }
+
+  .spine .kicker {
+    font-size: 8px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
+  .spine.dark  .kicker { color: rgba(255,255,255,0.78); }
+  .spine.light .kicker { color: rgba(0,0,0,0.55); }
+
+  .spine h1 {
+    font-family: 'Abril Fatface', Georgia, serif;
+    font-weight: 400;
+    font-size: 27px;
+    line-height: 1.02;
+    margin-bottom: 9px;
+  }
+  .spine .what {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-style: italic;
+    font-size: 13px;
+    line-height: 1.32;
+  }
+  .spine.dark  .what { color: rgba(255,255,255,0.86); }
+  .spine.light .what { color: rgba(0,0,0,0.64); }
+
+  .powers {
+    margin-top: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    padding-top: 14px;
+  }
+  .powers .eyebrow {
+    font-size: 7.5px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+  .spine.dark  .powers .eyebrow { color: rgba(255,255,255,0.68); }
+  .spine.light .powers .eyebrow { color: rgba(0,0,0,0.55); }
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 10px 4px 8px;
+    border-radius: 20px;
+    font-size: 9.5px;
+    font-weight: 500;
+    line-height: 1;
+    align-self: flex-start;
+  }
+  .chip svg { width: 12px; height: 12px; flex: none; }
+  .spine.dark .chip {
+    background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.30);
+    color: #fff;
+  }
+  .spine.light .chip {
+    background: rgba(0,0,0,0.08);
+    border: 1px solid rgba(0,0,0,0.20);
+    color: #000;
+  }
+
+  /* ── RIGHT CONTENT ── */
+  .content {
+    flex: 1;
+    padding: 20px 26px 14px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* steps */
+  .step { display: flex; gap: 10px; margin-bottom: 10px; }
+  .step-num {
+    flex: none;
+    width: 20px; height: 20px;
+    border-radius: 50%;
+    background: var(--accent, var(--brand-teal));
+    color: #fff;
+    font-size: 10.5px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 1px;
+  }
+  .step-title { font-size: 12px; font-weight: 600; color: var(--brand-black); margin-bottom: 2px; }
+  .step-desc { font-size: 10.5px; font-weight: 300; color: #555; line-height: 1.4; }
+
+  /* activities */
+  .activity { margin-bottom: 10px; }
+  .activity-head { display: flex; align-items: baseline; gap: 7px; margin-bottom: 2px; }
+  .activity-num {
+    font-family: 'Abril Fatface', serif;
+    font-size: 14px;
+    color: var(--accent, var(--brand-burnt-orange));
+    line-height: 1;
+  }
+  .activity-name { font-size: 12px; font-weight: 600; color: var(--brand-black); }
+  .activity-desc {
+    font-size: 10.5px; font-weight: 300; color: #555;
+    line-height: 1.4; margin: 0 0 5px 21px;
+  }
+
+  /* prompt box */
+  .prompt {
+    padding: 7px 11px;
+    background: #faf8f5;
+    border: 1px solid var(--hair);
+    border-left: 3px solid var(--accent, var(--brand-teal));
+    border-radius: 3px;
+  }
+  .activity .prompt { margin-left: 21px; }
+  .step .prompt { margin-top: 6px; }
+  .prompt .lbl {
+    font-size: 7px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    font-weight: 600;
+    color: var(--accent, var(--brand-teal));
+    margin-bottom: 3px;
+  }
+  .prompt .txt {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 11.5px;
+    line-height: 1.36;
+    color: #33302c;
+  }
+
+  .note {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 10px;
+    color: var(--muted);
+    margin: 4px 0 0 21px;
+  }
+
+  /* footer line */
+  .foot {
+    margin-top: auto;
+    padding-top: 8px;
+    border-top: 1px solid var(--hair);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .brandmark { display: flex; align-items: center; gap: 6px; }
+  .brandmark .name { font-family: 'Abril Fatface', serif; font-size: 11px; color: var(--brand-black); }
+  .brandmark .est { font-size: 6.5px; letter-spacing: 0.14em; color: var(--muted); }
+  .foot .tip { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 10px; color: var(--muted); }
+
+  @media print {
+    html, body { background: #fff; padding: 0; }
+    .sheet { width: 100%; margin: 0; page-break-after: always; }
+    .card { box-shadow: none; margin: 0; }
+  }
+  @page { size: letter portrait; margin: 0; }
+</style>
+</head>
+<body>
+
+<!-- ══════════════ SHEET 1 ══════════════ -->
+<div class="sheet">
+
+  <!-- CARD 1: TRAIN YOUR AI -->
+  <div class="card" style="--accent:var(--brand-teal);">
+    <div class="spine dark" style="background:var(--brand-teal);">
+      <div class="kicker">Summer Skills · Start Here</div>
+      <h1>Train Your AI</h1>
+      <div class="what">Five minutes now makes every other card work better. Set it up once so the AI actually knows your kid.</div>
+      <div class="powers">
+        <span class="eyebrow">New this summer</span>
+        <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a4 4 0 0 0-4 4c0 1.5.8 2.5 1.5 3.2C8 10.5 6 12.5 6 16v1h12v-1c0-3.5-2-5.5-3.5-6.8C15.2 8.5 16 7.5 16 6a4 4 0 0 0-4-4z"/><path d="M9 21h6"/></svg>It Remembers</span>
+      </div>
+    </div>
+    <div class="content">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div><div class="step-title">Make a home base.</div><div class="step-desc">In Claude, start a Project. In ChatGPT or Gemini, use custom instructions or a saved setup. This is where the AI remembers who it's talking to.</div></div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div><div class="step-title">Tell it who your kid is.</div><div class="step-desc">Age, grade, what they love, what they're good at, and the one thing they're working on this summer.</div></div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div style="flex:1;">
+          <div class="step-title">Paste a setup like this.</div>
+          <div class="prompt"><div class="lbl">Copy, then make it yours</div><div class="txt">"You're helping my 14-year-old, James. He's going into 9th grade at a new, competitive school this fall. He loves basketball and Minecraft. Strong reader, but math slipped this year and we're rebuilding his confidence. Keep it encouraging, never babyish. When he's stuck, coach him to the answer instead of handing it over. Talk to him like a sharp older cousin, not a teacher. We also want to build up his life skills. Think calendar, money management, cooking, cleaning, laundry. All the things needed to adult. We are working on fun ways to incorporate these skills into his summer."</div></div>
+        </div>
+      </div>
+      <div class="foot">
+        <div class="brandmark"><svg width="12" height="12" viewBox="0 0 24 24" fill="var(--brand-teal)"><rect x="9" y="2" width="6" height="11" rx="3"/><path d="M7 11a5 5 0 0 0 10 0" fill="none" stroke="var(--brand-teal)" stroke-width="1.6"/><line x1="12" y1="16" x2="12" y2="20" stroke="var(--brand-teal)" stroke-width="1.6"/><line x1="8" y1="20" x2="16" y2="20" stroke="var(--brand-teal)" stroke-width="1.6"/></svg><span class="name">AI for GenX</span><span class="est">EST 1971</span></div>
+        <span class="tip">Card 1 · Start Here</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- CARD 2: GET THE BAG -->
+  <div class="card" style="--accent:var(--brand-burnt-orange);">
+    <div class="spine light" style="background:var(--brand-amber);">
+      <div class="kicker">Summer Skills · Money</div>
+      <h1>Get the Bag</h1>
+      <div class="what">Real money, real stakes, their actual wants. Three ways to build money sense that sticks.</div>
+      <div class="powers">
+        <span class="eyebrow">New this summer</span>
+        <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-8.5 8.5 9 9 0 0 1-4-1L3 20l1.5-5a8.5 8.5 0 1 1 16.5-3.5z"/></svg>It Talks Back</span>
+        <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 0 0 5.4-5.4l-2.5 2.5-2.5-.7-.7-2.5z"/></svg>It Builds</span>
+      </div>
+    </div>
+    <div class="content">
+      <div class="activity">
+        <div class="activity-head"><span class="activity-num">1</span><span class="activity-name">The Shark Tank pitch</span></div>
+        <div class="activity-desc">A business idea, pressure-tested by a tough investor until the plan holds up.</div>
+        <div class="prompt"><div class="lbl">Try this prompt</div><div class="txt">"Act as a tough but fair investor on Shark Tank. I'm 14 and my idea is [their idea]. Ask me hard questions about costs, profit, and who would actually buy this. Don't let me off easy, then tell me if you'd invest and what I'd fix first."</div></div>
+      </div>
+      <div class="activity">
+        <div class="activity-head"><span class="activity-num">2</span><span class="activity-name">Make compound interest hit</span></div>
+        <div class="activity-desc">The lesson nobody got in time, made personal in 30 seconds.</div>
+        <div class="prompt"><div class="lbl">Try this prompt</div><div class="txt">"I'm 14. Show me what happens if I save $20 a month starting now versus starting at 25. Use a simple chart and explain it like I've never heard the words 'compound interest.' Make the chart dynamic so I can change the amount or start date and see what happens."</div></div>
+      </div>
+      <div class="activity">
+        <div class="activity-head"><span class="activity-num">3</span><span class="activity-name">Build your own Lemonade Stand</span></div>
+        <div class="activity-desc">The green-screen classic your parents played, rebuilt by you.</div>
+        <div class="prompt"><div class="lbl">Try this prompt</div><div class="txt">"Build me a Lemonade Stand game I can play in the browser. Let me set my price and supplies each day, change the weather randomly, then show my profit or loss. End the game after Day 7. Then turn my results into a short quiz: show me 2-3 'what if' moments from my week and have me guess what would've happened if I'd priced or stocked differently before revealing the answer."</div></div>
+        <div class="note">Ask the GenX in the house if they remember the original. They do.</div>
+      </div>
+      <div class="foot">
+        <div class="brandmark"><svg width="12" height="12" viewBox="0 0 24 24" fill="var(--brand-teal)"><rect x="9" y="2" width="6" height="11" rx="3"/><path d="M7 11a5 5 0 0 0 10 0" fill="none" stroke="var(--brand-teal)" stroke-width="1.6"/><line x1="12" y1="16" x2="12" y2="20" stroke="var(--brand-teal)" stroke-width="1.6"/><line x1="8" y1="20" x2="16" y2="20" stroke="var(--brand-teal)" stroke-width="1.6"/></svg><span class="name">AI for GenX</span><span class="est">EST 1971</span></div>
+        <span class="tip">Card 2 · Money</span>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ══════════════ SHEET 2 ══════════════ -->
+<div class="sheet">
+
+  <!-- CARD 3: RUN THE KITCHEN -->
+  <div class="card" style="--accent:var(--brand-burnt-orange);">
+    <div class="spine dark" style="background:var(--brand-burnt-orange);">
+      <div class="kicker">Summer Skills · Food</div>
+      <h1>Run the Kitchen</h1>
+      <div class="what">Dinner is a math class nobody notices. Hand them the kitchen and let AI run the lesson plan.</div>
+      <div class="powers">
+        <span class="eyebrow">New this summer</span>
+        <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>It Can See</span>
+        <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 0 0 5.4-5.4l-2.5 2.5-2.5-.7-.7-2.5z"/></svg>It Builds</span>
+      </div>
+    </div>
+    <div class="content">
+      <div class="activity">
+        <div class="activity-head"><span class="activity-num">1</span><span class="activity-name">What's in the fridge?</span></div>
+        <div class="activity-desc">Snap what you've got. Get three real things you can make tonight.</div>
+        <div class="prompt"><div class="lbl">Try this prompt</div><div class="txt">"Here's a photo of our fridge and pantry. Give me 3 meals a 14-year-old can cook with just these, ranked easiest to hardest, with steps."</div></div>
+      </div>
+      <div class="activity">
+        <div class="activity-head"><span class="activity-num">2</span><span class="activity-name">Cook the world</span></div>
+        <div class="activity-desc">A new country each week. AI builds the recipe, plus a little geography and history.</div>
+        <div class="prompt"><div class="lbl">Try this prompt</div><div class="txt">"Plan a 'cook the world' summer. Each week, pick a new country, give me one real recipe a beginner can make, plus 3 quick facts about its food and history."</div></div>
+      </div>
+      <div class="activity">
+        <div class="activity-head"><span class="activity-num">3</span><span class="activity-name">Double it, halve it</span></div>
+        <div class="activity-desc">Recipe serves four, you're cooking for six. Welcome to fractions, chef.</div>
+        <div class="prompt"><div class="lbl">Try this prompt</div><div class="txt">"This recipe serves 4 and I'm cooking for 6. Rewrite every ingredient amount, and show the math so I learn how you did it."</div></div>
+        <div class="note">The fractions are doing push-ups. Nobody has to know.</div>
+      </div>
+      <div class="foot">
+        <div class="brandmark"><svg width="12" height="12" viewBox="0 0 24 24" fill="var(--brand-teal)"><rect x="9" y="2" width="6" height="11" rx="3"/><path d="M7 11a5 5 0 0 0 10 0" fill="none" stroke="var(--brand-teal)" stroke-width="1.6"/><line x1="12" y1="16" x2="12" y2="20" stroke="var(--brand-teal)" stroke-width="1.6"/><line x1="8" y1="20" x2="16" y2="20" stroke="var(--brand-teal)" stroke-width="1.6"/></svg><span class="name">AI for GenX</span><span class="est">EST 1971</span></div>
+        <span class="tip">Card 3 · Food</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- CARD 4: HOLD YOUR OWN -->
+  <div class="card" style="--accent:var(--brand-rust);">
+    <div class="spine dark" style="background:var(--brand-rust);">
+      <div class="kicker">Summer Skills · Confidence</div>
+      <h1>Hold Your Own</h1>
+      <div class="what">The skills that matter most never show up on a report card. Practice them with zero risk.</div>
+      <div class="powers">
+        <span class="eyebrow">New this summer</span>
+        <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-8.5 8.5 9 9 0 0 1-4-1L3 20l1.5-5a8.5 8.5 0 1 1 16.5-3.5z"/></svg>It Talks Back</span>
+        <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>It Can See</span>
+      </div>
+    </div>
+    <div class="content">
+      <div class="activity">
+        <div class="activity-head"><span class="activity-num">1</span><span class="activity-name">The new-school dry run</span></div>
+        <div class="activity-desc">First-day nerves, rehearsed, so the real thing isn't the first time.</div>
+        <div class="prompt"><div class="lbl">Try this prompt</div><div class="txt">"Play a friendly kid I've never met at my new school. Start a normal conversation. Help me practice introducing myself and finding something in common."</div></div>
+      </div>
+      <div class="activity">
+        <div class="activity-head"><span class="activity-num">2</span><span class="activity-name">Practice Spanish with the New Foreign Student</span></div>
+        <div class="activity-desc">Build cultural diversity and practice your Spanish skills.</div>
+        <div class="prompt"><div class="lbl">Try this prompt</div><div class="txt">"You are a new foreign exchange student from Uruguay. You don't speak English yet, but you want to try out for the basketball team. Let's have a friendly conversation, in Spanish only, about the new school, the town, and the basketball team you're hoping to join. Keep your Spanish at a Spanish 2 level, and if I seem stuck, slow down or rephrase more simply. Ask me questions too, so the conversation keeps going."</div></div>
+      </div>
+      <div class="activity">
+        <div class="activity-head"><span class="activity-num">3</span><span class="activity-name">The negotiator</span></div>
+        <div class="activity-desc">Want a later curfew or a raise in allowance? Build your case on someone who pushes back.</div>
+        <div class="prompt"><div class="lbl">Try this prompt</div><div class="txt">"Play my parent. I want to make the case for a later weekend curfew. Listen, then push back with real concerns. Make me actually earn it."</div></div>
+      </div>
+      <div class="activity">
+        <div class="activity-head"><span class="activity-num">4</span><span class="activity-name">Your color analysis</span></div>
+        <div class="activity-desc">Upload a selfie, find the colors that actually work on you. Low stakes, surprisingly useful.</div>
+        <div class="prompt"><div class="lbl">Try this prompt</div><div class="txt">"Here's a clear photo of me in natural light. Based on my coloring, which clothing colors suit me best, and which should I skip? Keep it simple."</div></div>
+        <div class="note">If you want to go further, look up "best looksmaxing prompt" for detailed prompt ideas. ChatGPT excels at this.</div>
+      </div>
+      <div class="foot">
+        <div class="brandmark"><svg width="12" height="12" viewBox="0 0 24 24" fill="var(--brand-teal)"><rect x="9" y="2" width="6" height="11" rx="3"/><path d="M7 11a5 5 0 0 0 10 0" fill="none" stroke="var(--brand-teal)" stroke-width="1.6"/><line x1="12" y1="16" x2="12" y2="20" stroke="var(--brand-teal)" stroke-width="1.6"/><line x1="8" y1="20" x2="16" y2="20" stroke="var(--brand-teal)" stroke-width="1.6"/></svg><span class="name">AI for GenX</span><span class="est">EST 1971</span></div>
+        <span class="tip">Card 4 · Confidence</span>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ══════════════ SHEET 3 ══════════════ -->
+<div class="sheet">
+
+  <!-- CARD 5: LEVEL UP -->
+  <div class="card" style="--accent:var(--brand-red-orange);">
+    <div class="spine dark" style="background:var(--brand-red-orange);">
+      <div class="kicker">Summer Skills · Their Thing</div>
+      <h1>Level Up</h1>
+      <div class="what">Whatever they're obsessed with, AI can coach it. Here it's basketball. Swap in guitar, art, or skating.</div>
+      <div class="powers">
+        <span class="eyebrow">New this summer</span>
+        <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>It Can See</span>
+        <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-8.5 8.5 9 9 0 0 1-4-1L3 20l1.5-5a8.5 8.5 0 1 1 16.5-3.5z"/></svg>It Talks Back</span>
+      </div>
+    </div>
+    <div class="content">
+      <div class="activity">
+        <div class="activity-head"><span class="activity-num">1</span><span class="activity-name">Film your jumpshot</span></div>
+        <div class="activity-desc">Record a few reps. AI breaks down the mechanics like a trainer with a clipboard.</div>
+        <div class="prompt"><div class="lbl">Try this prompt · works best in Gemini</div><div class="txt">"Analyze my shooting form in this clip. Look at my footwork, hip load, elbow alignment, and follow-through. Tell me what I'm doing wrong compared to elite shooters and give me two specific fixes."</div></div>
+      </div>
+      <div class="activity">
+        <div class="activity-head"><span class="activity-num">2</span><span class="activity-name">Get a real training plan</span></div>
+        <div class="activity-desc">Not a generic workout. One built for your level, your gear, your goal.</div>
+        <div class="prompt"><div class="lbl">Try this prompt</div><div class="txt">"Act as an elite skills trainer. Build me an intense 45-minute solo basketball workout for an intermediate player with a half-court, one ball, and cones. Break it into warm-up, skill work, game-simulation drills, and a conditioner."</div></div>
+      </div>
+      <div class="activity">
+        <div class="activity-head"><span class="activity-num">3</span><span class="activity-name">Critique my thing</span></div>
+        <div class="activity-desc">Works for a drawing, a riff, a trick. Real feedback, not "good job."</div>
+        <div class="prompt"><div class="lbl">Try this prompt</div><div class="txt">"Here's a video of my [drawing / guitar playing / trick]. Give me honest, specific feedback like a coach would, then one thing to practice next."</div></div>
+      </div>
+      <div class="foot">
+        <div class="brandmark"><svg width="12" height="12" viewBox="0 0 24 24" fill="var(--brand-teal)"><rect x="9" y="2" width="6" height="11" rx="3"/><path d="M7 11a5 5 0 0 0 10 0" fill="none" stroke="var(--brand-teal)" stroke-width="1.6"/><line x1="12" y1="16" x2="12" y2="20" stroke="var(--brand-teal)" stroke-width="1.6"/><line x1="8" y1="20" x2="16" y2="20" stroke="var(--brand-teal)" stroke-width="1.6"/></svg><span class="name">AI for GenX</span><span class="est">EST 1971</span></div>
+        <span class="tip">Card 5 · Their Thing</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- CARD 6: MAKE SOMETHING REAL -->
+  <div class="card" style="--accent:var(--brand-red-orange);">
+    <div class="spine dark" style="background:var(--brand-coral);">
+      <div class="kicker">Summer Skills · Build</div>
+      <h1>Make Something Real</h1>
+      <div class="what">This is the one that turns a kid from a user into a maker. They describe it. The AI builds it. They learn how it works.</div>
+      <div class="powers">
+        <span class="eyebrow">New this summer</span>
+        <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 0 0 5.4-5.4l-2.5 2.5-2.5-.7-.7-2.5z"/></svg>It Builds</span>
+      </div>
+    </div>
+    <div class="content">
+      <div class="activity">
+        <div class="activity-head"><span class="activity-num">1</span><span class="activity-name">Build it in Minecraft</span></div>
+        <div class="activity-desc">Describe a contraption you've never pulled off. Get a block-by-block plan.</div>
+        <div class="prompt"><div class="lbl">Try this prompt</div><div class="txt">"I want to build a hidden 3x3 piston door in Minecraft. Explain step by step where to place the sticky pistons, redstone repeaters, and dust so it opens from a hidden lever."</div></div>
+        <div class="note">That's logic gates and circuitry in disguise.</div>
+      </div>
+      <div class="activity">
+        <div class="activity-head"><span class="activity-num">2</span><span class="activity-name">Code your own game</span></div>
+        <div class="activity-desc">Describe the game out loud. Watch it get built. No coding class required.</div>
+        <div class="prompt"><div class="lbl">Try this prompt</div><div class="txt">"Help me build a simple game I can play in the browser. It's about [their idea]. Ask me questions until you understand it, then build it and tell me how to change things."</div></div>
+      </div>
+      <div class="activity">
+        <div class="activity-head"><span class="activity-num">3</span><span class="activity-name">Write a book for someone</span></div>
+        <div class="activity-desc">They write the story. AI turns it into a real illustrated book for a little brother or a friend.</div>
+        <div class="prompt"><div class="lbl">Try this prompt</div><div class="txt">"I wrote this story. Turn it into an illustrated children's book for my little brother, with a picture described for each page. Keep my words, make it feel like a real book."</div></div>
+      </div>
+      <div class="foot">
+        <div class="brandmark"><svg width="12" height="12" viewBox="0 0 24 24" fill="var(--brand-teal)"><rect x="9" y="2" width="6" height="11" rx="3"/><path d="M7 11a5 5 0 0 0 10 0" fill="none" stroke="var(--brand-teal)" stroke-width="1.6"/><line x1="12" y1="16" x2="12" y2="20" stroke="var(--brand-teal)" stroke-width="1.6"/><line x1="8" y1="20" x2="16" y2="20" stroke="var(--brand-teal)" stroke-width="1.6"/></svg><span class="name">AI for GenX</span><span class="est">EST 1971</span></div>
+        <span class="tip">Card 6 · Build</span>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ══════════════ SHEET 4 ══════════════ -->
+<div class="sheet">
+
+  <!-- CARD 7: GET UNSTUCK -->
+  <div class="card" style="--accent:var(--brand-teal);">
+    <div class="spine dark" style="background:var(--brand-sage);">
+      <div class="kicker">Summer Skills · Learning</div>
+      <h1>Get Unstuck</h1>
+      <div class="what">Summer slide is just forgetting in slow motion. A tutor that knows your kid stops the leak. Worth noting: All three major AI tools have a built-in tutor mode that asks questions instead of handing over answers. Look for Learning Mode in Claude, Study Mode in ChatGPT, or Guided Learning in Gemini.</div>
+      <div class="powers">
+        <span class="eyebrow">New this summer</span>
+        <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a4 4 0 0 0-4 4c0 1.5.8 2.5 1.5 3.2C8 10.5 6 12.5 6 16v1h12v-1c0-3.5-2-5.5-3.5-6.8C15.2 8.5 16 7.5 16 6a4 4 0 0 0-4-4z"/><path d="M9 21h6"/></svg>It Remembers</span>
+        <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-8.5 8.5 9 9 0 0 1-4-1L3 20l1.5-5a8.5 8.5 0 1 1 16.5-3.5z"/></svg>It Talks Back</span>
+      </div>
+    </div>
+    <div class="content">
+      <div class="activity">
+        <div class="activity-head"><span class="activity-num">1</span><span class="activity-name">Coach, not answer key</span></div>
+        <div class="activity-desc">Stuck on a problem? AI walks you to the answer instead of handing it over.</div>
+        <div class="prompt"><div class="lbl">Try this prompt</div><div class="txt">"Here's a math problem I'm stuck on. Don't give me the answer. Ask me what my first step would be, then guide me one step at a time until I get it."</div></div>
+      </div>
+      <div class="activity">
+        <div class="activity-head"><span class="activity-num">2</span><span class="activity-name">The obsession bridge</span></div>
+        <div class="activity-desc">Every problem rebuilt around what they love. They think it's basketball. It's algebra.</div>
+        <div class="prompt"><div class="lbl">Try this prompt</div><div class="txt">"Give me 5 word problems about basketball stats that secretly teach me to solve for x. Make them feel like real games, not homework."</div></div>
+      </div>
+      <div class="activity">
+        <div class="activity-head"><span class="activity-num">3</span><span class="activity-name">A tutor that remembers</span></div>
+        <div class="activity-desc">Set it up once. It tracks where they struggle all summer and circles back.</div>
+        <div class="prompt"><div class="lbl">Try this prompt</div><div class="txt">"Be my summer math tutor. Quiz me a little each time, remember what I keep missing, and bring those topics back until I've got them."</div></div>
+      </div>
+      <div class="foot">
+        <div class="brandmark"><svg width="12" height="12" viewBox="0 0 24 24" fill="var(--brand-teal)"><rect x="9" y="2" width="6" height="11" rx="3"/><path d="M7 11a5 5 0 0 0 10 0" fill="none" stroke="var(--brand-teal)" stroke-width="1.6"/><line x1="12" y1="16" x2="12" y2="20" stroke="var(--brand-teal)" stroke-width="1.6"/><line x1="8" y1="20" x2="16" y2="20" stroke="var(--brand-teal)" stroke-width="1.6"/></svg><span class="name">AI for GenX</span><span class="est">EST 1971</span></div>
+        <span class="tip">Card 7 · Learning</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- CARD 8: GET IT TOGETHER -->
+  <div class="card" style="--accent:var(--brand-burnt-orange);">
+    <div class="spine light" style="background:var(--brand-soft-gold);">
+      <div class="kicker">Summer Skills · Run Your Life</div>
+      <h1>Get It Together</h1>
+      <div class="what">The summer falls apart without a plan. Let them build their own, so it's theirs to keep.</div>
+      <div class="powers">
+        <span class="eyebrow">New this summer</span>
+        <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>It Can See</span>
+        <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 0 0 5.4-5.4l-2.5 2.5-2.5-.7-.7-2.5z"/></svg>It Builds</span>
+      </div>
+    </div>
+    <div class="content">
+      <div class="activity">
+        <div class="activity-head"><span class="activity-num">1</span><span class="activity-name">Snap your schedule</span></div>
+        <div class="activity-desc">Photograph the practice or camp schedule. Have AI add it straight to your calendar. You'll need to connect your calendar. If unsure, ask the AI!</div>
+        <div class="prompt"><div class="lbl">Try this prompt</div><div class="txt">"Here's a photo of my basketball schedule. Add these to my Google Calendar, then read them back so I can double-check every date and time."</div></div>
+        <div class="note">Always check the events. AI gets dates wrong sometimes.</div>
+      </div>
+      <div class="activity">
+        <div class="activity-head"><span class="activity-num">2</span><span class="activity-name">Brain dump to a plan</span></div>
+        <div class="activity-desc">Everything rattling around in your head, turned into an actual week.</div>
+        <div class="prompt"><div class="lbl">Try this prompt</div><div class="txt">"Here's everything I want to do this week: [list it all]. Build me a realistic day-by-day plan with time for fun, not just chores."</div></div>
+      </div>
+      <div class="activity">
+        <div class="activity-head"><span class="activity-num">3</span><span class="activity-name">The morning launch</span></div>
+        <div class="activity-desc">A simple routine that gets you out the door without a fight.</div>
+        <div class="prompt"><div class="lbl">Try this prompt</div><div class="txt">"Build me a simple 6-step morning checklist so I can get ready on my own. Keep it quick, and let me earn something at the end of the week."</div></div>
+      </div>
+      <div class="foot">
+        <div class="brandmark"><svg width="12" height="12" viewBox="0 0 24 24" fill="var(--brand-teal)"><rect x="9" y="2" width="6" height="11" rx="3"/><path d="M7 11a5 5 0 0 0 10 0" fill="none" stroke="var(--brand-teal)" stroke-width="1.6"/><line x1="12" y1="16" x2="12" y2="20" stroke="var(--brand-teal)" stroke-width="1.6"/><line x1="8" y1="20" x2="16" y2="20" stroke="var(--brand-teal)" stroke-width="1.6"/></svg><span class="name">AI for GenX</span><span class="est">EST 1971</span></div>
+        <span class="tip">Card 8 · Run Your Life</span>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>

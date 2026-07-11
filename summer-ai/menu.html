@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Summer I Turned (Pretty Much) to AI</title>
+<link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --brand-black:#000000;
+    --brand-teal:#3C7F72;
+    --brand-rust:#992800;
+    --brand-red-orange:#D34A23;
+    --brand-amber:#FFAF00;
+    --brand-cream:#EFE2DD;
+    --brand-burnt-orange:#C86701;
+    --ink:#1c1c1c;
+    --muted:#5a5a5a;
+    --hair:#e3ded9;
+  }
+
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;background:#f4f1ee;color:var(--ink);
+    font-family:'Poppins',system-ui,-apple-system,Arial,sans-serif;
+    -webkit-font-smoothing:antialiased;}
+
+  .sheet{
+    background:#ffffff;
+    width:8.5in;
+    max-width:100%;
+    margin:24px auto;
+    padding:0.7in 0.7in 0.55in;
+    box-shadow:0 6px 30px rgba(0,0,0,0.10);
+  }
+
+  /* thin brand stripe */
+  .stripe{height:6px;width:100%;display:flex;}
+  .stripe span{flex:1;}
+  .stripe .s1{background:var(--brand-teal);}
+  .stripe .s2{background:var(--brand-rust);}
+  .stripe .s3{background:var(--brand-red-orange);}
+  .stripe .s4{background:var(--brand-amber);}
+
+  .kicker{
+    font-size:10.5px;letter-spacing:.22em;text-transform:uppercase;
+    color:var(--brand-teal);font-weight:600;margin:18px 0 6px;
+  }
+
+  h1{
+    font-family:'Abril Fatface',Georgia,serif;font-weight:400;
+    font-size:40px;line-height:1.04;margin:0 0 2px;color:var(--brand-black);
+  }
+  h1 .small{font-size:30px;}
+
+  .standfirst{
+    font-family:'Cormorant Garamond',Georgia,serif;
+    font-size:18px;line-height:1.4;color:var(--muted);
+    font-style:italic;margin:8px 0 0;max-width:6.4in;
+  }
+
+  .rulebox{
+    margin:18px 0 6px;padding:10px 14px;border:1px solid var(--hair);
+    border-left:4px solid var(--brand-teal);background:#fbfaf8;
+    font-size:12.5px;line-height:1.45;
+  }
+  .rulebox strong{color:var(--brand-black);}
+
+  .section-label{
+    display:flex;align-items:baseline;gap:10px;margin:22px 0 4px;
+  }
+  .section-label .lab{
+    font-family:'Abril Fatface',Georgia,serif;font-size:19px;color:var(--brand-black);
+  }
+  .section-label .sub{font-size:11.5px;color:var(--muted);font-style:italic;
+    font-family:'Cormorant Garamond',serif;font-size:14px;}
+
+  .band{
+    margin:14px 0;padding-left:14px;border-left:3px solid var(--accent,#ccc);
+  }
+  .band-head{display:flex;align-items:center;gap:9px;margin-bottom:7px;}
+  .band-head svg{flex:none;}
+  .band-name{
+    font-size:11px;letter-spacing:.14em;text-transform:uppercase;font-weight:600;
+    color:var(--accent);
+  }
+  .band-name span{color:var(--muted);font-weight:400;letter-spacing:.02em;
+    text-transform:none;font-size:11px;}
+
+  .item{margin:0 0 9px;font-size:12.5px;line-height:1.46;}
+  .item b{color:var(--brand-black);font-weight:600;}
+  .item .note{color:var(--muted);}
+
+  .cols{display:grid;grid-template-columns:1fr 1fr;gap:10px 30px;}
+
+  .footer{
+    margin-top:22px;padding-top:12px;border-top:1px solid var(--hair);
+    display:flex;align-items:center;justify-content:space-between;
+    font-size:10.5px;color:var(--muted);
+  }
+  .brandmark{display:flex;align-items:center;gap:8px;}
+  .brandmark .name{font-family:'Abril Fatface',serif;font-size:14px;color:var(--brand-black);}
+  .brandmark .est{font-size:8.5px;letter-spacing:.14em;color:var(--muted);}
+
+  .tip{font-style:italic;font-family:'Cormorant Garamond',serif;font-size:13px;}
+
+  @media print{
+    html,body{background:#fff;}
+    .sheet{box-shadow:none;margin:0;width:100%;padding:0.5in 0.55in;}
+    .sheet.two{page-break-before:always;}
+  }
+  @page{size:letter;margin:0;}
+</style>
+</head>
+<body>
+
+<!-- ================= SHEET 1 ================= -->
+<section class="sheet one">
+  <div class="stripe"><span class="s1"></span><span class="s2"></span><span class="s3"></span><span class="s4"></span></div>
+
+  <div class="kicker">AI for GenX &nbsp;/&nbsp; AI for Your Life</div>
+  <h1>The Summer I Turned<br><span class="small">(Pretty Much) to AI for All of It</span></h1>
+  <p class="standfirst">Sixteen ways to keep an 11-to-15-year-old's brain awake this summer, using AI that can finally talk back, see, build, and actually know your kid. If a dictionary or a worksheet could already do it, it didn't make the list.</p>
+
+  <div class="rulebox">
+    <strong>One rule for everything below:</strong> your kid stays the author. AI is the amplifier, never the substitute. The second an activity turns them into a spectator, skip it.
+  </div>
+
+  <div class="section-label">
+    <span class="lab">Hand It to Your Kid</span>
+    <span class="sub">try these together</span>
+  </div>
+
+  <!-- BAND 1 -->
+  <div class="band" style="--accent:var(--brand-teal);">
+    <div class="band-head">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#3C7F72" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-8.5 8.5 9 9 0 0 1-4-1L3 20l1.5-5a8.5 8.5 0 1 1 16.5-3.5z"/><path d="M8.5 12h.01M12 12h.01M15.5 12h.01"/></svg>
+      <div class="band-name">It Talks Back <span>/ now in real time, out loud</span></div>
+    </div>
+    <div class="item"><b>Debate club of one.</b> They argue a position out loud. The AI takes the other side and pushes back, fair but relentless. Builds reasoning and the nerve to defend an idea.</div>
+    <div class="item"><b>The shop that won't speak English.</b> The AI plays a shopkeeper who only answers in the language they're about to take in school. They have to order, ask the price, get directions. Immersion with zero embarrassment.</div>
+    <div class="item"><b>Teach the robot.</b> They explain a tricky idea to an AI playing a slightly confused student. The moment they get stuck is the exact thing they didn't actually understand.</div>
+  </div>
+
+  <!-- BAND 2 -->
+  <div class="band" style="--accent:var(--brand-red-orange);">
+    <div class="band-head">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#D34A23" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
+      <div class="band-name">It Can See <span>/ point the camera at the world</span></div>
+    </div>
+    <div class="item"><b>Coach, not answer key.</b> They photograph the math problem they're stuck on. Instead of solving it, the AI asks "what's your first move?" and walks them through it.</div>
+    <div class="item"><b>Trail biologist.</b> On a hike, aim the phone at a plant, a bug, a rock. Name it, plus one wild fact. The whole walk turns into science.</div>
+  </div>
+
+  <!-- BAND 3 -->
+  <div class="band" style="--accent:var(--brand-burnt-orange);">
+    <div class="band-head">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#C86701" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 0 0 5.4-5.4l-2.5 2.5-2.5-.7-.7-2.5z"/></svg>
+      <div class="band-name">It Builds <span>/ real, working things, in minutes</span></div>
+    </div>
+    <div class="item"><b>A game for their exact gap.</b> "Make a game where I blast the right answer to a fractions problem." A custom arcade game built around the thing they keep missing.</div>
+    <div class="item"><b>They build it themselves.</b> A motivated kid can now describe a game in plain English and watch the AI code it. Logic and creation, no coding class required.</div>
+    <div class="item"><b>Author becomes illustrated.</b> They write the story, the AI turns it into a real comic book or short animation. <span class="note">(Some tools, like Gemini, are especially strong at the video version.)</span> The writing motivation goes through the roof.</div>
+  </div>
+
+  <!-- BAND 4 -->
+  <div class="band" style="--accent:var(--brand-rust);">
+    <div class="band-head">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#992800" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a4 4 0 0 0-4 4c0 1.5.8 2.5 1.5 3.2C8 10.5 6 12.5 6 16v1h12v-1c0-3.5-2-5.5-3.5-6.8C15.2 8.5 16 7.5 16 6a4 4 0 0 0-4-4z"/><path d="M9 21h6"/></svg>
+      <div class="band-name">It Knows Your Kid <span>/ personalized, and it remembers</span></div>
+    </div>
+    <div class="item"><b>The obsession bridge.</b> Every problem, passage, and prompt rebuilt around the one thing they love. They think it's basketball. It's algebra.</div>
+    <div class="item"><b>A tutor that remembers.</b> Set it up once with their level and their interests. It tracks where they struggle all summer and quietly circles back.</div>
+  </div>
+
+  <div class="footer">
+    <div class="brandmark">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="#3C7F72"><rect x="9" y="2" width="6" height="11" rx="3"/><path d="M7 11a5 5 0 0 0 10 0" fill="none" stroke="#3C7F72" stroke-width="1.6"/><line x1="12" y1="16" x2="12" y2="20" stroke="#3C7F72" stroke-width="1.6"/><line x1="8" y1="20" x2="16" y2="20" stroke="#3C7F72" stroke-width="1.6"/></svg>
+      <span class="name">AI for GenX</span><span class="est">EST 1971</span>
+    </div>
+    <span class="tip">Rule of thumb: 20 minutes, a few times a week, beats a daily fight.</span>
+  </div>
+</section>
+
+<!-- ================= SHEET 2 ================= -->
+<section class="sheet two">
+  <div class="stripe"><span class="s1"></span><span class="s2"></span><span class="s3"></span><span class="s4"></span></div>
+
+  <div class="kicker">The Summer I Turned (Pretty Much) to AI &nbsp;/&nbsp; page 2</div>
+
+  <div class="section-label">
+    <span class="lab">Make It Yourself</span>
+    <span class="sub">you and AI, the production team</span>
+  </div>
+
+  <p class="standfirst" style="margin-bottom:6px;">Summer-slide worry is really just helplessness wearing a trench coat. Here is the cure: sit down with AI and build something real you can hand over. "I made this for you" beats "go talk to the robot" every single time, for both of you.</p>
+
+  <div class="rulebox" style="border-left-color:var(--brand-burnt-orange);">
+    You are not supervising the summer. You are <strong>producing</strong> it. Every item here is something you make, then print, hang, or hand over.
+  </div>
+
+  <div style="margin-top:16px;">
+    <div class="item"><b>The custom problem set.</b> Thirty math problems tuned to their exact weak spot and their favorite thing. Printed, on the kitchen table. The tutoring a pro used to charge for, built in a sentence.</div>
+
+    <div class="item"><b>The Lifeskills Passport.</b> Design the whole thing with AI: the stamps, the challenges, the rules, the cover. A summer of real-world skills that reads like a quest instead of a chore.</div>
+
+    <div class="item"><b>A scavenger hunt that makes them think.</b> Custom clues for the house, the block, or a trail, each one needing a little reading or math to crack.</div>
+
+    <div class="item"><b>A surprise graphic novel starring them.</b> You make it quietly. You hand it over. Then watch what it does to a kid who swears they hate reading.</div>
+
+    <div class="item"><b>A reading flight, not a reading list.</b> Five books at their exact level, each with a one-line hook so they actually pick one up.</div>
+
+    <div class="item"><b>Cook the world.</b> Each week a country: a recipe (hello, fractions and conversions), a little geography, a little history. AI builds the unit. You run the kitchen.</div>
+  </div>
+
+  <div class="rulebox" style="margin-top:18px;border-left-color:var(--brand-amber);background:#fffdf7;">
+    <strong>The test for any idea, theirs or yours:</strong> could a dictionary, a worksheet, a search bar, or a YouTube video already do it? If yes, it isn't using what's actually new. This is the first summer the answer is usually no.
+  </div>
+
+  <div class="footer">
+    <div class="brandmark">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="#3C7F72"><rect x="9" y="2" width="6" height="11" rx="3"/><path d="M7 11a5 5 0 0 0 10 0" fill="none" stroke="#3C7F72" stroke-width="1.6"/><line x1="12" y1="16" x2="12" y2="20" stroke="#3C7F72" stroke-width="1.6"/><line x1="8" y1="20" x2="16" y2="20" stroke="#3C7F72" stroke-width="1.6"/></svg>
+      <span class="name">AI for GenX</span><span class="est">EST 1971</span>
+    </div>
+    <span class="tip">aigenx.substack.com &nbsp;/&nbsp; pull up a chair, let's figure this out</span>
+  </div>
+</section>
+
+</body>
+</html>
