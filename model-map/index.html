@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Model Map · AI for GenX</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --brand-black: #000000;
+  --brand-teal: #3C7F72;
+  --brand-rust: #992800;
+  --brand-red-orange: #D34A23;
+  --brand-amber: #FFAF00;
+  --brand-cream: #EFE2DD;
+  --brand-sage: #6D9E8F;
+  --brand-burnt-orange: #C86701;
+  --brand-coral: #ED8042;
+  --brand-soft-gold: #FDD476;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  background: var(--brand-black);
+  color: var(--brand-cream);
+  font-family: 'Poppins', system-ui, sans-serif;
+  font-weight: 300;
+  line-height: 1.55;
+}
+.stripe-bar {
+  background: linear-gradient(to bottom,
+    #3C7F72 25%, #992800 25% 50%, #D34A23 50% 75%, #FFAF00 75%);
+  height: 14px;
+  width: 100%;
+}
+.wrap { max-width: 820px; margin: 0 auto; padding: 0 18px 80px; }
+
+/* ---------- header ---------- */
+header { padding: 36px 0 10px; }
+.kicker {
+  font-size: 12px; letter-spacing: 2.5px; text-transform: uppercase;
+  color: var(--brand-sage); font-weight: 500;
+}
+h1 {
+  font-family: 'Abril Fatface', serif;
+  font-weight: 400;
+  font-size: clamp(38px, 8vw, 56px);
+  color: #fff;
+  margin: 6px 0 14px;
+  line-height: 1.05;
+}
+.intro {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 20px;
+  color: var(--brand-cream);
+  max-width: 60ch;
+}
+.intro strong { color: var(--brand-amber); font-weight: 600; }
+.asof {
+  display: inline-block;
+  margin-top: 16px;
+  border: 1px solid var(--brand-teal);
+  color: var(--brand-teal);
+  font-size: 12px; letter-spacing: 1.5px; text-transform: uppercase;
+  padding: 5px 12px; border-radius: 999px; font-weight: 500;
+}
+.strawman {
+  margin-top: 10px;
+  font-size: 12px;
+  color: var(--brand-coral);
+  letter-spacing: .5px;
+}
+.howto {
+  margin: 22px 0 4px;
+  border: 1px dashed #333;
+  border-radius: 10px;
+  padding: 14px 16px;
+  display: grid;
+  gap: 8px;
+  font-size: 13px;
+  color: var(--brand-cream);
+}
+.howto strong { color: #fff; font-weight: 500; }
+.ht-ico { margin-right: 8px; }
+
+/* ---------- filter chips ---------- */
+.chipbar { display: flex; flex-wrap: wrap; gap: 8px; margin: 28px 0 18px; align-items: center; }
+.chip {
+  font-family: 'Poppins', sans-serif;
+  font-size: 13px; font-weight: 500;
+  background: transparent;
+  color: var(--brand-cream);
+  border: 1px solid #444;
+  border-radius: 999px;
+  padding: 7px 14px;
+  cursor: pointer;
+  transition: all .15s ease;
+}
+.chip:hover { border-color: var(--brand-sage); }
+.chip.active {
+  background: var(--brand-teal);
+  border-color: var(--brand-teal);
+  color: #fff;
+}
+.expand-all {
+  margin-left: auto;
+  background: none; border: none; cursor: pointer;
+  color: var(--brand-sage); font-family: 'Poppins', sans-serif;
+  font-size: 12px; letter-spacing: 1px; text-transform: uppercase; font-weight: 500;
+}
+.expand-all:hover { color: var(--brand-teal); }
+
+/* ---------- table (row cards) ---------- */
+.legend {
+  display: grid;
+  grid-template-columns: 40px 1.5fr 1.1fr .55fr 1fr 20px;
+  gap: 10px;
+  padding: 0 14px 8px;
+  font-size: 10.5px; letter-spacing: 1.2px; text-transform: uppercase;
+  color: var(--brand-sage); font-weight: 500;
+}
+.row {
+  border: 1px solid #2a2a2a;
+  border-radius: 10px;
+  margin-bottom: 8px;
+  background: #0d0d0d;
+  overflow: hidden;
+  transition: border-color .15s ease;
+}
+.row:hover { border-color: var(--brand-teal); }
+.row.hidden { display: none; }
+.row-surface {
+  display: grid;
+  grid-template-columns: 40px 1.5fr 1.1fr .55fr 1fr 20px;
+  gap: 10px;
+  align-items: center;
+  padding: 13px 14px;
+  cursor: pointer;
+  width: 100%;
+  background: none; border: none; text-align: left;
+  color: inherit; font: inherit;
+}
+.logo {
+  width: 28px; height: 28px; border-radius: 6px;
+  background: #1c1c1c; padding: 3px;
+}
+.logo.light { background: var(--brand-cream); }
+.who .co { font-size: 11px; color: var(--brand-sage); letter-spacing: .5px; text-transform: uppercase; font-weight: 500; }
+.who .model { font-size: 15px; font-weight: 500; color: #fff; }
+.badge {
+  display: inline-block;
+  font-size: 9.5px; letter-spacing: .8px; text-transform: uppercase;
+  color: var(--brand-soft-gold); border: 1px solid #5a4a1a;
+  border-radius: 4px; padding: 1px 6px; margin-left: 6px;
+  font-weight: 500; vertical-align: middle;
+}
+.bestat { font-size: 13px; color: var(--brand-cream); }
+.free { font-size: 13px; font-weight: 500; }
+.free.yes { color: var(--brand-amber); }
+.free.no { color: var(--brand-coral); }
+.price { font-size: 13px; color: var(--brand-cream); white-space: nowrap; }
+.caret { color: var(--brand-teal); font-size: 12px; transition: transform .2s ease; justify-self: end; }
+.row.open .caret { transform: rotate(180deg); }
+
+/* ---------- expand layer ---------- */
+.row-detail { display: none; padding: 4px 16px 18px; border-top: 1px dashed #2a2a2a; }
+.row.open .row-detail { display: block; }
+.honest {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 18px;
+  color: #fff;
+  padding: 14px 0 4px;
+}
+.honest::before { content: '“'; color: var(--brand-amber); font-size: 24px; }
+.honest::after { content: '”'; color: var(--brand-amber); font-size: 24px; }
+
+.sec-label {
+  font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase;
+  color: var(--brand-sage); font-weight: 500;
+  margin: 14px 0 7px;
+}
+
+/* price ladder */
+.ladder { display: flex; flex-wrap: wrap; gap: 8px; }
+.rung {
+  background: #161616; border: 1px solid #2a2a2a;
+  border-radius: 8px; padding: 8px 12px;
+  min-width: 120px; flex: 1 1 120px; max-width: 190px;
+}
+.rung .amt { font-size: 15px; font-weight: 600; color: var(--brand-amber); }
+.rung .plan { font-size: 10.5px; letter-spacing: 1px; text-transform: uppercase; color: var(--brand-sage); font-weight: 500; }
+.rung .note { font-size: 11.5px; color: var(--brand-cream); margin-top: 3px; line-height: 1.4; }
+.verdict {
+  margin-top: 10px;
+  font-size: 13px;
+  color: var(--brand-soft-gold);
+}
+.verdict::before { content: '→ '; color: var(--brand-teal); }
+
+/* decoder ring */
+.decoder { width: 100%; border-collapse: collapse; }
+.decoder td {
+  font-size: 12.5px; padding: 6px 10px 6px 0;
+  border-bottom: 1px dashed #222;
+  vertical-align: top; color: var(--brand-cream);
+}
+.decoder tr:last-child td { border-bottom: none; }
+.decoder .eng { font-weight: 500; color: #fff; white-space: nowrap; }
+.decoder .unlock { color: var(--brand-sage); white-space: nowrap; text-align: right; }
+
+/* nerd grid */
+.nerd {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 10px;
+}
+.nerd div { background: #161616; border-radius: 8px; padding: 10px 12px; }
+.nerd dt {
+  font-size: 10px; letter-spacing: 1.2px; text-transform: uppercase;
+  color: var(--brand-sage); font-weight: 500; margin-bottom: 3px;
+}
+.nerd dd { font-size: 13px; color: var(--brand-cream); margin: 0; }
+.tag-open { color: var(--brand-amber); font-weight: 500; }
+
+/* links */
+.links { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 16px; }
+.golink {
+  display: inline-block;
+  font-size: 13px; font-weight: 500; text-decoration: none;
+  border-radius: 999px; padding: 8px 18px;
+  transition: all .15s ease;
+}
+.golink.primary { background: var(--brand-teal); color: #fff; }
+.golink.primary:hover { background: var(--brand-sage); }
+.golink.secondary { border: 1px solid var(--brand-teal); color: var(--brand-teal); }
+.golink.secondary:hover { color: var(--brand-sage); border-color: var(--brand-sage); }
+
+/* ---------- footer ---------- */
+.footnote {
+  margin-top: 36px;
+  padding-top: 20px;
+  border-top: 1px solid #2a2a2a;
+  font-size: 13px;
+  color: #999;
+  max-width: 66ch;
+}
+.footnote a { color: var(--brand-teal); }
+.mic { text-align: right; font-size: 22px; margin-top: 24px; }
+
+/* ---------- mobile ---------- */
+@media (max-width: 600px) {
+  .legend { display: none; }
+  .expand-all { display: none; }
+  .row-surface {
+    grid-template-columns: 34px 1fr auto 16px;
+    grid-template-areas:
+      "logo who    free  caret"
+      "logo bestat price caret";
+    row-gap: 4px;
+  }
+  .logo { grid-area: logo; }
+  .who { grid-area: who; }
+  .free { grid-area: free; justify-self: end; }
+  .caret { grid-area: caret; align-self: center; }
+  .bestat { grid-area: bestat; font-size: 12px; color: var(--brand-sage); }
+  .price { grid-area: price; font-size: 12px; color: var(--brand-sage); justify-self: end; }
+  .rung { max-width: none; }
+  .decoder .unlock { white-space: normal; }
+}
+</style>
+</head>
+<body>
+
+<div class="stripe-bar"></div>
+
+<div class="wrap">
+  <header>
+    <div class="kicker">AI for GenX · From the Lab</div>
+    <h1>The Model Map</h1>
+    <p class="intro">The decoder ring, laminated. The names you keep hearing are
+      <strong>cars</strong> (ChatGPT, Claude, Gemini) and the "new releases" flooding
+      your feed are <strong>engines</strong> that drop into them, usually while you
+      sleep. This map shows each car, the engines under its hood, what it costs to
+      keep running, and which ones you could actually own. Tap any row to pop the hood.</p>
+
+    <div class="howto">
+      <div><span class="ht-ico">🚗</span><strong>The car</strong> is the product you open. You pick one of these. That is the whole decision.</div>
+      <div><span class="ht-ico">⚙️</span><strong>The engines</strong> are the models inside (Sol, Fable, Flash). They upgrade themselves; you mostly just benefit.</div>
+      <div><span class="ht-ico">🔑</span><strong>Lease or own:</strong> most cars you lease monthly on their computers. Open models are engines anyone can download and own.</div>
+    </div>
+    <span class="asof">Snapshot · Verified July 13, 2026</span>
+    <div class="strawman" style="color: var(--brand-sage);">Every price, engine name, and plan mapping checked against the companies' own pricing and release pages on the date above. They change monthly; the date stamp is your grain of salt.</div>
+  </header>
+
+  <div class="chipbar" id="chips">
+    <button class="chip active" data-filter="all">Everything</button>
+    <button class="chip" data-filter="everyday">Everyday</button>
+    <button class="chip" data-filter="writing">Writing</button>
+    <button class="chip" data-filter="coding">Coding &amp; building</button>
+    <button class="chip" data-filter="research">Research</button>
+    <button class="chip" data-filter="open">Open models</button>
+    <button class="expand-all" id="toggleAll">Expand all</button>
+  </div>
+
+  <div class="legend">
+    <span></span><span>Company · Product</span><span>Best at</span><span>Free?</span><span>Price ladder</span><span></span>
+  </div>
+
+  <div id="rows"></div>
+
+  <p class="footnote">
+    This map covers the everyday general-purpose cars only, the chatbots you will actually
+    touch. The image, video, and voice specialists get their own map another day.
+    Prices are the consumer plans, monthly; business and enterprise tiers exist everywhere
+    and are not this page's problem. Engine-to-plan mappings come from each company's own
+    pricing pages; independent quality reads lean on
+    <a href="https://artificialanalysis.ai">Artificial Analysis</a>, cited as theirs.
+    No sponsors, no affiliate links, and by the time you read this some of it will already
+    be different. That is why the date stamp is up top, and why this page gets updated
+    so you do not have to keep up.
+  </p>
+  <div class="mic">🎙️</div>
+</div>
+
+<script>
+// Favicons baked in at build time (July 2026 snapshot), no external requests.
+const FAV = {
+  "chatgpt.com": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAAclBMVEVHcEz////////////////////////////////////////////////////+/v4AAAA/Pz/g4ODq6ur7+/tqamrW1tbz8/MgICBeXl4xMTGqqqp1dXWenp6Tk5Ozs7MUFBTJycmAgICLi4u+vr5SUlJHcEyJKyhEAAAAJnRSTlMA7sfn8ohSESCZQtrb////////////////////////////////AKlBkwYAAAHJSURBVDiNhVPZduowDAyUAimVt3iJY2fP/39jJTk3p8C5p3qBWKMZaSxX1RH3a30+CXE619d79R73+gOO+KhfIbdPeInP21P+8ZoH+P6F+Lq85wEuX0f9v7zr52zK30YIuOwct+9yZLZoFxtmN6waBAY8CqL0JyBaj7+9lHGUS4MQ7JTnK4zQtXji2tjhp4lKNHRO09al3qgV/CKToQ9hGAdQIwH745FZg1WYdpscPEzKC3LsXl0ZuQSnEDAQyTIE5ZpguItrUdBSewLkbpQJ+bqxVQVQV2fS7C32oCGNYZrCNqFOko4B5+pEM7QdMMPMcjI5gBxY+1QJYrA9AibqAauGdpZZeJyKxiMAwIo9Z5mQCA0ZLLhoSJaKWQJEzKzLErMFjS2ycShxLtckkyYfx2EKITEg9dBQkzwmztCOGSuSHIeOGDxODjxmMUqHxqkwzHLxQIA4hZ7yaNRuNc7gB7mhjo4IkDJ7KFbvGl0sm2LSiCSr4jvjyyrXDWJDowjXumIc+8jXvS9Ms4wyIDPpWcXl+8LsK92AnlY3h3a2sdVcfiw2L60oRSYvmUR4rW9va0+FolT/XvtjsZ/i8fy0/nh6fz/e/z//HwWfNNRhSNJKAAAAAElFTkSuQmCC",
+  "claude.ai": "data:image/png;base64,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",
+  "gemini.google.com": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAA/FBMVEVHcEzvTVOvzklCiPsyh//1WEP1Sko0jPZuheExhv+Y01o9wGbkxSr5vhXuX1Hd0C4xhv8KumEhuXM+i/wPumX6REL6vRL2nh89nN13y2VRw2iscqqBg9bsfjstqaw+k/HscEcxhv82iP44jPdKifY7m9Zgiuc7lOfXYnQ+iPxUtouPy1zkWGPDa42WfLyAg887kPA5ocRTr5xzxG/0SUvtT1atc6Upsoo5pbZhvns/qavZyC7xtxyCtXIlu2rmjDwxrZvac2jtpCW/yT9Mv3Kajqllp6dzmcG1n2fQrzpQlORNoMbMi2bvxB4XtnItt3q4fZWZnI+jtlhHcEyxzr5xAAAAVHRSTlMAjvi36RjpGPmOsRgX6q6OXl6PpepeXo/o546OGuiOt7f//////////////////////////////////////////////////////////////////wAvHtwrAAABMklEQVQ4jZWQ6VaCUBRGryaWUpmm2TwADkClIgZkKJoyKU7v/zAdLhUmcF19f/dem8NF6J+rVPYI2SyZU7JMEYWU3EsRBbn33CQGgL/cEC7w+dvrbaKQxbx1lMRPv3n9IIE3RwHnuPM4/jgarVYB5/log7obzufTaateB8wzTObwL68Oh3N7PbUwZ5gnWC6kx9XxeOzY9tqyXJcDjgVQgsrFyQfMcTa6ac7cNvuD/WXOsOB5Xr//udElc1ZrsOyuAJ8oAE+LuiCB0A6F3NahBRC6mvTeCRNbR+JKWhS7gqTiBBi7vwnLQ0LwE74R+9h5nMBG7FOD4SfUWq3xEM8RutIEAz5ymcQRrU0UQ+1E7/vd9WSpGPfJHKHBUlFIHJUGixJRoAcLmiigcpnMUbG4R4jsC+mvNX3eaTMOAAAAAElFTkSuQmCC",
+  "grok.com": "data:image/png;base64,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",
+  "copilot.microsoft.com": "data:image/png;base64,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",
+  "perplexity.ai": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAARVBMVEVHcEzx8e+enpxiYmH///8AAADZ2dYAAAAAAAAAAABWVlWoqKbk5OIYGBf6+vc8PDu6uriHh4ZwcG/Ly8lISEcvLy6UlJJcSHI2AAAACnRSTlMA////////86GgqH/RjQAAAR1JREFUOI2Fk4uSgyAMRQGvthIeItX//9QlClaRuplxADmE5CYIMb76n/Z6C/H+vc02iofzmw+RJz6PIVQ/CtBJu43DsA1WdjUA6C+ggTsgEQoQ0uIOeMK0AxPINwCdPsOASZv6Bmh8+AJpjORLPntEBeiIJkxEpCQgFeVldwAKMpsDXJlDnYAjEucw50UDUAgxBk6mDcR0OGUxw9gmYDhy1kHvqlaAd24pSi6ON6+Az373WlgW6wp0m1BHNVmoCzCvWTpjsrDrfAFQqg2UeuME9HYrVmqTJCm4dbhYtiqWTolgGeIC59vV1Hw2BZn86FY/EEzJYoBqeED8phnvPalBZx3ofoXqz0Cv5gootq7Vj/+f3vgM8PN+ev6j+ANkKRcOQdITMAAAAABJRU5ErkJggg==",
+  "llama.com": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAEGUlEQVRYhe2Vz28TRxTHP+/NrpM0VHHotTROQeqhh7hSpR4xfwHhxDGuFCRUoWL1VFVCmRQJcauROCBQK/MfhP/A+Qswx0ogx6ByaA+xo0ol/jGvh9214+A13OEdvOud+f6YN2/ewMf40ENyR6rtIhFVoALyLfAGaGLhNr9/2cnF+X4ZoYpIOflge4TRHn7p4P0NbLdrgAdWZkwzFf4Ij0rb08KHRcIndSLdmslp7LIT+3cb2G43gK28aZL9iLywh2sXAKgdFlkuNHFuA6cgOYkVe8ytQvXkJz0l7t8WP4GXRFwAMTuv118+B2ApaqKygQBmPULYRbgE9j1YBzMwg8AWu4P67KVda5dBnmJ2cvwJETUerB+w3b6qIg+AYmYCwJaW/gxnlr9CHTjpgVbwhdaU891+A7Ot8SpMLuHj5rSB6y+bGBcTpwFUH/NwbSpdAHrt4LkI58dAEUafnYUownT0Df5M6zQGAH/cAjZSTIedQgmyLbj+qgJyEU13JIo69ENtFk94VLoAdBFBRBAgOjpChoNfcsUTZE2y7Jqt8Wu/OjEgUkUkSU8UAeZprHfzqEZxoSxpoYmADIdER/9ezhcH/FITs/2JCdmcGChEm6iCcyDS48EXjblkq5+uD8+ujotdABkOvivc+OvqPJjZqIEFxAwsXMZbUan9U8FYIXIJU6EwX9xbkWihYYuLhIWF8bGUpDBvzcW6wd5UkbthWYEy6kBdkn51zbkkHHtE1jAIy8tHqNi4IIf9rxd/eFnNN7/axewZkB7LUFFiLRE50HT/Y/ILyQ8qiLuZEAQg/IbKEwDDwMBCqFNrF3M5zA6wkB4/KSnOlRGBOE4m3F09yAUL9fSJDgadcGfFH98/d8XMXjDJ7MrCG3wuhdDCwFRBpKRImnohKcK82B14IOl2oxFBJyISue2MPalIvbl441VlJo8qacdM/uJkIp5nwPfLwE4GFLN9bp9pZMNv7p9rmtPHpopJcrCC0ZjJBeM5iYHMVVbK3qb3z1sRlca4Z4aA6eitJtWPRzVEegDmHKiuxbXX9dPzCJTEjKzpKeqaySlQcAoMqlMAN6iTtVAA0XszO159vWsmtYzYErGb8U9/T/j8YdFg07IGYjQF3y8TwtMEaEkjwuqIHIBUgYuT3NkzLK7gJbdLRj++3hO4DGDqMOcQuGfONc05b85tmCq4CFSuJFb8cQvS6xRm3+dGD7O3b7rTUWsXYxZbmKyZCKhiUYSJZFuTPTvsFEppNUgVoZe+z6LtoVJ9pzhAfb0Lo01T6Y0Xklb8eH0hgI2qkBWhL7QwKojsz9B/RrAKt6K9d4qnMah/3ooslBH2TfXUqHTM5BJ+qXnS1CT8fyVcVAJgZN33WvW8+PmwFEEJYKhxlzvzruyP8TE+xPgfkyCBwwN1jtUAAAAASUVORK5CYII=",
+  "kimi.com": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAAflBMVEVHcEwLCwsHBwcCAgKTk5MEBARmZ2ZcXFxxcnI0OkMJCQpqa2oDAwF+f39BQkJeX14CAgIkJSVrbWyChIN3d3cAAAACAgIKCgoFBQX///8zMzMgIiUQEBAaGhpERUUrKytTU1OEhITz8/OlpqX4+Pi+v74Xhf0QWq/l5ebW1tY3ADQgAAAAFXRSTlMAujbZ/en8/vv8hDYhIcSDs+q6tLRwFLKxAAAB70lEQVQ4jV2T17arIBCGMVGB1N0oMjRj6vu/4J4B9eyTuXCx/L/pwBjZZtdsO6vINJntts1uwxY7NForXaW/9nGo+qYjjYglQDVruxLk0BVnVam/OhIU42POXMUVwX9W2wYTqFrbewkAioJs2K7Kb7qS97tUCOxYs0RYKyynx/3+QMA0bFsVZWKEQigXY0TgAcoav2XdDLjLMJZa+eU6tKhRld50zM49zIDi12GY5qIxhWdLCQVQi05DsNSFYXNtM0B6S7oxCHjzDqw6Aoj44P8H+LD6k+kQDAJlvIqAF/o/lULXChhvSpF66aLYK6pVB6uBzVuowO05DJeRghTAB3BsmS8Bk0o3woLSqGKE5BzT/4AbTaRF4jkmW1K8AWWSimMaPHoiZIrM2Bm4FgB3AJimNaFYkqyjkSIAt1dPgMfl8EkkgCQB4ifb0tCXW1BvIp5SDC7LILNkjbeG/pOoC4o7CBHoVqScT2wHATvCyMsCtcLqU5DJpcjzmW08eJyIxY8psgGH3TmXksuZ7xlrAraLNUEK1Fpw0QWQSMQc8w++iyOXOWfMiI7S9TnKQCzEPvfiSE/rKIToOUeqH8UouAMIAWLmWezr4zx+i5H3Qozt1LaiFzGkRPFPx/V9789fPaq3aWrHUThrPk9f5+r+C+gwVocd94fkAAAAAElFTkSuQmCC",
+  "deepseek.com": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAAJ1BMVEVHcExNa/5Na/5Na/5Na/5Na/5Na/5Na/5Na/5Na/5Na/5Na/5Na/4kQUr/AAAADHRSTlMAk/IXMFzU46tHwns1u9deAAAA6klEQVQ4jc1SS3bAIAhERFHD/c9bAWOIzb6dBQ9hwmcIwH9FLh+xnIESS9VHkiN7sSygvYeM7JmkpkuAhet0CuReUAuWmBckazEdNdIASA6UGOsAeBKU0ZY7jgEehtUXHXFyK5+MS5uwi8E2N6WdHGrqtNUXFbk39nzzJd1zQl9q+eg8CHj1MeDtTLX9S1pUgiUaw5vRfHWE3Zo2I4qaVqybGjfaQ9gxfMa0mbcUsaxtWjo8VwhVdW3MVl6jl+UrRKDLn/14fuX8i8Gprdl9lfqijLAe19ZY8E2AHg768UcrKFVE5NS/03+KH6hIEQQ9CMOXAAAAAElFTkSuQmCC",
+  "qwen.ai": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAAeFBMVEVHcEx2bO9QJ+ZnWu02BONeT+tfVOxhS+qJhPJeNudTNuhgUetgV+2UkfR/e/D///9iU+xiS+pgQ+lhOOZcL+aFefBpXu24rfTe2fvv7v2OhfJUJeabkPL6+v9yaO7RyPhRDeNUPOl3cPCooPTIvfaCZOzo5PyFbu2BMEwOAAAAD3RSTlMAW4yTN0fHGDVaznfwnbLDDcNBAAABbElEQVQ4ja2SW3OCMBCFEYt4azeXDQgJBgTk///D7pJKRjr60On3gpNzXM6ekCT/yobYv9G3prjezGs9NyDJsX1pOFZQiuJ63QfytX5wANCJgobcTF27fm3QpPdKsCNYPp/1dACorJKSLWFKfMnOmEk2NGCcJkPUhHPu66FnoqfxNawoNw/DWXQVwOCbJ73aPfRTIaShk6n0/hIxS4SsEKK7ANxbSyB2nXV935tDzCiEFJwCtdaKqCtGxI4FjSgBmjY4MIQZ0sWxpRF8Wlo2IHs51DUWQYaOm9Y8QtIPhxzqGO9BSGnvAL7V2nqScA7lsphCSj3S0Yg48YMrp8ZPcQ8p1fzXtqXOPJKBLOfYtZAKraVw0xxFBUMWBwhl/DDcoRr5zlDNjqVrLqKbd288rVi1NGF5+08Rqgw3xEEN7aqSFbKccfTVXGhVna0N+UeASlKI+rjWF9JhaBHx1xcd0Zr09LWe5Afijf4HvgG7TygU1jxAEgAAAABJRU5ErkJggg==",
+  "mistral.ai": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAAZlBMVEVHcEzJARnhBAbqOAj/hgP/rwHTAhHHABrEAB36TA//gwP/rgH/rQH7UA/7UA//ggPEAB3FABz/rwH/qALhAgDhBQDFABzEAB37UA//ggThBQD/sAH/hAPgAAD/fwTjBQD/qAL6TA+p1uSXAAAAF3RSTlMA/iQZKzFlMNj+32XaZDBkOOUO/tPWvRzaX7wAAACjSURBVDiN1Y7bDoIwEEQrXWxVVMAbeC3//5PONm2cGF8wvHBeZmdzmq0xs6EtAS8EvaVe3gALFfpmWiEcQrAiEu+L2AoLFuQJeqBljdS+Z6FPZEEZJ9wTUUgzC7thFRk6kOctC90PphXcA+igaZFH5JKFK9BBs0CekKOE4gWyEE+gZ8E13vsFQPgCnFPXvUr1hdAXnvp/QvMlmNp9iJ8irJkFbxmrHyZu/8BmAAAAAElFTkSuQmCC"
+};
+
+// Verified against each company's own pricing and release pages, 2026-07-13.
+// Full source list in the verification brief. Update the date stamp when editing.
+const MODELS = [
+  { fav:"chatgpt.com", flag:"\u{1F1FA}\u{1F1F8}", co:"OpenAI", model:"ChatGPT", best:"A bit of everything",
+    cats:["everyday","writing","coding"], free:true, ladderShort:"$0 \u2192 $100+",
+    honest:"The one your coworkers mean when they say 'the AI.' Jack of all trades, genuinely good at most.",
+    ladder:[
+      {amt:"$0", plan:"Free", note:"GPT-5.5 Instant, daily limits"},
+      {amt:"$8", plan:"Go", note:"More of the same engine. May include ads."},
+      {amt:"$20", plan:"Plus", note:"Adds the new 5.6 engines"},
+      {amt:"$100+", plan:"Pro", note:"$100 or $200 by usage. Sol Pro exclusive."}
+    ],
+    verdict:"Stay free until you hit the wall. Go at $8 is the quiet deal, with an ads asterisk.",
+    decoder:[
+      ["GPT-5.5 Instant","Still the everyday workhorse in regular chat.","Free and up"],
+      ["GPT-5.6 Sol","The new flagship. Deep thinking for hard problems.","Plus and up"],
+      ["GPT-5.6 Terra","Balanced and cheaper. Lives mostly in Work, Codex, and the API.","Plus and up"],
+      ["GPT-5.6 Luna","The fast-and-cheap one of the new family.","Plus and up"],
+      ["GPT-Live","The voice engine. Listens and talks at the same time.","All plans (mini on Free)"]
+    ],
+    open:false, tokens:"$5 in / $30 out per M (Sol)", speed:"Fast enough you won't notice",
+    launch:{label:"Open ChatGPT", url:"https://chatgpt.com"} },
+
+  { fav:"claude.ai", flag:"\u{1F1FA}\u{1F1F8}", co:"Anthropic", model:"Claude", best:"Writing, coding",
+    cats:["writing","coding","everyday"], free:true, ladderShort:"$0 \u2192 $100+",
+    honest:"The careful one. Strong writer, strong coder, will tell you when it is not sure.",
+    ladder:[
+      {amt:"$0", plan:"Free", note:"Haiku and Sonnet, daily limits"},
+      {amt:"$20", plan:"Pro", note:"Adds Opus and Fable, real headroom"},
+      {amt:"$100+", plan:"Max", note:"$100 or $200 by usage"}
+    ],
+    verdict:"Free tier is generous. Pay $20 only when the limits start biting.",
+    decoder:[
+      ["Haiku 4.5","Small and fast, for quick answers.","Free and up"],
+      ["Sonnet 5","The daily driver. Most people live here.","Free and up"],
+      ["Opus 4.8","The deep one, for hard reasoning and long work.","Pro and up"],
+      ["Fable 5","The new leap. In a promo window on paid plans now, usage credits after.","Pro and up"]
+    ],
+    open:false, tokens:"$2 in / $10 out per M (Sonnet 5, intro price)", speed:"Fast enough you won't notice",
+    launch:{label:"Open Claude", url:"https://claude.ai"} },
+
+  { fav:"gemini.google.com", flag:"\u{1F1FA}\u{1F1F8}", co:"Google", model:"Gemini", best:"Research, long docs",
+    cats:["research","everyday"], free:true, ladderShort:"$0 \u2192 $100+",
+    honest:"Lives inside everything Google you already use. Huge memory for long documents.",
+    ladder:[
+      {amt:"$0", plan:"Free", note:"3.5 Flash, plus a taste of 3.1 Pro"},
+      {amt:"$4.99", plan:"AI Plus", note:"The cheap seat. More Pro access."},
+      {amt:"$19.99", plan:"AI Pro", note:"4x the Pro engine, Gmail and Docs tie-ins"},
+      {amt:"$99.99+", plan:"AI Ultra", note:"$100 or $200 by usage. Deep Think modes."}
+    ],
+    verdict:"The $4.99 tier is the sneaky value play nobody advertises.",
+    decoder:[
+      ["Gemini 3.5 Flash","Fast and free. The default.","All plans"],
+      ["Gemini 3.1 Pro","Stronger reasoning. Even Free gets a taste.","More on paid plans"],
+      ["Deep Think + Spark","The heavy research modes.","Ultra only"]
+    ],
+    open:false, tokens:"$2 in / $12 out per M (3.1 Pro)", speed:"Fast enough you won't notice",
+    launch:{label:"Open Gemini", url:"https://gemini.google.com"} },
+
+  { fav:"grok.com", flag:"\u{1F1FA}\u{1F1F8}", co:"xAI", model:"Grok", best:"News, current events",
+    cats:["everyday","research"], free:true, ladderShort:"$0 \u2192 $30+", darkLogo:true,
+    honest:"Wired into X, so it knows what happened an hour ago. Comes with attitude, for better or worse.",
+    ladder:[
+      {amt:"$0", plan:"Free", note:"Free to start, weekly limits"},
+      {amt:"$30", plan:"SuperGrok", note:"Full engines, bigger weekly pool"},
+      {amt:"more", plan:"Heavy", note:"A tier above exists; price on their site"}
+    ],
+    verdict:"Only worth paying for if breaking news is your thing.",
+    decoder:[
+      ["Grok 4.5","The new flagship. Coding and agent work at fast-model speeds.","Default"],
+      ["Grok 4 Fast","Quick conversational answers.","Free and up"],
+      ["Think mode","Slower reasoning for harder questions.","Paid plans"]
+    ],
+    open:false, tokens:"$2 in / $6 out per M (Grok 4.5)", speed:"Fast",
+    launch:{label:"Open Grok", url:"https://grok.com"} },
+
+  { fav:"copilot.microsoft.com", flag:"\u{1F1FA}\u{1F1F8}", co:"Microsoft", model:"Copilot", best:"Office, Windows",
+    cats:["everyday","writing"], free:true, ladderShort:"$0 \u2192 $19.99", badge:"ChatGPT in a trench coat",
+    honest:"OpenAI engines wearing a Microsoft badge, bolted into Word, Excel, and Windows itself.",
+    ladder:[
+      {amt:"$0", plan:"Free", note:"Solid daily assistant"},
+      {amt:"$9.99", plan:"M365 Personal", note:"Copilot bundled with Office, lower limits"},
+      {amt:"$19.99", plan:"M365 Premium", note:"Highest Copilot limits. Replaced Copilot Pro."}
+    ],
+    verdict:"If your life is in Office already, this is the lowest-friction door into AI.",
+    decoder:[
+      ["(no picker)","You choose modes (Quick, Think Deeper, Smart), and Microsoft routes you to a GPT-5-family engine automatically.","All plans"]
+    ],
+    open:false, tokens:"Not sold per token to consumers", speed:"Fast enough you won't notice",
+    launch:{label:"Open Copilot", url:"https://copilot.microsoft.com"} },
+
+  { fav:"perplexity.ai", flag:"\u{1F1FA}\u{1F1F8}", co:"Perplexity", model:"Perplexity", best:"Search with sources",
+    cats:["research"], free:true, ladderShort:"$0 \u2192 $200", badge:"The buffet",
+    honest:"One $20 subscription, engines from four companies. Less a chatbot, more a search engine that shows its homework.",
+    ladder:[
+      {amt:"$0", plan:"Free", note:"Sonar engine, capped searches"},
+      {amt:"$20", plan:"Pro", note:"Pick GPT, Claude, Gemini, or Grok"},
+      {amt:"$200", plan:"Max", note:"Model Council: several engines answer at once"}
+    ],
+    verdict:"The sleeper move: one sub gets you engines from four different companies.",
+    decoder:[
+      ["Sonar","Perplexity's own search engine family.","Free and up"],
+      ["The guest engines","GPT-5.2, Claude Sonnet 4.6, Gemini 3.1 Pro, and Grok 4, pickable per question.","Pro and up"]
+    ],
+    open:false, tokens:"Not really a per-token product", speed:"Fast",
+    launch:{label:"Open Perplexity", url:"https://perplexity.ai"} },
+
+  { fav:"llama.com", flag:"\u{1F1FA}\u{1F1F8}", co:"Meta", model:"Llama", best:"Run it yourself",
+    cats:["coding","open"], free:true, ladderShort:"Free (download)", darkLogo:true,
+    honest:"The one you can actually download and own, if you're the type who rebuilt carburetors.",
+    ladder:[
+      {amt:"$0", plan:"Download", note:"Yours forever, runs on your machine"}
+    ],
+    verdict:"Free means free. The cost is your time and a decent computer.",
+    decoder:[
+      ["Llama 4 Scout","The smaller one. Runs on serious home hardware.","Download"],
+      ["Llama 4 Maverick","The big one. Needs a rented server.","Download"],
+      ["Muse Spark 1.1","Meta's newest engine. API only, NOT downloadable.","Developers, closed"]
+    ],
+    open:true, tokens:"Varies by host", speed:"Depends on your hardware",
+    launch:{label:"Meta's Llama page", url:"https://www.llama.com"},
+    download:{label:"Hugging Face", url:"https://huggingface.co/meta-llama"} },
+
+  { fav:"kimi.com", flag:"\u{1F1E8}\u{1F1F3}", co:"Moonshot", model:"Kimi", best:"Cheap power at volume",
+    cats:["coding","open"], free:true, ladderShort:"$0 / cheap API",
+    honest:"Top three among open models, priced well under the US flagships. Cheaper to run or strategically underpriced? Nobody outside the company knows.",
+    ladder:[
+      {amt:"$0", plan:"Web chat", note:"Chat free at kimi.com"},
+      {amt:"$0.95", plan:"API", note:"Per-million in, $4 out. A fraction of Sol's rates."}
+    ],
+    verdict:"The price gap is the story here. Read the article for why.",
+    decoder:[
+      ["K2.6","The flagship. Long documents, coding, many languages.","Free and up"],
+      ["K2.7-Code","The new coding specialist.","API and download"]
+    ],
+    open:true, tokens:"$0.95 in / $4.00 out per M", speed:"Slower, reasons more",
+    launch:{label:"Open Kimi", url:"https://kimi.com"},
+    download:{label:"Hugging Face", url:"https://huggingface.co/moonshotai"} },
+
+  { fav:"deepseek.com", flag:"\u{1F1E8}\u{1F1F3}", co:"DeepSeek", model:"DeepSeek", best:"Math, cheap reasoning",
+    cats:["coding","research","open"], free:true, ladderShort:"$0 / cheap API",
+    honest:"The one that spooked Wall Street in '25. Startlingly good at reasoning for the price.",
+    ladder:[
+      {amt:"$0", plan:"Web chat", note:"Free at chat.deepseek.com"},
+      {amt:"pennies", plan:"API", note:"V4-Flash from $0.14 in / $0.28 out per million"}
+    ],
+    verdict:"Free, capable, and Chinese-run. Weigh all three words equally.",
+    decoder:[
+      ["V4-Flash","The everyday engine, absurdly cheap.","Free and up"],
+      ["V4-Pro","The big reasoner. Thinking on by default.","Free and up"]
+    ],
+    open:true, tokens:"$0.14\u2013$0.44 in / $0.28\u2013$0.87 out per M", speed:"Slower, reasons more",
+    launch:{label:"Open DeepSeek", url:"https://chat.deepseek.com"},
+    download:{label:"Ollama", url:"https://ollama.com/search?q=deepseek"} },
+
+  { fav:"qwen.ai", flag:"\u{1F1E8}\u{1F1F3}", co:"Alibaba", model:"Qwen", best:"Tinkerers, translation",
+    cats:["open","coding"], free:true, ladderShort:"$0 / download", darkLogo:true,
+    honest:"Comes in every size from phone-sized to data-center-sized. The hobbyist favorite.",
+    ladder:[
+      {amt:"$0", plan:"Web chat", note:"Free at chat.qwen.ai"},
+      {amt:"$0", plan:"Download", note:"The open Qwen3.5 family, every size"}
+    ],
+    verdict:"If you want to experiment on your own machine, start here or with Llama.",
+    decoder:[
+      ["Qwen3.5 family","Open weights, 0.8B to 397B. Pick your size.","Download"],
+      ["Qwen3.7 Max","The flagship. API only, NOT downloadable.","Web and API"]
+    ],
+    open:true, tokens:"Varies by host", speed:"Depends on size",
+    launch:{label:"Open Qwen Chat", url:"https://chat.qwen.ai"},
+    download:{label:"Hugging Face", url:"https://huggingface.co/Qwen"} },
+
+  { fav:"mistral.ai", flag:"\u{1F1EB}\u{1F1F7}", co:"Mistral", model:"Le Chat", best:"Europe's answer",
+    cats:["everyday","open"], free:true, ladderShort:"$0 \u2192 $14.99",
+    honest:"The European option, if where your data lives matters to you. Scrappy and improving fast.",
+    ladder:[
+      {amt:"$0", plan:"Free", note:"Full assistant, fair limits"},
+      {amt:"$14.99", plan:"Pro", note:"Higher limits, newest engines. Students $5.99."}
+    ],
+    verdict:"The privacy-minded pick. EU rules apply to your chats.",
+    decoder:[
+      ["Mistral Large 3","The open flagship. Yes, their BIG one is downloadable.","Free and up / Download"],
+      ["Mistral Small 4","Light and open, Apache 2.0.","Download"],
+      ["Medium 3.5","Their premier API engine. This one is closed.","API only"]
+    ],
+    open:true, tokens:"$2 in / $6 out per M (Large 3)", speed:"Very fast",
+    launch:{label:"Open Le Chat", url:"https://chat.mistral.ai"},
+    download:{label:"Hugging Face", url:"https://huggingface.co/mistralai"} }
+];
+
+const rowsEl = document.getElementById('rows');
+rowsEl.innerHTML = MODELS.map(m => `
+  <div class="row" data-cats="${m.cats.join(' ')}">
+    <button class="row-surface" onclick="this.parentElement.classList.toggle('open')">
+      <img class="logo${m.darkLogo ? ' light' : ''}" src="${FAV[m.fav]}" alt="${m.co} logo">
+      <span class="who">
+        <span class="co">${m.flag} ${m.co}</span><br>
+        <span class="model">${m.model}${m.badge ? `<span class="badge">${m.badge}</span>` : ''}</span>
+      </span>
+      <span class="bestat">${m.best}</span>
+      <span class="free ${m.free ? 'yes' : 'no'}">${m.free ? 'Yes' : 'No'}</span>
+      <span class="price">${m.ladderShort}</span>
+      <span class="caret">▼</span>
+    </button>
+    <div class="row-detail">
+      <div class="sec-label">The test drive</div>
+      <p class="honest">${m.honest}</p>
+
+      <div class="sec-label">What it costs to keep running</div>
+      <div class="ladder">
+        ${m.ladder.map(r => `<div class="rung"><span class="amt">${r.amt}</span> <span class="plan">${r.plan}</span><div class="note">${r.note}</div></div>`).join('')}
+      </div>
+      <div class="verdict">${m.verdict}</div>
+
+      <div class="sec-label">The engines under the hood</div>
+      <table class="decoder">
+        ${m.decoder.map(d => `<tr><td class="eng">${d[0]}</td><td>${d[1]}</td><td class="unlock">${d[2]}</td></tr>`).join('')}
+      </table>
+
+      <div class="sec-label">The nerd layer</div>
+      <dl class="nerd">
+        <div><dt>Lease or own?</dt><dd class="${m.open ? 'tag-open' : ''}">${m.open ? 'You could own it · free to download' : 'Lease only · runs on their computers'}</dd></div>
+        <div><dt>Real per-token price</dt><dd>${m.tokens}</dd></div>
+        <div><dt>Speed</dt><dd>${m.speed}</dd></div>
+      </dl>
+
+      <div class="links">
+        <a class="golink primary" href="${m.launch.url}" target="_blank" rel="noopener">${m.launch.label} ↗</a>
+        ${m.download ? `<a class="golink secondary" href="${m.download.url}" target="_blank" rel="noopener">Own the engine · ${m.download.label} ↗</a>` : ''}
+      </div>
+    </div>
+  </div>
+`).join('');
+
+document.getElementById('chips').addEventListener('click', e => {
+  const chip = e.target.closest('.chip');
+  if (!chip) return;
+  document.querySelectorAll('.chip').forEach(c => c.classList.remove('active'));
+  chip.classList.add('active');
+  const f = chip.dataset.filter;
+  document.querySelectorAll('.row').forEach(r => {
+    r.classList.toggle('hidden', f !== 'all' && !r.dataset.cats.split(' ').includes(f));
+  });
+});
+
+const toggleBtn = document.getElementById('toggleAll');
+toggleBtn.addEventListener('click', () => {
+  const rows = [...document.querySelectorAll('.row:not(.hidden)')];
+  const anyClosed = rows.some(r => !r.classList.contains('open'));
+  rows.forEach(r => r.classList.toggle('open', anyClosed));
+  toggleBtn.textContent = anyClosed ? 'Collapse all' : 'Expand all';
+});
+</script>
+</body>
+</html>
