@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Finn's Racing Casino</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Racing+Sans+One&display=swap');
+  :root{
+    --red:#E10600; --asphalt:#0A0A0B; --panel:#141417; --line:#26262B;
+    --white:#F5F5F0; --amber:#FFB800; --green:#00D26A; --steel:#8A8D91;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;}
+  body{min-height:100vh;background:var(--asphalt);color:var(--white);
+    font-family:'Oswald',system-ui,sans-serif;padding:16px;-webkit-font-smoothing:antialiased;}
+  .wrap{max-width:820px;margin:0 auto;}
+  .race{font-family:'Racing Sans One','Oswald',system-ui,sans-serif;}
+  .btn{transition:transform .08s ease, filter .12s ease;}
+  .btn:not(:disabled):hover{filter:brightness(1.12);}
+  .btn:not(:disabled):active{transform:translateY(1px);}
+  .btn:focus-visible{outline:3px solid var(--amber);outline-offset:2px;}
+  @keyframes flag{0%{background-position:0 0}100%{background-position:32px 0}}
+  @keyframes pulse{0%,100%{opacity:1}50%{opacity:.55}}
+  @media (prefers-reduced-motion: reduce){*{animation:none !important;}}
+</style>
+</head>
+<body>
+<div class="wrap" id="app"></div>
+<script>
+(function () {
+  "use strict";
+
+  // ---- KNOBS YOU CAN TWIST ----
+  const CONFIG = { startCash: 800, tickMs: 1000, costCurve: 1.15 };
+
+  const RIVALS = [
+    { name: "The Sterling Grand",     who: "Duke Sterling",   floor: 6000,        gap: 1.5,  growth: 14,     unlock: null,
+      beat: "Duke Sterling is standing in your parking lot in a bathrobe asking if you're hiring. The go-karts never stopped running." },
+    { name: "Riviera Motor Lodge",    who: "the Riviera",     floor: 35000,       gap: 1.7,  growth: 42,     unlock: "diner",
+      beat: "The Riviera sold to a REIT and mailed you a fruit basket. Weird flex. You kept the pears." },
+    { name: "Grand Prix Palace",      who: "the Palace",      floor: 200000,      gap: 1.8,  growth: 150,    unlock: "darts",
+      beat: "Grand Prix Palace repainted their marquee to point at YOUR valet line. That's not how marquees work, but okay." },
+    { name: "The Monaco",             who: "The Monaco",      floor: 900000,      gap: 1.8,  growth: 550,    unlock: "golf",
+      beat: "The Monaco's high-roller whales are your whales now. Somebody just lost a boat at your blackjack table." },
+    { name: "Nightingale Towers",     who: "the Towers",      floor: 4000000,     gap: 1.85, growth: 2000,   unlock: "arcade",
+      beat: "Nightingale Towers turned off their fountains to save face. You turned yours UP. Pettiness is a strategy." },
+    { name: "The Cosmodrome",         who: "the Cosmodrome",  floor: 18000000,    gap: 1.9,  growth: 8000,   unlock: "bowl",
+      beat: "The Cosmodrome's laser show now just spells your name by accident every third loop. Chef's kiss." },
+    { name: "Sunset Family Kingdom",  who: "the Kingdom",     floor: 80000000,    gap: 1.9,  growth: 32000,  unlock: "playplace",
+      beat: "Sunset Family Kingdom's mascot defected to your payroll. He drives the pace car now." },
+    { name: "Aces High Resort",       who: "Aces High",       floor: 350000000,   gap: 1.95, growth: 130000, unlock: "daycare",
+      beat: "Aces High Resort quietly took the word 'Resort' off the sign. Couldn't back it up anymore." },
+    { name: "House of Aces",          who: "the strip",       floor: 1500000000,  gap: 2.0,  growth: 550000, unlock: null, final: true,
+      beat: "You own the #1 spot on the strip. They renamed the boulevard after your go-kart lap record. Checkered flag, boss." },
+  ];
+
+  const ATTRACTIONS = [
+    { id: "slots",     name: "Pit Stop Slots",         emoji: "🎰", cost: 120,      income: 5,     mult: 0,    tier: 0, blurb: "Cheap, cheerful, always spinning." },
+    { id: "bar",       name: "Fuel Stop Bar",          emoji: "🍺", cost: 300,      income: 6,     mult: 0.12, tier: 0, blurb: "Happy gamblers spend more. +12% to everything." },
+    { id: "bjack",     name: "Victory Lane Blackjack", emoji: "🃏", cost: 500,      income: 16,    mult: 0,    tier: 0, blurb: "Solid mid-floor earner." },
+    { id: "roul",      name: "The Chicane",            emoji: "🎡", cost: 1200,     income: 40,    mult: 0,    tier: 0, blurb: "Roulette. The wheel that eats wallets." },
+    { id: "kart",      name: "The Speedway",           emoji: "🏎️", cost: 3000,     income: 70,    mult: 0.30, tier: 0, blurb: "Your go-kart track. The reason they drive across town. +30%." },
+    { id: "diner",     name: "The Paddock Diner",      emoji: "🍽️", cost: 8000,     income: 220,   mult: 0.15, tier: 1, blurb: "24-hour breakfast keeps them on the floor. +15%." },
+    { id: "darts",     name: "Dart Alley",             emoji: "🎯", cost: 20000,    income: 550,   mult: 0,    tier: 2, blurb: "Pub games. Loud, cheap to run, prints money." },
+    { id: "golf",      name: "Apex Golf Sims",         emoji: "⛳", cost: 42000,    income: 950,   mult: 0,    tier: 3, blurb: "Corporate retreats. Deep pockets, bad swings." },
+    { id: "arcade",    name: "The Grid Arcade",        emoji: "🕹️", cost: 150000,   income: 3200,  mult: 0.15, tier: 4, blurb: "Retro cabinets, skee-ball, blacklight. Keeps the whole family on-site. +15%." },
+    { id: "bowl",      name: "Turn 4 Lanes",           emoji: "🎳", cost: 500000,   income: 9000,  mult: 0.20, tier: 5, blurb: "Neon bowling. A whole vibe. +20%." },
+    { id: "playplace", name: "Rugrat Raceway",         emoji: "🎠", cost: 1500000,  income: 26000, mult: 0.18, tier: 6, blurb: "Kids' play place. Parents stay and gamble longer. +18%." },
+    { id: "daycare",   name: "Pit Crew Daycare",       emoji: "🧸", cost: 6000000,  income: 95000, mult: 0.25, tier: 7, blurb: "Drop the kids, gamble guilt-free. The single biggest floor boost. +25%." },
+  ];
+
+  const AMBIENT = [
+    "Somebody set a new lap record on the kart track. Loudspeaker's losing its mind.",
+    "The blackjack dealers are wearing pit crew suits now. It's a whole thing.",
+    "A guy in a Nomex suit just tipped the bartender in casino chips. Iconic.",
+    "The daycare has a waitlist. The daycare. At a casino. You did this.",
+  ];
+
+  const fmt = (n) =>
+    n >= 1e9 ? "$" + (n / 1e9).toFixed(2) + "B"
+    : n >= 1e6 ? "$" + (n / 1e6).toFixed(2) + "M"
+    : n >= 1e3 ? "$" + (n / 1e3).toFixed(1) + "k"
+    : "$" + Math.floor(n);
+
+  const reduce = !!(window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches);
+
+  // ---- STATE ----
+  let phase = "intro", lights = 0, cash = CONFIG.startCash, invested = 0,
+      owned = {}, tier = 0, rival = RIVALS[0].floor,
+      radio = "Lights out. Let's take Sterling's crown.";
+  let clockIv = null, radioIv = null, introT = null;
+
+  // ---- DERIVED ----
+  const current    = () => RIVALS[tier];
+  const baseIncome = () => ATTRACTIONS.reduce((s, a) => s + (owned[a.id] || 0) * a.income, 0);
+  const totalMult  = () => 1 + ATTRACTIONS.reduce((s, a) => s + (owned[a.id] || 0) * a.mult, 0);
+  const income     = () => baseIncome() * totalMult();
+  const netWorth   = () => cash + invested;
+  const nextCost   = (a) => Math.round(a.cost * Math.pow(CONFIG.costCurve, owned[a.id] || 0));
+  const carPos     = () => Math.min(netWorth() / rival, 1);
+
+  const app = document.getElementById("app");
+  const $ = (id) => document.getElementById(id);
+  const setText = (id, t) => { const el = $(id); if (el) el.textContent = t; };
+
+  function clearTimers() {
+    if (clockIv) { clearInterval(clockIv); clockIv = null; }
+    if (radioIv) { clearInterval(radioIv); radioIv = null; }
+    if (introT)  { clearTimeout(introT);  introT = null; }
+  }
+
+  // ---- INTRO ----
+  function renderIntro() {
+    clearTimers();
+    const dots = [0,1,2,3,4].map((i) =>
+      `<div style="width:26px;height:26px;border-radius:50%;background:${i<lights?"var(--red)":"#2A0303"};box-shadow:${i<lights?"0 0 14px var(--red)":"none"};animation:${i<lights&&!reduce?"pulse 1s infinite":"none"};"></div>`
+    ).join("");
+    app.innerHTML =
+      `<div style="text-align:center;padding:48px 8px;">
+        <div class="race" style="font-size:52px;letter-spacing:1px;color:var(--red);line-height:1;">REDLINE</div>
+        <div style="color:var(--steel);text-transform:uppercase;letter-spacing:3px;font-size:12px;margin-top:6px;">a casino you built out of spite</div>
+        <p style="max-width:460px;margin:22px auto;color:#CFCFCF;font-size:15px;line-height:1.6;">
+          Duke Sterling fired you from the floor of <b>The Sterling Grand</b> in front of the whole night shift.
+          So you leased the lot across the street, wheeled in a go-kart track, and now you're going to climb
+          the entire strip and leave every one of them in the mirror. Green flag in…
+        </p>
+        <div style="display:flex;gap:10px;justify-content:center;margin:18px 0 26px;">${dots}</div>
+        <div class="race" style="font-size:22px;color:${lights>=5?"var(--green)":"var(--steel)"};">${lights>=5?"GO GO GO":"GET READY"}</div>
+      </div>`;
+    if (lights < 5) {
+      introT = setTimeout(() => { lights++; renderIntro(); }, reduce ? 120 : 550);
+    } else {
+      introT = setTimeout(() => { phase = "play"; startPlay(); }, 650);
+    }
+  }
+
+  // ---- PLAY ----
+  function stat(label, id, color) {
+    return `<div style="text-align:right;">
+      <div style="font-size:10px;letter-spacing:2px;color:var(--steel);">${label}</div>
+      <div id="${id}" style="font-size:20px;color:${color};"></div></div>`;
+  }
+
+  function startPlay() {
+    clearTimers();
+    app.innerHTML =
+      `<div style="display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:8px;">
+        <div>
+          <span class="race" style="font-size:30px;color:var(--red);">REDLINE</span>
+          <span style="color:var(--steel);margin-left:10px;font-size:12px;letter-spacing:2px;text-transform:uppercase;">rung ${tier+1} of ${RIVALS.length}</span>
+        </div>
+        <div class="race" style="display:flex;gap:18px;">
+          ${stat("CASH","stat-cash","var(--amber)")}
+          ${stat("INCOME/S","stat-income","var(--green)")}
+          ${stat("NET WORTH","stat-net","var(--white)")}
+        </div>
+      </div>
+
+      <div style="margin-top:14px;background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:14px;">
+        <div style="display:flex;justify-content:space-between;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--steel);margin-bottom:8px;">
+          <span>Chasing ${current().name}</span><span id="behind"></span>
+        </div>
+        <div style="position:relative;height:46px;background:#1B1B20;border-radius:6px;overflow:hidden;border:1px solid var(--line);">
+          <div style="position:absolute;top:22px;left:0;right:40px;height:2px;background-image:repeating-linear-gradient(90deg,#3A3A42 0 14px,transparent 14px 28px);"></div>
+          <div style="position:absolute;top:0;right:0;width:22px;height:100%;background-image:conic-gradient(#fff 90deg,#000 0 180deg,#fff 0 270deg,#000 0);background-size:11px 11px;opacity:.9;"></div>
+          <div style="position:absolute;right:26px;top:4px;font-size:22px;filter:grayscale(.4);" title="${current().name}">🚗</div>
+          <div id="car" style="position:absolute;top:22px;left:4px;transform:translateY(-50%);font-size:26px;transition:${reduce?"none":"left .5s linear"};" title="You">🏎️</div>
+        </div>
+      </div>
+
+      <div style="margin-top:12px;background:#101013;border:1px solid var(--line);border-left:4px solid var(--red);border-radius:8px;padding:9px 12px;font-size:13.5px;color:#DDD;">
+        <span style="color:var(--red);font-weight:700;letter-spacing:1px;margin-right:8px;">📻 RADIO</span><span id="radio-text"></span>
+      </div>
+
+      <div style="display:grid;grid-template-columns:1fr;gap:14px;margin-top:14px;">
+        <div style="background:#0F0F12;border:1px solid var(--line);border-radius:10px;padding:14px;">
+          <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:10px;">
+            <span class="race" style="font-size:18px;color:var(--white);">The Floor</span>
+            <span id="floor-hint" style="font-size:11px;letter-spacing:1px;text-transform:uppercase;color:var(--steel);"></span>
+          </div>
+          <div id="floor"></div>
+        </div>
+        <div style="background:#0F0F12;border:1px solid var(--line);border-radius:10px;padding:14px;">
+          <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:10px;">
+            <span class="race" style="font-size:18px;color:var(--white);">Pit Shop</span>
+            <span id="pit-hint" style="font-size:11px;letter-spacing:1px;text-transform:uppercase;color:var(--steel);"></span>
+          </div>
+          <div id="pitshop" style="display:flex;flex-direction:column;gap:8px;"></div>
+        </div>
+      </div>`;
+    setText("radio-text", radio);
+    renderFloor();
+    renderPitShop();
+    updateDynamic();
+    clockIv = setInterval(onTick, CONFIG.tickMs);
+    radioIv = setInterval(onRadio, 4500);
+  }
+
+  function renderFloor() {
+    const el = $("floor"); if (!el) return;
+    const list = ATTRACTIONS.filter((a) => owned[a.id]);
+    if (list.length === 0) {
+      el.innerHTML = `<div style="color:var(--steel);font-size:14px;padding:10px 2px;">Nothing here yet. Buy your first attraction from the Pit Shop and watch the cash start ticking.</div>`;
+      return;
+    }
+    el.innerHTML = `<div style="display:flex;flex-wrap:wrap;gap:8px;">` + list.map((a) =>
+      `<div style="background:#1A1A1F;border:1px solid var(--line);border-radius:8px;padding:8px 11px;min-width:96px;">
+        <div style="font-size:24px;">${a.emoji}</div>
+        <div style="font-size:12.5px;color:var(--white);margin-top:2px;">${a.name}</div>
+        <div class="race" style="color:var(--amber);font-size:15px;">×${owned[a.id]}</div>
+      </div>`).join("") + `</div>`;
+  }
+
+  function renderPitShop() {
+    const el = $("pitshop"); if (!el) return;
+    const list = ATTRACTIONS.filter((a) => a.tier <= tier);
+    el.innerHTML = list.map((a) => {
+      const cost = nextCost(a), afford = cash >= cost;
+      return `<button class="btn pit-btn" data-id="${a.id}" data-cost="${cost}" ${afford?"":"disabled"}
+        style="text-align:left;background:${afford?"var(--panel)":"#161619"};border:1px solid ${afford?"var(--line)":"#1C1C20"};border-radius:9px;padding:10px 12px;color:var(--white);cursor:${afford?"pointer":"not-allowed"};opacity:${afford?1:0.55};display:flex;align-items:center;gap:12px;font-family:'Oswald',system-ui,sans-serif;">
+        <span style="font-size:26px;">${a.emoji}</span>
+        <span style="flex:1;">
+          <span style="font-size:14.5px;font-weight:600;">${a.name}</span>
+          <span style="display:block;font-size:11.5px;color:var(--steel);margin-top:1px;">${a.blurb}</span>
+          <span style="display:block;font-size:11.5px;color:var(--green);margin-top:2px;">+${fmt(a.income)}/s${a.mult?"  ·  +"+Math.round(a.mult*100)+"% floor":""}</span>
+        </span>
+        <span class="race cost" style="font-size:16px;color:${afford?"var(--amber)":"var(--steel)"};">${fmt(cost)}</span>
+      </button>`;
+    }).join("");
+    el.querySelectorAll(".pit-btn").forEach((b) =>
+      b.addEventListener("click", () => buy(b.dataset.id)));
+    setText("pit-hint", "×" + totalMult().toFixed(2) + " floor multiplier");
+  }
+
+  function updateDynamic() {
+    const inc = income();
+    setText("stat-cash", fmt(cash));
+    setText("stat-income", fmt(inc));
+    setText("stat-net", fmt(netWorth()));
+    const car = $("car"); if (car) car.style.left = "calc(" + (carPos() * 88) + "% + 4px)";
+    setText("behind", netWorth() >= rival ? "🏁 you crossed the line" : fmt(rival - netWorth()) + " behind");
+    setText("floor-hint", inc > 0 ? "spinning up" : "empty — buy something");
+    document.querySelectorAll(".pit-btn").forEach((b) => {
+      const cost = Number(b.dataset.cost), afford = cash >= cost;
+      b.disabled = !afford;
+      b.style.opacity = afford ? 1 : 0.55;
+      b.style.cursor = afford ? "pointer" : "not-allowed";
+      b.style.background = afford ? "var(--panel)" : "#161619";
+      b.style.borderColor = afford ? "var(--line)" : "#1C1C20";
+      const c = b.querySelector(".cost"); if (c) c.style.color = afford ? "var(--amber)" : "var(--steel)";
+    });
+  }
+
+  function onTick() {
+    cash += income();
+    rival += current().growth;
+    if (netWorth() >= rival) {
+      if (current().final) { phase = "won"; renderWon(); }
+      else { phase = "cleared"; renderCleared(); }
+      return;
+    }
+    updateDynamic();
+  }
+
+  function onRadio() {
+    const p = netWorth() / rival;
+    if (p >= 0.85) radio = "P2 and closing. " + current().who + " can hear the engine now.";
+    else if (p >= 0.45) radio = "Mid-pack. Stack boost buildings — bar, karts, arcade, daycare all multiply your whole floor.";
+    else radio = AMBIENT[Math.floor(Math.random() * AMBIENT.length)];
+    setText("radio-text", radio);
+  }
+
+  function buy(id) {
+    const a = ATTRACTIONS.find((x) => x.id === id);
+    const cost = nextCost(a);
+    if (cash < cost) return;
+    cash -= cost; invested += cost;
+    owned[id] = (owned[id] || 0) + 1;
+    renderFloor(); renderPitShop(); updateDynamic();
+  }
+
+  // ---- OVERLAYS ----
+  function overlay(border, inner) {
+    const ov = document.createElement("div");
+    ov.id = "overlay";
+    ov.style.cssText = "position:fixed;inset:0;background:rgba(5,5,7,.92);display:flex;align-items:center;justify-content:center;padding:20px;z-index:20;";
+    ov.innerHTML = `<div style="max-width:440px;text-align:center;background:#141417;border:1px solid ${border};border-radius:14px;padding:30px 26px;">${inner}</div>`;
+    document.body.appendChild(ov);
+    return ov;
+  }
+  const flagStrip = `<div style="height:16px;border-radius:4px;margin-bottom:18px;background-image:conic-gradient(#fff 90deg,#000 0 180deg,#fff 0 270deg,#000 0);background-size:16px 16px;animation:${reduce?"none":"flag 1s linear infinite"};"></div>`;
+
+  function renderCleared() {
+    clearTimers();
+    const cur = current(), nxt = RIVALS[tier + 1];
+    const unl = nxt && nxt.unlock ? ATTRACTIONS.find((a) => a.id === nxt.unlock) : null;
+    overlay("var(--line)",
+      flagStrip +
+      `<div class="race" style="font-size:30px;color:var(--green);">${cur.name} — CLEARED</div>
+       <p style="color:#DDD;font-size:14.5px;line-height:1.6;margin-top:10px;">${cur.beat}</p>` +
+      (unl ? `<div style="margin-top:14px;background:#101013;border:1px solid var(--amber);border-radius:8px;padding:10px 12px;color:var(--amber);font-size:14px;">🔓 Unlocked: ${unl.emoji} ${unl.name}</div>` : "") +
+      `<div style="color:var(--steel);font-size:12.5px;margin-top:14px;">Next up: ${nxt ? nxt.name : ""}</div>
+       <button class="btn race" id="keep" style="margin-top:16px;background:var(--red);color:#fff;border:none;border-radius:8px;padding:11px 22px;font-size:16px;cursor:pointer;letter-spacing:1px;">KEEP BUILDING →</button>`);
+    $("keep").addEventListener("click", advance);
+  }
+
+  function renderWon() {
+    clearTimers();
+    const cur = current();
+    overlay("var(--red)",
+      flagStrip +
+      `<div class="race" style="font-size:42px;color:var(--green);">P1. THE WHOLE STRIP.</div>
+       <p style="color:#DDD;font-size:15px;line-height:1.6;margin-top:10px;">${cur.beat}</p>
+       <button class="btn race" id="again" style="margin-top:18px;background:var(--red);color:#fff;border:none;border-radius:8px;padding:11px 20px;font-size:16px;cursor:pointer;letter-spacing:1px;">RUN IT BACK</button>`);
+    $("again").addEventListener("click", reset);
+  }
+
+  function advance() {
+    const ov = $("overlay"); if (ov) ov.remove();
+    tier += 1;
+    const t = RIVALS[tier];
+    rival = Math.max(netWorth() * t.gap, t.floor);
+    radio = "New target: " + t.name + ". Bigger house, bigger payday.";
+    phase = "play";
+    startPlay();
+  }
+
+  function reset() {
+    const ov = $("overlay"); if (ov) ov.remove();
+    clearTimers();
+    phase = "intro"; lights = 0; cash = CONFIG.startCash; invested = 0;
+    owned = {}; tier = 0; rival = RIVALS[0].floor;
+    radio = "Lights out. Let's take Sterling's crown.";
+    renderIntro();
+  }
+
+  // ---- BOOT ----
+  renderIntro();
+})();
+</script>
+</body>
+</html>
