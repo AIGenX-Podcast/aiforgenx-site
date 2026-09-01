@@ -235,6 +235,35 @@ h1 {
 .golink.secondary { border: 1px solid var(--brand-teal); color: var(--brand-teal); }
 .golink.secondary:hover { color: var(--brand-sage); border-color: var(--brand-sage); }
 
+/* ---------- watchlist + changelog ---------- */
+.panel {
+  margin-top: 34px;
+  border: 1px dashed #333;
+  border-radius: 10px;
+  padding: 16px 18px;
+}
+.panel-h {
+  font-family: 'Poppins', sans-serif;
+  font-size: 12px; letter-spacing: 1.5px; text-transform: uppercase;
+  color: var(--brand-amber); font-weight: 600;
+  margin: 0 0 4px;
+}
+.panel-sub { font-size: 12px; color: #999; margin: 0 0 14px; max-width: 62ch; }
+.log-date {
+  font-size: 11px; letter-spacing: 1.2px; text-transform: uppercase;
+  color: var(--brand-sage); font-weight: 500; margin: 0 0 8px;
+}
+.log + .log { margin-top: 18px; padding-top: 16px; border-top: 1px solid #222; }
+.log ul { margin: 0; padding-left: 18px; }
+.log li { font-size: 13px; color: var(--brand-cream); margin-bottom: 7px; line-height: 1.5; }
+.log li strong { color: #fff; font-weight: 500; }
+.watch { display: grid; gap: 14px; }
+.watch-item { border-left: 2px solid var(--brand-teal); padding-left: 12px; }
+.watch-name { font-size: 14px; color: #fff; font-weight: 500; }
+.watch-why { font-size: 13px; color: var(--brand-cream); margin-top: 3px; line-height: 1.5; }
+.watch-status { font-size: 12px; color: var(--brand-sage); margin-top: 5px; }
+.watch-item a { color: var(--brand-teal); }
+
 /* ---------- footer ---------- */
 .footnote {
   margin-top: 36px;
@@ -307,6 +336,9 @@ h1 {
   </div>
 
   <div id="rows"></div>
+
+  <section class="panel" id="logPanel"></section>
+  <section class="panel" id="watchPanel"></section>
 
   <p class="footnote">
     This map covers the everyday general-purpose cars only, the chatbots you will actually
@@ -527,6 +559,63 @@ const MODELS = [
     launch:{label:"Open Vibe", url:"https://chat.mistral.ai"},
     download:{label:"Hugging Face", url:"https://huggingface.co/mistralai"} }
 ];
+
+// ---------------------------------------------------------------------------
+// WATCHLIST — engines worth knowing about that are not full rows yet.
+// A model earns a row when there is a consumer product a normal person can open.
+// Promote by moving it into MODELS above; retire by deleting it here.
+// ---------------------------------------------------------------------------
+const WATCHLIST = [
+  { name:"Z.ai \u00b7 GLM", flag:"\u{1F1E8}\u{1F1F3}",
+    why:"China's Zhipu lab. GLM-5.3 arrived August 18 with open weights and frontier coding scores, and the cheap GLM-5.3-Flash tier runs about $0.08 per million in. You may already be using it without knowing: it is one of the engines you can pick inside Perplexity, and Mistral serves it too.",
+    status:"Closest to earning a full row. Free chat at chat.z.ai, coding plan from $18/mo.",
+    url:"https://z.ai" },
+
+  { name:"NVIDIA \u00b7 Nemotron", flag:"\u{1F1FA}\u{1F1F8}",
+    why:"The chip company builds open models too. Nemotron shows up as a pickable engine inside Perplexity, and the smaller Nano weights are downloadable.",
+    status:"Engine only. No consumer app to open, so no row until there is one.",
+    url:"https://huggingface.co/nvidia" }
+];
+
+// ---------------------------------------------------------------------------
+// CHANGELOG — what moved since the previous verified snapshot. Newest first.
+// Keep to the changes a reader would actually feel. Two entries is plenty.
+// ---------------------------------------------------------------------------
+const CHANGELOG = [
+  { date:"September 1, 2026", since:"since the July 13 snapshot", items:[
+    "<strong>Claude's deep engine went from Opus 4.8 to Opus 5.</strong> Anthropic also cancelled a price rise that was scheduled for today, so Sonnet stays at $2 in / $10 out per million instead of going to $3 / $15.",
+    "<strong>ChatGPT's free tier got better.</strong> It now runs GPT-5.6 Luna with unlimited text chat, where it used to be GPT-5.5 Instant on daily limits.",
+    "<strong>xAI renamed itself SpaceXAI.</strong> Grok's flagship is now 4.6, and the vague tier above SuperGrok turned out to be SuperGrok Plus at $100 a month.",
+    "<strong>Mistral renamed Le Chat to Vibe.</strong> Same account, same plan, new name on the door.",
+    "<strong>Two engines flipped from closed to open.</strong> Alibaba open-sourced a Max-class Qwen for the first time, and Mistral's Medium 3.5 now ships with downloadable weights. Meta went the other way: its newest engine, Muse Spark 1.2, stays API-only while the downloadable Llama line has not moved.",
+    "<strong>Prices moved both directions.</strong> Mistral Large got about four times cheaper. Kimi's new K3 flagship costs roughly three times its old one, and DeepSeek raised rates across the board."
+  ]}
+];
+
+const logPanel = document.getElementById('logPanel');
+logPanel.innerHTML = `
+  <h2 class="panel-h">What changed since the last update</h2>
+  <p class="panel-sub">The engines swap out while you sleep. This is the short version of what actually moved, so you are not re-learning the whole board every time.</p>
+  ${CHANGELOG.map(c => `
+    <div class="log">
+      <div class="log-date">${c.date} \u00b7 ${c.since}</div>
+      <ul>${c.items.map(i => `<li>${i}</li>`).join('')}</ul>
+    </div>`).join('')}
+`;
+
+const watchPanel = document.getElementById('watchPanel');
+watchPanel.innerHTML = `
+  <h2 class="panel-h">On the watchlist</h2>
+  <p class="panel-sub">Names that are getting loud but have not earned a row yet. A model makes the main table when there is a product a normal person can actually open and use.</p>
+  <div class="watch">
+    ${WATCHLIST.map(w => `
+      <div class="watch-item">
+        <div class="watch-name">${w.flag} ${w.name}</div>
+        <div class="watch-why">${w.why}</div>
+        <div class="watch-status">${w.status} <a href="${w.url}" target="_blank" rel="noopener">Look \u2197</a></div>
+      </div>`).join('')}
+  </div>
+`;
 
 const rowsEl = document.getElementById('rows');
 rowsEl.innerHTML = MODELS.map(m => `
