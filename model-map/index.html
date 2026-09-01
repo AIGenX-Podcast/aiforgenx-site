@@ -288,7 +288,7 @@ h1 {
       <div><span class="ht-ico">⚙️</span><strong>The engines</strong> are the models inside (Sol, Fable, Flash). They upgrade themselves; you mostly just benefit.</div>
       <div><span class="ht-ico">🔑</span><strong>Lease or own:</strong> most cars you lease monthly on their computers. Open models are engines anyone can download and own.</div>
     </div>
-    <span class="asof">Snapshot · Verified July 13, 2026</span>
+    <span class="asof">Snapshot · Verified September 1, 2026</span>
     <div class="strawman" style="color: var(--brand-sage);">Every price, engine name, and plan mapping checked against the companies' own pricing and release pages on the date above. They change monthly; the date stamp is your grain of salt.</div>
   </header>
 
@@ -338,27 +338,27 @@ const FAV = {
   "mistral.ai": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAAZlBMVEVHcEzJARnhBAbqOAj/hgP/rwHTAhHHABrEAB36TA//gwP/rgH/rQH7UA/7UA//ggPEAB3FABz/rwH/qALhAgDhBQDFABzEAB37UA//ggThBQD/sAH/hAPgAAD/fwTjBQD/qAL6TA+p1uSXAAAAF3RSTlMA/iQZKzFlMNj+32XaZDBkOOUO/tPWvRzaX7wAAACjSURBVDiN1Y7bDoIwEEQrXWxVVMAbeC3//5PONm2cGF8wvHBeZmdzmq0xs6EtAS8EvaVe3gALFfpmWiEcQrAiEu+L2AoLFuQJeqBljdS+Z6FPZEEZJ9wTUUgzC7thFRk6kOctC90PphXcA+igaZFH5JKFK9BBs0CekKOE4gWyEE+gZ8E13vsFQPgCnFPXvUr1hdAXnvp/QvMlmNp9iJ8irJkFbxmrHyZu/8BmAAAAAElFTkSuQmCC"
 };
 
-// Verified against each company's own pricing and release pages, 2026-07-13.
+// Verified against each company's own pricing and release pages, 2026-09-01.
 // Full source list in the verification brief. Update the date stamp when editing.
 const MODELS = [
   { fav:"chatgpt.com", flag:"\u{1F1FA}\u{1F1F8}", co:"OpenAI", model:"ChatGPT", best:"A bit of everything",
     cats:["everyday","writing","coding"], free:true, ladderShort:"$0 \u2192 $100+",
     honest:"The one your coworkers mean when they say 'the AI.' Jack of all trades, genuinely good at most.",
     ladder:[
-      {amt:"$0", plan:"Free", note:"GPT-5.5 Instant, daily limits"},
+      {amt:"$0", plan:"Free", note:"GPT-5.6 Luna, unlimited text chats"},
       {amt:"$8", plan:"Go", note:"More of the same engine. May include ads."},
       {amt:"$20", plan:"Plus", note:"Adds the new 5.6 engines"},
       {amt:"$100+", plan:"Pro", note:"$100 or $200 by usage. Sol Pro exclusive."}
     ],
     verdict:"Stay free until you hit the wall. Go at $8 is the quiet deal, with an ads asterisk.",
     decoder:[
-      ["GPT-5.5 Instant","Still the everyday workhorse in regular chat.","Free and up"],
-      ["GPT-5.6 Sol","The new flagship. Deep thinking for hard problems.","Plus and up"],
+      ["GPT-5.6 Luna","The everyday workhorse. Unlimited text chat, even on Free.","Free and up"],
+      ["GPT-5.6 Sol","The flagship. Deep thinking for hard problems.","Plus and up"],
       ["GPT-5.6 Terra","Balanced and cheaper. Lives mostly in Work, Codex, and the API.","Plus and up"],
-      ["GPT-5.6 Luna","The fast-and-cheap one of the new family.","Plus and up"],
-      ["GPT-Live","The voice engine. Listens and talks at the same time.","All plans (mini on Free)"]
+      ["GPT-5.6 Sol Pro","The heaviest reasoning tier.","Pro only"],
+      ["GPT-Realtime-2.1","The voice engine. Listens and talks at the same time.","All plans"]
     ],
-    open:false, tokens:"$5 in / $30 out per M (Sol)", speed:"Fast enough you won't notice",
+    open:false, tokens:"$4 in / $20 out per M (Sol, promo thru Nov 21 2026)", speed:"Fast enough you won't notice",
     launch:{label:"Open ChatGPT", url:"https://chatgpt.com"} },
 
   { fav:"claude.ai", flag:"\u{1F1FA}\u{1F1F8}", co:"Anthropic", model:"Claude", best:"Writing, coding",
@@ -373,45 +373,45 @@ const MODELS = [
     decoder:[
       ["Haiku 4.5","Small and fast, for quick answers.","Free and up"],
       ["Sonnet 5","The daily driver. Most people live here.","Free and up"],
-      ["Opus 4.8","The deep one, for hard reasoning and long work.","Pro and up"],
-      ["Fable 5","The new leap. In a promo window on paid plans now, usage credits after.","Pro and up"]
+      ["Opus 5","The deep one, for hard reasoning and long work.","Pro and up"],
+      ["Fable 5","The top end, for the longest and hardest work.","Pro and up"]
     ],
-    open:false, tokens:"$2 in / $10 out per M (Sonnet 5, intro price)", speed:"Fast enough you won't notice",
+    open:false, tokens:"$2 in / $10 out per M (Sonnet 5)", speed:"Fast enough you won't notice",
     launch:{label:"Open Claude", url:"https://claude.ai"} },
 
   { fav:"gemini.google.com", flag:"\u{1F1FA}\u{1F1F8}", co:"Google", model:"Gemini", best:"Research, long docs",
     cats:["research","everyday"], free:true, ladderShort:"$0 \u2192 $100+",
     honest:"Lives inside everything Google you already use. Huge memory for long documents.",
     ladder:[
-      {amt:"$0", plan:"Free", note:"3.5 Flash, plus a taste of 3.1 Pro"},
+      {amt:"$0", plan:"Free", note:"3.6 Flash, plus a taste of 3.1 Pro"},
       {amt:"$4.99", plan:"AI Plus", note:"The cheap seat. More Pro access."},
       {amt:"$19.99", plan:"AI Pro", note:"4x the Pro engine, Gmail and Docs tie-ins"},
       {amt:"$99.99+", plan:"AI Ultra", note:"$100 or $200 by usage. Deep Think modes."}
     ],
     verdict:"The $4.99 tier is the sneaky value play nobody advertises.",
     decoder:[
-      ["Gemini 3.5 Flash","Fast and free. The default.","All plans"],
+      ["Gemini 3.6 Flash","Fast and free. The default.","All plans"],
       ["Gemini 3.1 Pro","Stronger reasoning. Even Free gets a taste.","More on paid plans"],
-      ["Deep Think + Spark","The heavy research modes.","Ultra only"]
+      ["Deep Think","The heavy research mode.","Ultra only"]
     ],
     open:false, tokens:"$2 in / $12 out per M (3.1 Pro)", speed:"Fast enough you won't notice",
     launch:{label:"Open Gemini", url:"https://gemini.google.com"} },
 
-  { fav:"grok.com", flag:"\u{1F1FA}\u{1F1F8}", co:"xAI", model:"Grok", best:"News, current events",
-    cats:["everyday","research"], free:true, ladderShort:"$0 \u2192 $30+", darkLogo:true,
+  { fav:"grok.com", flag:"\u{1F1FA}\u{1F1F8}", co:"SpaceXAI", model:"Grok", best:"News, current events",
+    cats:["everyday","research"], free:true, ladderShort:"$0 \u2192 $100+", darkLogo:true,
     honest:"Wired into X, so it knows what happened an hour ago. Comes with attitude, for better or worse.",
     ladder:[
       {amt:"$0", plan:"Free", note:"Free to start, weekly limits"},
       {amt:"$30", plan:"SuperGrok", note:"Full engines, bigger weekly pool"},
-      {amt:"more", plan:"Heavy", note:"A tier above exists; price on their site"}
+      {amt:"$100", plan:"SuperGrok Plus", note:"Much higher usage, priority access"}
     ],
     verdict:"Only worth paying for if breaking news is your thing.",
     decoder:[
-      ["Grok 4.5","The new flagship. Coding and agent work at fast-model speeds.","Default"],
-      ["Grok 4 Fast","Quick conversational answers.","Free and up"],
-      ["Think mode","Slower reasoning for harder questions.","Paid plans"]
+      ["Grok 4.6","The flagship. Leads on coding and agent work.","SuperGrok and up"],
+      ["Grok Voice","Realtime voice mode, on every plan.","Free and up"],
+      ["Imagine","Image and video generation.","SuperGrok and up"]
     ],
-    open:false, tokens:"$2 in / $6 out per M (Grok 4.5)", speed:"Fast",
+    open:false, tokens:"$2 in / $6 out per M (Grok 4.6)", speed:"Fast",
     launch:{label:"Open Grok", url:"https://grok.com"} },
 
   { fav:"copilot.microsoft.com", flag:"\u{1F1FA}\u{1F1F8}", co:"Microsoft", model:"Copilot", best:"Office, Windows",
@@ -424,7 +424,7 @@ const MODELS = [
     ],
     verdict:"If your life is in Office already, this is the lowest-friction door into AI.",
     decoder:[
-      ["(no picker)","You choose modes (Quick, Think Deeper, Smart), and Microsoft routes you to a GPT-5-family engine automatically.","All plans"]
+      ["(no picker)","You choose modes (Quick, Think Deeper, Smart), and Microsoft routes you to a GPT-5.6-family engine automatically.","All plans"]
     ],
     open:false, tokens:"Not sold per token to consumers", speed:"Fast enough you won't notice",
     launch:{label:"Open Copilot", url:"https://copilot.microsoft.com"} },
@@ -439,8 +439,8 @@ const MODELS = [
     ],
     verdict:"The sleeper move: one sub gets you engines from four different companies.",
     decoder:[
-      ["Sonar","Perplexity's own search engine family.","Free and up"],
-      ["The guest engines","GPT-5.2, Claude Sonnet 4.6, Gemini 3.1 Pro, and Grok 4, pickable per question.","Pro and up"]
+      ["Sonar 2","Perplexity's own search engine.","Free and up"],
+      ["The guest engines","GPT-5.6 Terra, Claude Sonnet 5, Gemini 3.1 Pro, Grok 4.5, Kimi K3 and more, pickable per question.","Pro and up"]
     ],
     open:false, tokens:"Not really a per-token product", speed:"Fast",
     launch:{label:"Open Perplexity", url:"https://perplexity.ai"} },
@@ -455,10 +455,10 @@ const MODELS = [
     decoder:[
       ["Llama 4 Scout","The smaller one. Runs on serious home hardware.","Download"],
       ["Llama 4 Maverick","The big one. Needs a rented server.","Download"],
-      ["Muse Spark 1.1","Meta's newest engine. API only, NOT downloadable.","Developers, closed"]
+      ["Muse Spark 1.2","Meta's newest engine. API only, NOT downloadable.","Developers, closed"]
     ],
     open:true, tokens:"Varies by host", speed:"Depends on your hardware",
-    launch:{label:"Meta's Llama page", url:"https://www.llama.com"},
+    launch:{label:"Meta's AI page", url:"https://developer.meta.com/ai/"},
     download:{label:"Hugging Face", url:"https://huggingface.co/meta-llama"} },
 
   { fav:"kimi.com", flag:"\u{1F1E8}\u{1F1F3}", co:"Moonshot", model:"Kimi", best:"Cheap power at volume",
@@ -466,14 +466,15 @@ const MODELS = [
     honest:"Top three among open models, priced well under the US flagships. Cheaper to run or strategically underpriced? Nobody outside the company knows.",
     ladder:[
       {amt:"$0", plan:"Web chat", note:"Chat free at kimi.com"},
-      {amt:"$0.95", plan:"API", note:"Per-million in, $4 out. A fraction of Sol's rates."}
+      {amt:"$0.95", plan:"API", note:"K2.6 per-million in, $4 out. K3 costs more."}
     ],
     verdict:"The price gap is the story here. Read the article for why.",
     decoder:[
-      ["K2.6","The flagship. Long documents, coding, many languages.","Free and up"],
-      ["K2.7-Code","The new coding specialist.","API and download"]
+      ["K3","The flagship. 1M-token context, built for agents.","Free and up"],
+      ["K2.7-Code","The coding specialist.","API and download"],
+      ["K2.6","The cheap general-purpose workhorse.","Free and up"]
     ],
-    open:true, tokens:"$0.95 in / $4.00 out per M", speed:"Slower, reasons more",
+    open:true, tokens:"$0.95 in / $4 out per M (K2.6), $3 / $15 (K3)", speed:"Slower, reasons more",
     launch:{label:"Open Kimi", url:"https://kimi.com"},
     download:{label:"Hugging Face", url:"https://huggingface.co/moonshotai"} },
 
@@ -482,14 +483,14 @@ const MODELS = [
     honest:"The one that spooked Wall Street in '25. Startlingly good at reasoning for the price.",
     ladder:[
       {amt:"$0", plan:"Web chat", note:"Free at chat.deepseek.com"},
-      {amt:"pennies", plan:"API", note:"V4-Flash from $0.14 in / $0.28 out per million"}
+      {amt:"pennies", plan:"API", note:"V4-Flash from $0.22 in / $0.66 out per million"}
     ],
     verdict:"Free, capable, and Chinese-run. Weigh all three words equally.",
     decoder:[
       ["V4-Flash","The everyday engine, absurdly cheap.","Free and up"],
       ["V4-Pro","The big reasoner. Thinking on by default.","Free and up"]
     ],
-    open:true, tokens:"$0.14\u2013$0.44 in / $0.28\u2013$0.87 out per M", speed:"Slower, reasons more",
+    open:true, tokens:"$0.22\u2013$1.32 in / $0.66\u2013$3.96 out per M", speed:"Slower, reasons more",
     launch:{label:"Open DeepSeek", url:"https://chat.deepseek.com"},
     download:{label:"Ollama", url:"https://ollama.com/search?q=deepseek"} },
 
@@ -497,21 +498,21 @@ const MODELS = [
     cats:["open","coding"], free:true, ladderShort:"$0 / download", darkLogo:true,
     honest:"Comes in every size from phone-sized to data-center-sized. The hobbyist favorite.",
     ladder:[
-      {amt:"$0", plan:"Web chat", note:"Free at chat.qwen.ai"},
-      {amt:"$0", plan:"Download", note:"The open Qwen3.5 family, every size"}
+      {amt:"$0", plan:"Web chat", note:"Free in Qwen Studio"},
+      {amt:"$0", plan:"Download", note:"The open Qwen3.8 family, every size"}
     ],
     verdict:"If you want to experiment on your own machine, start here or with Llama.",
     decoder:[
-      ["Qwen3.5 family","Open weights, 0.8B to 397B. Pick your size.","Download"],
-      ["Qwen3.7 Max","The flagship. API only, NOT downloadable.","Web and API"]
+      ["Qwen3.8 family","Open weights, 27B up to a 2.4T flagship. Pick your size.","Download"],
+      ["Qwen3.8-Max","The flagship. Now open-weight too, a first for Max-class.","Studio and API"]
     ],
     open:true, tokens:"Varies by host", speed:"Depends on size",
-    launch:{label:"Open Qwen Chat", url:"https://chat.qwen.ai"},
+    launch:{label:"Open Qwen Studio", url:"https://chat.qwen.ai"},
     download:{label:"Hugging Face", url:"https://huggingface.co/Qwen"} },
 
-  { fav:"mistral.ai", flag:"\u{1F1EB}\u{1F1F7}", co:"Mistral", model:"Le Chat", best:"Europe's answer",
+  { fav:"mistral.ai", flag:"\u{1F1EB}\u{1F1F7}", co:"Mistral", model:"Vibe", best:"Europe's answer",
     cats:["everyday","open"], free:true, ladderShort:"$0 \u2192 $14.99",
-    honest:"The European option, if where your data lives matters to you. Scrappy and improving fast.",
+    honest:"The European option, if where your data lives matters to you. Renamed from Le Chat in 2026.",
     ladder:[
       {amt:"$0", plan:"Free", note:"Full assistant, fair limits"},
       {amt:"$14.99", plan:"Pro", note:"Higher limits, newest engines. Students $5.99."}
@@ -520,10 +521,10 @@ const MODELS = [
     decoder:[
       ["Mistral Large 3","The open flagship. Yes, their BIG one is downloadable.","Free and up / Download"],
       ["Mistral Small 4","Light and open, Apache 2.0.","Download"],
-      ["Medium 3.5","Their premier API engine. This one is closed.","API only"]
+      ["Medium 3.5","Their recommended all-rounder. Now open-weight too.","Free and up / Download"]
     ],
-    open:true, tokens:"$2 in / $6 out per M (Large 3)", speed:"Very fast",
-    launch:{label:"Open Le Chat", url:"https://chat.mistral.ai"},
+    open:true, tokens:"$0.50 in / $1.50 out per M (Large 3)", speed:"Very fast",
+    launch:{label:"Open Vibe", url:"https://chat.mistral.ai"},
     download:{label:"Hugging Face", url:"https://huggingface.co/mistralai"} }
 ];
 
