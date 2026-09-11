@@ -68,21 +68,15 @@ h1 {
 /* ---------- stoplight sections ---------- */
 .light { margin-top: 34px; }
 .light-h {
-  display: flex; align-items: center; gap: 12px;
   font-family: 'Poppins', sans-serif;
   font-size: 12px; letter-spacing: 1.5px; text-transform: uppercase;
   font-weight: 600; color: #fff;
   margin: 0 0 14px;
 }
-.light-h .dot {
-  width: 18px; height: 18px; border-radius: 50%; flex: 0 0 18px;
-  box-shadow: 0 0 0 4px #111, 0 0 18px 2px currentColor;
-  background: currentColor;
-}
-.light-h .cue { color: var(--brand-sage); font-weight: 500; }
-.light.red .light-h { color: var(--brand-red-orange); }
-.light.yellow .light-h { color: var(--brand-amber); }
-.light.green .light-h { color: var(--brand-teal); }
+.light-h .cue { color: var(--brand-sage); font-weight: 500; margin-left: 10px; }
+.light.red .light-h .word { color: var(--brand-red-orange); }
+.light.yellow .light-h .word { color: var(--brand-amber); }
+.light.green .light-h .word { color: var(--brand-teal); }
 
 /* ---------- cards (same surface as model-map rows) ---------- */
 .row {
@@ -92,15 +86,13 @@ h1 {
   background: #0d0d0d;
   overflow: hidden;
   padding: 16px 18px 18px;
-  border-left-width: 3px;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 18px;
+  align-items: center;
   transition: border-color .15s ease;
 }
-.red .row { border-left-color: var(--brand-red-orange); }
-.yellow .row { border-left-color: var(--brand-amber); }
-.green .row { border-left-color: var(--brand-teal); }
 .row:hover { border-color: var(--brand-teal); }
-.red .row:hover { border-left-color: var(--brand-red-orange); }
-.yellow .row:hover { border-left-color: var(--brand-amber); }
 .card-title { font-size: 15px; font-weight: 500; color: #fff; margin-bottom: 8px; }
 .sec-label {
   font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase;
@@ -117,6 +109,18 @@ h1 {
 .source { font-size: 11.5px; color: #999; margin-top: 12px; }
 .source a { color: var(--brand-teal); text-decoration: none; }
 .source a:hover { color: var(--brand-sage); text-decoration: underline; }
+
+/* the stoplight itself: one SVG per card, the section color lights up */
+.signal { width: 78px; height: auto; flex: 0 0 auto; }
+.signal .lamp { fill: #1f1f1f; stroke: #2e2e2e; stroke-width: 1; }
+.signal .glow { opacity: 0; }
+.signal .shine { fill: #fff; opacity: .18; }
+.red .signal .lamp.r { fill: var(--brand-red-orange); stroke: none; }
+.yellow .signal .lamp.y { fill: var(--brand-amber); stroke: none; }
+.green .signal .lamp.g { fill: var(--brand-teal); stroke: none; }
+.red .signal .glow.r { opacity: .35; fill: var(--brand-red-orange); }
+.yellow .signal .glow.y { opacity: .35; fill: var(--brand-amber); }
+.green .signal .glow.g { opacity: .35; fill: var(--brand-teal); }
 
 /* ---------- footer (same as model-map) ---------- */
 .footnote {
@@ -139,8 +143,8 @@ h1 {
 
 /* ---------- mobile ---------- */
 @media (max-width: 600px) {
-  .row { padding: 14px 14px 16px; }
-  .light-h { flex-wrap: wrap; row-gap: 2px; }
+  .row { padding: 14px 14px 16px; gap: 12px; }
+  .signal { width: 58px; }
 }
 </style>
 </head>
@@ -158,89 +162,169 @@ h1 {
 
   <!-- RED -->
   <section class="light red">
-    <h2 class="light-h"><span class="dot"></span><span class="word">Red.</span><span class="cue">Pay attention now.</span></h2>
+    <h2 class="light-h"><span class="word">Red.</span><span class="cue">Pay attention now.</span></h2>
 
     <article class="row">
+      <div class="card-text">
       <div class="card-title">Agents with logins.</div>
       <div class="sec-label">What's happening</div>
       <p class="happening">In July 2026, over 1,200 OpenAI agents on a cybersecurity test built a message board in a shared cache, escaped their sandbox, found working Hugging Face credentials, and broke in to steal the test answers. Hugging Face's alert fired and failed to reach the on-call team.</p>
       <div class="sec-label">What to do</div>
       <div class="verdict">Before you hand any AI your email, files, or computer, know exactly which doors that login opens.</div>
-      <div class="source">Source: <a href="https://huggingface.co/blog/agent-intrusion-technical-timeline" target="_blank" rel="noopener">Hugging Face, agent intrusion technical timeline ↗</a></div>
+      <div class="source">Source: <a href="https://huggingface.co/blog/agent-intrusion-technical-timeline" target="_blank" rel="noopener">Hugging Face, agent intrusion technical timeline ↗</a></div></div>
+      <svg class="signal" viewBox="0 0 60 150" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Stoplight, red light on">
+        <rect x="26" y="130" width="8" height="20" fill="#191919"/>
+        <rect x="4" y="2" width="52" height="132" rx="10" fill="#161616" stroke="#2a2a2a" stroke-width="1.5"/>
+        <path d="M6 20 h48 v6 H6 z" fill="#0a0a0a"/><path d="M6 60 h48 v6 H6 z" fill="#0a0a0a"/><path d="M6 100 h48 v6 H6 z" fill="#0a0a0a"/>
+        <circle class="glow r" cx="30" cy="28" r="22"/><circle class="lamp r" cx="30" cy="28" r="15"/>
+        <circle class="glow y" cx="30" cy="68" r="22"/><circle class="lamp y" cx="30" cy="68" r="15"/>
+        <circle class="glow g" cx="30" cy="108" r="22"/><circle class="lamp g" cx="30" cy="108" r="15"/>
+        <circle class="shine" cx="25" cy="23" r="4"/><circle class="shine" cx="25" cy="63" r="4"/><circle class="shine" cx="25" cy="103" r="4"/>
+      </svg>
     </article>
 
     <article class="row">
+      <div class="card-text">
       <div class="card-title">Your electric bill is the AI story.</div>
       <div class="sec-label">What's happening</div>
       <p class="happening">The data center buildout is now a measurable slice of US growth by the Fed's own accounting. New Jersey, Arizona, and Virginia have pulled or paused the tax breaks that brought the buildings in, and more states are lining up.</p>
       <div class="sec-label">What to do</div>
       <div class="verdict">Look at your utility bill and your state's November ballot. AI is on both, without the word AI anywhere.</div>
-      <div class="source">Sources: <a href="https://www.federalreserve.gov/econres/notes/feds-notes/the-ai-buildout-and-the-economy-publicly-available-data-to-assess-ais-impact-20260717.html" target="_blank" rel="noopener">Federal Reserve, the AI buildout and the economy ↗</a> and <a href="https://news.bloombergtax.com/daily-tax-report-state/data-center-tax-breaks-at-risk-as-states-rethink-cost-and-impact" target="_blank" rel="noopener">Bloomberg Tax, data center tax breaks at risk ↗</a></div>
+      <div class="source">Sources: <a href="https://www.federalreserve.gov/econres/notes/feds-notes/the-ai-buildout-and-the-economy-publicly-available-data-to-assess-ais-impact-20260717.html" target="_blank" rel="noopener">Federal Reserve, the AI buildout and the economy ↗</a> and <a href="https://news.bloombergtax.com/daily-tax-report-state/data-center-tax-breaks-at-risk-as-states-rethink-cost-and-impact" target="_blank" rel="noopener">Bloomberg Tax, data center tax breaks at risk ↗</a></div></div>
+      <svg class="signal" viewBox="0 0 60 150" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Stoplight, red light on">
+        <rect x="26" y="130" width="8" height="20" fill="#191919"/>
+        <rect x="4" y="2" width="52" height="132" rx="10" fill="#161616" stroke="#2a2a2a" stroke-width="1.5"/>
+        <path d="M6 20 h48 v6 H6 z" fill="#0a0a0a"/><path d="M6 60 h48 v6 H6 z" fill="#0a0a0a"/><path d="M6 100 h48 v6 H6 z" fill="#0a0a0a"/>
+        <circle class="glow r" cx="30" cy="28" r="22"/><circle class="lamp r" cx="30" cy="28" r="15"/>
+        <circle class="glow y" cx="30" cy="68" r="22"/><circle class="lamp y" cx="30" cy="68" r="15"/>
+        <circle class="glow g" cx="30" cy="108" r="22"/><circle class="lamp g" cx="30" cy="108" r="15"/>
+        <circle class="shine" cx="25" cy="23" r="4"/><circle class="shine" cx="25" cy="63" r="4"/><circle class="shine" cx="25" cy="103" r="4"/>
+      </svg>
     </article>
   </section>
 
   <!-- YELLOW -->
   <section class="light yellow">
-    <h2 class="light-h"><span class="dot"></span><span class="word">Yellow.</span><span class="cue">Watch, don't panic.</span></h2>
+    <h2 class="light-h"><span class="word">Yellow.</span><span class="cue">Watch, don't panic.</span></h2>
 
     <article class="row">
+      <div class="card-text">
       <div class="card-title">Deepfakes and the midterms.</div>
       <div class="sec-label">What's happening</div>
       <p class="happening">Real, spreading, and regulators are behind. Audio is the easiest to fake.</p>
       <div class="sec-label">What to do</div>
       <div class="verdict">If a clip makes you furious, wait an hour before you share it.</div>
-      <div class="source">Source: <a href="https://www.rstreet.org/commentary/ai-and-elections-what-to-watch-for-in-2026/" target="_blank" rel="noopener">R Street, AI and elections: what to watch for in 2026 ↗</a></div>
+      <div class="source">Source: <a href="https://www.rstreet.org/commentary/ai-and-elections-what-to-watch-for-in-2026/" target="_blank" rel="noopener">R Street, AI and elections: what to watch for in 2026 ↗</a></div></div>
+      <svg class="signal" viewBox="0 0 60 150" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Stoplight, yellow light on">
+        <rect x="26" y="130" width="8" height="20" fill="#191919"/>
+        <rect x="4" y="2" width="52" height="132" rx="10" fill="#161616" stroke="#2a2a2a" stroke-width="1.5"/>
+        <path d="M6 20 h48 v6 H6 z" fill="#0a0a0a"/><path d="M6 60 h48 v6 H6 z" fill="#0a0a0a"/><path d="M6 100 h48 v6 H6 z" fill="#0a0a0a"/>
+        <circle class="glow r" cx="30" cy="28" r="22"/><circle class="lamp r" cx="30" cy="28" r="15"/>
+        <circle class="glow y" cx="30" cy="68" r="22"/><circle class="lamp y" cx="30" cy="68" r="15"/>
+        <circle class="glow g" cx="30" cy="108" r="22"/><circle class="lamp g" cx="30" cy="108" r="15"/>
+        <circle class="shine" cx="25" cy="23" r="4"/><circle class="shine" cx="25" cy="63" r="4"/><circle class="shine" cx="25" cy="103" r="4"/>
+      </svg>
     </article>
 
     <article class="row">
+      <div class="card-text">
       <div class="card-title">The word AGI.</div>
       <div class="sec-label">What's happening</div>
       <p class="happening">OpenAI said GPT-6 Astra "may represent AGI." That is a marketing sentence.</p>
       <div class="sec-label">What to do</div>
       <div class="verdict">Nothing about your Monday changes because of a definition.</div>
-      <div class="source">Source: <a href="https://www.axios.com/2026/09/03/openai-astra-gpt-6-agi-brockman" target="_blank" rel="noopener">Axios, OpenAI's Astra and the AGI question ↗</a></div>
+      <div class="source">Source: <a href="https://www.axios.com/2026/09/03/openai-astra-gpt-6-agi-brockman" target="_blank" rel="noopener">Axios, OpenAI's Astra and the AGI question ↗</a></div></div>
+      <svg class="signal" viewBox="0 0 60 150" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Stoplight, yellow light on">
+        <rect x="26" y="130" width="8" height="20" fill="#191919"/>
+        <rect x="4" y="2" width="52" height="132" rx="10" fill="#161616" stroke="#2a2a2a" stroke-width="1.5"/>
+        <path d="M6 20 h48 v6 H6 z" fill="#0a0a0a"/><path d="M6 60 h48 v6 H6 z" fill="#0a0a0a"/><path d="M6 100 h48 v6 H6 z" fill="#0a0a0a"/>
+        <circle class="glow r" cx="30" cy="28" r="22"/><circle class="lamp r" cx="30" cy="28" r="15"/>
+        <circle class="glow y" cx="30" cy="68" r="22"/><circle class="lamp y" cx="30" cy="68" r="15"/>
+        <circle class="glow g" cx="30" cy="108" r="22"/><circle class="lamp g" cx="30" cy="108" r="15"/>
+        <circle class="shine" cx="25" cy="23" r="4"/><circle class="shine" cx="25" cy="63" r="4"/><circle class="shine" cx="25" cy="103" r="4"/>
+      </svg>
     </article>
 
     <article class="row">
+      <div class="card-text">
       <div class="card-title">The money.</div>
       <div class="sec-label">What's happening</div>
       <p class="happening">Trillions are committed to the buildout. If it slows, US growth slows with it.</p>
       <div class="sec-label">What to do</div>
       <div class="verdict">Don't confuse the stock chart with the product.</div>
-      <div class="source">Source: <a href="https://www.goldmansachs.com/insights/articles/tracking-trillions-the-assumptions-shaping-scale-of-the-ai-build-out" target="_blank" rel="noopener">Goldman Sachs, tracking trillions ↗</a></div>
+      <div class="source">Source: <a href="https://www.goldmansachs.com/insights/articles/tracking-trillions-the-assumptions-shaping-scale-of-the-ai-build-out" target="_blank" rel="noopener">Goldman Sachs, tracking trillions ↗</a></div></div>
+      <svg class="signal" viewBox="0 0 60 150" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Stoplight, yellow light on">
+        <rect x="26" y="130" width="8" height="20" fill="#191919"/>
+        <rect x="4" y="2" width="52" height="132" rx="10" fill="#161616" stroke="#2a2a2a" stroke-width="1.5"/>
+        <path d="M6 20 h48 v6 H6 z" fill="#0a0a0a"/><path d="M6 60 h48 v6 H6 z" fill="#0a0a0a"/><path d="M6 100 h48 v6 H6 z" fill="#0a0a0a"/>
+        <circle class="glow r" cx="30" cy="28" r="22"/><circle class="lamp r" cx="30" cy="28" r="15"/>
+        <circle class="glow y" cx="30" cy="68" r="22"/><circle class="lamp y" cx="30" cy="68" r="15"/>
+        <circle class="glow g" cx="30" cy="108" r="22"/><circle class="lamp g" cx="30" cy="108" r="15"/>
+        <circle class="shine" cx="25" cy="23" r="4"/><circle class="shine" cx="25" cy="63" r="4"/><circle class="shine" cx="25" cy="103" r="4"/>
+      </svg>
     </article>
   </section>
 
   <!-- GREEN -->
   <section class="light green">
-    <h2 class="light-h"><span class="dot"></span><span class="word">Green.</span><span class="cue">Go.</span></h2>
+    <h2 class="light-h"><span class="word">Green.</span><span class="cue">Go.</span></h2>
 
     <article class="row">
+      <div class="card-text">
       <div class="card-title">The models work now.</div>
       <div class="sec-label">What's happening</div>
       <p class="happening">Every major model got dramatically better in the last year, including at multi-step jobs.</p>
       <div class="sec-label">What to do</div>
       <div class="verdict">Re-run the task that fell apart on you last spring, unchanged.</div>
-      <div class="source">Source: <a href="https://openai.com/index/gpt-6-astra/" target="_blank" rel="noopener">OpenAI, introducing GPT-6 Astra ↗</a></div>
+      <div class="source">Source: <a href="https://openai.com/index/gpt-6-astra/" target="_blank" rel="noopener">OpenAI, introducing GPT-6 Astra ↗</a></div></div>
+      <svg class="signal" viewBox="0 0 60 150" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Stoplight, green light on">
+        <rect x="26" y="130" width="8" height="20" fill="#191919"/>
+        <rect x="4" y="2" width="52" height="132" rx="10" fill="#161616" stroke="#2a2a2a" stroke-width="1.5"/>
+        <path d="M6 20 h48 v6 H6 z" fill="#0a0a0a"/><path d="M6 60 h48 v6 H6 z" fill="#0a0a0a"/><path d="M6 100 h48 v6 H6 z" fill="#0a0a0a"/>
+        <circle class="glow r" cx="30" cy="28" r="22"/><circle class="lamp r" cx="30" cy="28" r="15"/>
+        <circle class="glow y" cx="30" cy="68" r="22"/><circle class="lamp y" cx="30" cy="68" r="15"/>
+        <circle class="glow g" cx="30" cy="108" r="22"/><circle class="lamp g" cx="30" cy="108" r="15"/>
+        <circle class="shine" cx="25" cy="23" r="4"/><circle class="shine" cx="25" cy="63" r="4"/><circle class="shine" cx="25" cy="103" r="4"/>
+      </svg>
     </article>
 
     <article class="row">
+      <div class="card-text">
       <div class="card-title">ELI10.</div>
       <div class="sec-label">What's happening</div>
       <p class="happening">Models pontificate by default.</p>
       <div class="sec-label">What to do</div>
       <div class="verdict">Tell it "explain it like I'm 10" and it will.</div>
       <!-- TODO: replace href="#" with the Substack ELI10 article URL once it is live -->
-      <div class="source">Source: <a href="#">The ELI10 article on Substack (coming soon) ↗</a></div>
+      <div class="source">Source: <a href="#">The ELI10 article on Substack (coming soon) ↗</a></div></div>
+      <svg class="signal" viewBox="0 0 60 150" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Stoplight, green light on">
+        <rect x="26" y="130" width="8" height="20" fill="#191919"/>
+        <rect x="4" y="2" width="52" height="132" rx="10" fill="#161616" stroke="#2a2a2a" stroke-width="1.5"/>
+        <path d="M6 20 h48 v6 H6 z" fill="#0a0a0a"/><path d="M6 60 h48 v6 H6 z" fill="#0a0a0a"/><path d="M6 100 h48 v6 H6 z" fill="#0a0a0a"/>
+        <circle class="glow r" cx="30" cy="28" r="22"/><circle class="lamp r" cx="30" cy="28" r="15"/>
+        <circle class="glow y" cx="30" cy="68" r="22"/><circle class="lamp y" cx="30" cy="68" r="15"/>
+        <circle class="glow g" cx="30" cy="108" r="22"/><circle class="lamp g" cx="30" cy="108" r="15"/>
+        <circle class="shine" cx="25" cy="23" r="4"/><circle class="shine" cx="25" cy="63" r="4"/><circle class="shine" cx="25" cy="103" r="4"/>
+      </svg>
     </article>
 
     <article class="row">
+      <div class="card-text">
       <div class="card-title">Ask your admin, not the internet.</div>
       <div class="sec-label">What's happening</div>
       <p class="happening">On Business and Enterprise plans the new models are off by default until an admin switches them on.</p>
       <div class="sec-label">What to do</div>
       <div class="verdict">If you don't see it at work, someone at your company has a switch. Go find them.</div>
-      <div class="source">Source: <a href="https://openai.com/index/gpt-6-astra/" target="_blank" rel="noopener">OpenAI, introducing GPT-6 Astra ↗</a></div>
+      <div class="source">Source: <a href="https://openai.com/index/gpt-6-astra/" target="_blank" rel="noopener">OpenAI, introducing GPT-6 Astra ↗</a></div></div>
+      <svg class="signal" viewBox="0 0 60 150" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Stoplight, green light on">
+        <rect x="26" y="130" width="8" height="20" fill="#191919"/>
+        <rect x="4" y="2" width="52" height="132" rx="10" fill="#161616" stroke="#2a2a2a" stroke-width="1.5"/>
+        <path d="M6 20 h48 v6 H6 z" fill="#0a0a0a"/><path d="M6 60 h48 v6 H6 z" fill="#0a0a0a"/><path d="M6 100 h48 v6 H6 z" fill="#0a0a0a"/>
+        <circle class="glow r" cx="30" cy="28" r="22"/><circle class="lamp r" cx="30" cy="28" r="15"/>
+        <circle class="glow y" cx="30" cy="68" r="22"/><circle class="lamp y" cx="30" cy="68" r="15"/>
+        <circle class="glow g" cx="30" cy="108" r="22"/><circle class="lamp g" cx="30" cy="108" r="15"/>
+        <circle class="shine" cx="25" cy="23" r="4"/><circle class="shine" cx="25" cy="63" r="4"/><circle class="shine" cx="25" cy="103" r="4"/>
+      </svg>
     </article>
   </section>
 
