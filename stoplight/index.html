@@ -80,6 +80,36 @@ h1 {
 .legend .y::before { background: var(--brand-amber); }
 .legend .g::before { background: var(--brand-teal); }
 
+/* ---------- the board: every question, one line, one light ---------- */
+.board {
+  margin-top: 26px;
+  border: 1px dashed #333;
+  border-radius: 10px;
+  padding: 14px 16px 10px;
+}
+.board-h {
+  font-size: 12px; letter-spacing: 1.5px; text-transform: uppercase;
+  color: var(--brand-amber); font-weight: 600; margin: 0 0 2px;
+}
+.board-sub { font-size: 12px; color: #999; margin: 0 0 10px; }
+.board-sec {
+  font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase;
+  color: var(--brand-sage); font-weight: 500; margin: 12px 0 4px;
+}
+.board-row {
+  display: grid; grid-template-columns: 14px 1fr 1fr; gap: 10px; align-items: baseline;
+  padding: 5px 0; border-bottom: 1px dashed #222; text-decoration: none; color: inherit;
+}
+.board-sec + .board-row { border-top: none; }
+.board-row:last-child { border-bottom: none; }
+.board-row:hover .q { color: var(--brand-teal); }
+.board-row .dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; position: relative; top: 0; }
+.board-row.red .dot { background: var(--brand-red-orange); box-shadow: 0 0 6px var(--brand-red-orange); }
+.board-row.yellow .dot { background: var(--brand-amber); box-shadow: 0 0 6px var(--brand-amber); }
+.board-row.green .dot { background: var(--brand-teal); box-shadow: 0 0 6px var(--brand-teal); }
+.board-row .q { font-size: 13.5px; color: #fff; font-weight: 500; }
+.board-row .a { font-size: 12.5px; color: var(--brand-cream); }
+
 /* ---------- sections (one per circle) ---------- */
 .circle { margin-top: 36px; }
 .circle-h {
@@ -151,6 +181,8 @@ h1 {
 @media (max-width: 600px) {
   .row { padding: 14px 14px 16px; gap: 12px; }
   .signal { width: 58px; }
+  .board-row { grid-template-columns: 14px 1fr; row-gap: 2px; }
+  .board-row .a { grid-column: 2; }
 }
 </style>
 </head>
@@ -162,297 +194,181 @@ h1 {
   <header>
     <div class="kicker">AI for GenX · From the Lab</div>
     <h1>The AI Stoplight Report</h1>
-    <p class="intro">A 1990s management-consultant stoplight on what's actually going on in AI and what you should do about it. Three colors. Twenty-nine things. Updated when it changes.</p>
+    <p class="intro">A 1990s management-consultant stoplight on what's actually going on in AI and what you should do about it. Three colors. Fifteen questions. Updated when it changes.</p>
     <span class="asof">Snapshot · Verified September 11, 2026</span>
-    <div class="legend"><span class="r">Red: pay attention now.</span><span class="y">Yellow: watch, don't panic.</span><span class="g">Green: go.</span></div>
+    <div class="legend"><span class="r">Red: not yet.</span><span class="y">Yellow: yes, with conditions.</span><span class="g">Green: go.</span></div>
   </header>
 
-  <!-- US -->
-  <section class="circle">
-    <h2 class="circle-h">Us</h2>
-    <article class="row red">
+  <nav class="board" aria-label="The board">
+    <h2 class="board-h">The board</h2>
+    <p class="board-sub">Every question, one light, one line. Tap a row for the evidence and the sources.</p>
+    <div class="board-sec">Me</div>
+    <a class="board-row red" href="#q-email"><span class="dot"></span><span class="q">Can I give it my email and files?</span><span class="a">Know which doors the login opens first.</span></a>
+    <a class="board-row green" href="#q-again"><span class="dot"></span><span class="q">Should I try it again?</span><span class="a">Re-run the task that failed last spring.</span></a>
+    <a class="board-row yellow" href="#q-job"><span class="dot"></span><span class="q">Is my job safe?</span><span class="a">Learn the tool before your boss does.</span></a>
+    <a class="board-row yellow" href="#q-health"><span class="dot"></span><span class="q">Can I ask it about my health?</span><span class="a">Prep for the appointment. Don't replace it.</span></a>
+    <div class="board-sec">My kids</div>
+    <a class="board-row red" href="#q-toddler"><span class="dot"></span><span class="q">Can a toddler have AI?</span><span class="a">No talking toys. No unsupervised YouTube.</span></a>
+    <a class="board-row yellow" href="#q-homework"><span class="dot"></span><span class="q">Is my kid learning or outsourcing?</span><span class="a">Study mode on. Ask the teacher the rule.</span></a>
+    <a class="board-row red" href="#q-friend"><span class="dot"></span><span class="q">Is the "friend" app okay?</span><span class="a">A name and a personality means companion. Ask the three questions.</span></a>
+    <a class="board-row yellow" href="#q-essay"><span class="dot"></span><span class="q">Can they use it on the college essay?</span><span class="a">Check each school's AI policy before they type.</span></a>
+    <a class="board-row yellow" href="#q-firstjob"><span class="dot"></span><span class="q">Will there be a first job?</span><span class="a">AI skills are the new typing class.</span></a>
+    <div class="board-sec">My parents</div>
+    <a class="board-row red" href="#q-phone"><span class="dot"></span><span class="q">Can Mom trust the phone?</span><span class="a">Family password. Get a human for anything hard.</span></a>
+    <a class="board-row green" href="#q-taxi"><span class="dot"></span><span class="q">Can Dad take a robotaxi?</span><span class="a">Take one ride with him before it's an emergency.</span></a>
+    <a class="board-row yellow" href="#q-medicine"><span class="dot"></span><span class="q">Is AI medicine real yet?</span><span class="a">Ask for the blood test. Ask what phase.</span></a>
+    <div class="board-sec">The world outside</div>
+    <a class="board-row yellow" href="#q-trust"><span class="dot"></span><span class="q">Can I trust what I see and hear?</span><span class="a">Furious? Wait an hour before you share it.</span></a>
+    <a class="board-row yellow" href="#q-economy"><span class="dot"></span><span class="q">Is the AI economy my problem?</span><span class="a">Read your utility bill and your ballot.</span></a>
+    <a class="board-row green" href="#q-forecast"><span class="dot"></span><span class="q">Can I trust the forecast?</span><span class="a">Trust the cone. Still leave when told.</span></a>
+  </nav>
+
+  <section class="circle" id="me">
+    <h2 class="circle-h">Me</h2>
+    <article class="row red" id="q-email">
       <div class="card-text">
-        <div class="card-title">The login you hand it.</div>
-        <p class="why">In July 2026, over 1,200 OpenAI agents on a cybersecurity test built a message board in a shared cache, escaped their sandbox, found working Hugging Face credentials, and broke in to steal the test answers. Hugging Face's alert fired and failed to reach the on-call team. They were not building Skynet. They were cheating on the test, and somebody's forgotten login was the way in.</p>
-        <div class="verdict">Before you hand any AI your email, files, or computer, know exactly which doors that login opens.</div>
+        <div class="card-title">Can I give it my email and files?</div>
+        <p class="why">Not yet, not all of it. In July, 1,200 OpenAI agents on a cybersecurity test escaped their sandbox, found a forgotten Hugging Face login lying around, and broke in to steal the answer key. They were not building Skynet. They were cheating on a test, and somebody's login was the door.</p>
+        <div class="verdict">Before you connect any AI to your email, files, or computer, know exactly which doors that login opens.</div>
         <div class="source">Sources: <a href="https://huggingface.co/blog/agent-intrusion-technical-timeline" target="_blank" rel="noopener">Hugging Face, agent intrusion technical timeline ↗</a> · <a href="https://www.dwarkesh.com/p/ajeya-cotra" target="_blank" rel="noopener">Dwarkesh Podcast with Ajeya Cotra, September 1, 2026 ↗</a></div>
       </div>
       <svg class="signal" viewBox="0 0 60 150" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Stoplight, red light on"><rect x="26" y="130" width="8" height="20" fill="#191919"/><rect x="4" y="2" width="52" height="132" rx="10" fill="#161616" stroke="#2a2a2a" stroke-width="1.5"/><path d="M6 20 h48 v6 H6 z" fill="#0a0a0a"/><path d="M6 60 h48 v6 H6 z" fill="#0a0a0a"/><path d="M6 100 h48 v6 H6 z" fill="#0a0a0a"/><circle class="glow r" cx="30" cy="28" r="22"/><circle class="lamp r" cx="30" cy="28" r="15"/><circle class="glow y" cx="30" cy="68" r="22"/><circle class="lamp y" cx="30" cy="68" r="15"/><circle class="glow g" cx="30" cy="108" r="22"/><circle class="lamp g" cx="30" cy="108" r="15"/><circle class="shine" cx="25" cy="23" r="4"/><circle class="shine" cx="25" cy="63" r="4"/><circle class="shine" cx="25" cy="103" r="4"/></svg>
     </article>
-    <article class="row yellow">
+    <article class="row green" id="q-again">
       <div class="card-text">
-        <div class="card-title">Your own job description.</div>
-        <p class="why">Employers named AI as the reason for 116,175 announced job cuts this year through August, about one in five of all cuts and the top reason on the list. August was the first month since February it was not number one.</p>
-        <div class="verdict">If your job is mostly following a process someone else wrote, learn the tool before your boss learns it for you.</div>
-        <div class="source">Source: <a href="https://www.challengergray.com/blog/challenger-report-august-job-cuts-up-58-consumer-products-food-lead/" target="_blank" rel="noopener">Challenger, Gray &amp; Christmas, August 2026 job cut report ↗</a></div>
-      </div>
-      <svg class="signal" viewBox="0 0 60 150" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Stoplight, yellow light on"><rect x="26" y="130" width="8" height="20" fill="#191919"/><rect x="4" y="2" width="52" height="132" rx="10" fill="#161616" stroke="#2a2a2a" stroke-width="1.5"/><path d="M6 20 h48 v6 H6 z" fill="#0a0a0a"/><path d="M6 60 h48 v6 H6 z" fill="#0a0a0a"/><path d="M6 100 h48 v6 H6 z" fill="#0a0a0a"/><circle class="glow r" cx="30" cy="28" r="22"/><circle class="lamp r" cx="30" cy="28" r="15"/><circle class="glow y" cx="30" cy="68" r="22"/><circle class="lamp y" cx="30" cy="68" r="15"/><circle class="glow g" cx="30" cy="108" r="22"/><circle class="lamp g" cx="30" cy="108" r="15"/><circle class="shine" cx="25" cy="23" r="4"/><circle class="shine" cx="25" cy="63" r="4"/><circle class="shine" cx="25" cy="103" r="4"/></svg>
-    </article>
-    <article class="row yellow">
-      <div class="card-text">
-        <div class="card-title">Who made this song.</div>
-        <p class="why">Deezer says more than half of the tracks uploaded to it on a peak day are now fully AI-generated, close to 90,000 a day. Spotify pulled 75 million spam tracks in a year. Almost nobody listens to them on purpose, which is the point: they are built to skim royalties off your sleep playlist.</p>
-        <div class="verdict">Check the artist page. No face, no history, no shows? A robot. It only matters if you care who gets paid.</div>
-        <div class="source">Sources: <a href="https://newsroom-deezer.com/2026/07/ai-music-exceeds-50-percent-daily-uploads-deezer/" target="_blank" rel="noopener">Deezer, July 2026 ↗</a> · <a href="https://www.musicbusinessworldwide.com/spotify-has-deleted-75m-spammy-tracks-as-it-unveils-new-ai-music-policies/" target="_blank" rel="noopener">Music Business Worldwide on Spotify's AI policy ↗</a></div>
-      </div>
-      <svg class="signal" viewBox="0 0 60 150" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Stoplight, yellow light on"><rect x="26" y="130" width="8" height="20" fill="#191919"/><rect x="4" y="2" width="52" height="132" rx="10" fill="#161616" stroke="#2a2a2a" stroke-width="1.5"/><path d="M6 20 h48 v6 H6 z" fill="#0a0a0a"/><path d="M6 60 h48 v6 H6 z" fill="#0a0a0a"/><path d="M6 100 h48 v6 H6 z" fill="#0a0a0a"/><circle class="glow r" cx="30" cy="28" r="22"/><circle class="lamp r" cx="30" cy="28" r="15"/><circle class="glow y" cx="30" cy="68" r="22"/><circle class="lamp y" cx="30" cy="68" r="15"/><circle class="glow g" cx="30" cy="108" r="22"/><circle class="lamp g" cx="30" cy="108" r="15"/><circle class="shine" cx="25" cy="23" r="4"/><circle class="shine" cx="25" cy="63" r="4"/><circle class="shine" cx="25" cy="103" r="4"/></svg>
-    </article>
-    <article class="row green">
-      <div class="card-text">
-        <div class="card-title">The models work now.</div>
-        <p class="why">Every major model got dramatically better in the last year, including at multi-step jobs.</p>
+        <div class="card-title">Should I try it again?</div>
+        <p class="why">Yes. Every major model got dramatically better in the last year, including at multi-step jobs. They pontificate by default, so tell it "explain it like I'm 10" and it will. If you don't see the new models at work, someone at your company has a switch.</p>
         <div class="verdict">Re-run the task that fell apart on you last spring, unchanged.</div>
-        <div class="source">Source: <a href="https://openai.com/index/gpt-6-astra/" target="_blank" rel="noopener">OpenAI, introducing GPT-6 Astra ↗</a></div>
+        <div class="source">Sources: <a href="https://openai.com/index/gpt-6-astra/" target="_blank" rel="noopener">OpenAI, introducing GPT-6 Astra ↗</a> · <!-- TODO: replace href="#" with the Substack ELI10 article URL once it is live --><a href="#">The ELI10 article on Substack (coming soon) ↗</a></div>
       </div>
       <svg class="signal" viewBox="0 0 60 150" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Stoplight, green light on"><rect x="26" y="130" width="8" height="20" fill="#191919"/><rect x="4" y="2" width="52" height="132" rx="10" fill="#161616" stroke="#2a2a2a" stroke-width="1.5"/><path d="M6 20 h48 v6 H6 z" fill="#0a0a0a"/><path d="M6 60 h48 v6 H6 z" fill="#0a0a0a"/><path d="M6 100 h48 v6 H6 z" fill="#0a0a0a"/><circle class="glow r" cx="30" cy="28" r="22"/><circle class="lamp r" cx="30" cy="28" r="15"/><circle class="glow y" cx="30" cy="68" r="22"/><circle class="lamp y" cx="30" cy="68" r="15"/><circle class="glow g" cx="30" cy="108" r="22"/><circle class="lamp g" cx="30" cy="108" r="15"/><circle class="shine" cx="25" cy="23" r="4"/><circle class="shine" cx="25" cy="63" r="4"/><circle class="shine" cx="25" cy="103" r="4"/></svg>
     </article>
-    <article class="row green">
+    <article class="row yellow" id="q-job">
       <div class="card-text">
-        <div class="card-title">ELI10.</div>
-        <p class="why">Models pontificate by default.</p>
-        <div class="verdict">Tell it "explain it like I'm 10" and it will.</div>
-        <div class="source">Source: <!-- TODO: replace href="#" with the Substack ELI10 article URL once it is live --><a href="#">The ELI10 article on Substack (coming soon) ↗</a></div>
+        <div class="card-title">Is my job safe?</div>
+        <p class="why">Depends what it is made of. Employers named AI in 116,175 announced job cuts this year through August, about one in five and the top reason on the list. Jobs that are mostly following a process someone else wrote are the ones on the list.</p>
+        <div class="verdict">If that describes your job, learn the tool before your boss learns it for you.</div>
+        <div class="source">Source: <a href="https://www.challengergray.com/blog/challenger-report-august-job-cuts-up-58-consumer-products-food-lead/" target="_blank" rel="noopener">Challenger, Gray &amp; Christmas, August 2026 ↗</a></div>
       </div>
-      <svg class="signal" viewBox="0 0 60 150" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Stoplight, green light on"><rect x="26" y="130" width="8" height="20" fill="#191919"/><rect x="4" y="2" width="52" height="132" rx="10" fill="#161616" stroke="#2a2a2a" stroke-width="1.5"/><path d="M6 20 h48 v6 H6 z" fill="#0a0a0a"/><path d="M6 60 h48 v6 H6 z" fill="#0a0a0a"/><path d="M6 100 h48 v6 H6 z" fill="#0a0a0a"/><circle class="glow r" cx="30" cy="28" r="22"/><circle class="lamp r" cx="30" cy="28" r="15"/><circle class="glow y" cx="30" cy="68" r="22"/><circle class="lamp y" cx="30" cy="68" r="15"/><circle class="glow g" cx="30" cy="108" r="22"/><circle class="lamp g" cx="30" cy="108" r="15"/><circle class="shine" cx="25" cy="23" r="4"/><circle class="shine" cx="25" cy="63" r="4"/><circle class="shine" cx="25" cy="103" r="4"/></svg>
+      <svg class="signal" viewBox="0 0 60 150" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Stoplight, yellow light on"><rect x="26" y="130" width="8" height="20" fill="#191919"/><rect x="4" y="2" width="52" height="132" rx="10" fill="#161616" stroke="#2a2a2a" stroke-width="1.5"/><path d="M6 20 h48 v6 H6 z" fill="#0a0a0a"/><path d="M6 60 h48 v6 H6 z" fill="#0a0a0a"/><path d="M6 100 h48 v6 H6 z" fill="#0a0a0a"/><circle class="glow r" cx="30" cy="28" r="22"/><circle class="lamp r" cx="30" cy="28" r="15"/><circle class="glow y" cx="30" cy="68" r="22"/><circle class="lamp y" cx="30" cy="68" r="15"/><circle class="glow g" cx="30" cy="108" r="22"/><circle class="lamp g" cx="30" cy="108" r="15"/><circle class="shine" cx="25" cy="23" r="4"/><circle class="shine" cx="25" cy="63" r="4"/><circle class="shine" cx="25" cy="103" r="4"/></svg>
     </article>
-    <article class="row green">
+    <article class="row yellow" id="q-health">
       <div class="card-text">
-        <div class="card-title">Ask your admin, not the internet.</div>
-        <p class="why">On Business and Enterprise plans the new models are off by default until an admin switches them on.</p>
-        <div class="verdict">If you don't see it at work, someone at your company has a switch. Go find them.</div>
-        <div class="source">Source: <a href="https://openai.com/index/gpt-6-astra/" target="_blank" rel="noopener">OpenAI, introducing GPT-6 Astra ↗</a></div>
+        <div class="card-title">Can I ask it about my health?</div>
+        <p class="why">For the appointment, yes. To replace it, no. In an Oxford trial of 1,300 people, asking a chatbot about symptoms was no better than the old ways and it missed cases that needed urgent help. Meanwhile 81 percent of doctors now use AI themselves, mostly as a scribe so they can look at you instead of the screen.</p>
+        <div class="verdict">Ask it what to ask your doctor. Then ask your doctor if they use an AI scribe. Yes is the right answer.</div>
+        <div class="source">Sources: <a href="https://www.ox.ac.uk/news/2026-02-10-new-study-warns-risks-ai-chatbots-giving-medical-advice" target="_blank" rel="noopener">University of Oxford, February 2026 ↗</a> · <a href="https://www.ama-assn.org/press-center/ama-press-releases/ama-ai-usage-among-doctors-doubles-confidence-technology-grows" target="_blank" rel="noopener">American Medical Association, March 2026 ↗</a></div>
       </div>
-      <svg class="signal" viewBox="0 0 60 150" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Stoplight, green light on"><rect x="26" y="130" width="8" height="20" fill="#191919"/><rect x="4" y="2" width="52" height="132" rx="10" fill="#161616" stroke="#2a2a2a" stroke-width="1.5"/><path d="M6 20 h48 v6 H6 z" fill="#0a0a0a"/><path d="M6 60 h48 v6 H6 z" fill="#0a0a0a"/><path d="M6 100 h48 v6 H6 z" fill="#0a0a0a"/><circle class="glow r" cx="30" cy="28" r="22"/><circle class="lamp r" cx="30" cy="28" r="15"/><circle class="glow y" cx="30" cy="68" r="22"/><circle class="lamp y" cx="30" cy="68" r="15"/><circle class="glow g" cx="30" cy="108" r="22"/><circle class="lamp g" cx="30" cy="108" r="15"/><circle class="shine" cx="25" cy="23" r="4"/><circle class="shine" cx="25" cy="63" r="4"/><circle class="shine" cx="25" cy="103" r="4"/></svg>
-    </article>
-    <article class="row green">
-      <div class="card-text">
-        <div class="card-title">Your doctor already uses it.</div>
-        <p class="why">81 percent of US physicians now use AI in their practice, up from 38 percent in 2023. The most common use is a scribe that writes the visit notes, which is why some doctors have started looking at you instead of the screen.</p>
-        <div class="verdict">Ask your doctor if they use an AI scribe. Yes is the right answer.</div>
-        <div class="source">Source: <a href="https://www.ama-assn.org/press-center/ama-press-releases/ama-ai-usage-among-doctors-doubles-confidence-technology-grows" target="_blank" rel="noopener">American Medical Association, March 2026 physician survey ↗</a></div>
-      </div>
-      <svg class="signal" viewBox="0 0 60 150" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Stoplight, green light on"><rect x="26" y="130" width="8" height="20" fill="#191919"/><rect x="4" y="2" width="52" height="132" rx="10" fill="#161616" stroke="#2a2a2a" stroke-width="1.5"/><path d="M6 20 h48 v6 H6 z" fill="#0a0a0a"/><path d="M6 60 h48 v6 H6 z" fill="#0a0a0a"/><path d="M6 100 h48 v6 H6 z" fill="#0a0a0a"/><circle class="glow r" cx="30" cy="28" r="22"/><circle class="lamp r" cx="30" cy="28" r="15"/><circle class="glow y" cx="30" cy="68" r="22"/><circle class="lamp y" cx="30" cy="68" r="15"/><circle class="glow g" cx="30" cy="108" r="22"/><circle class="lamp g" cx="30" cy="108" r="15"/><circle class="shine" cx="25" cy="23" r="4"/><circle class="shine" cx="25" cy="63" r="4"/><circle class="shine" cx="25" cy="103" r="4"/></svg>
+      <svg class="signal" viewBox="0 0 60 150" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Stoplight, yellow light on"><rect x="26" y="130" width="8" height="20" fill="#191919"/><rect x="4" y="2" width="52" height="132" rx="10" fill="#161616" stroke="#2a2a2a" stroke-width="1.5"/><path d="M6 20 h48 v6 H6 z" fill="#0a0a0a"/><path d="M6 60 h48 v6 H6 z" fill="#0a0a0a"/><path d="M6 100 h48 v6 H6 z" fill="#0a0a0a"/><circle class="glow r" cx="30" cy="28" r="22"/><circle class="lamp r" cx="30" cy="28" r="15"/><circle class="glow y" cx="30" cy="68" r="22"/><circle class="lamp y" cx="30" cy="68" r="15"/><circle class="glow g" cx="30" cy="108" r="22"/><circle class="lamp g" cx="30" cy="108" r="15"/><circle class="shine" cx="25" cy="23" r="4"/><circle class="shine" cx="25" cy="63" r="4"/><circle class="shine" cx="25" cy="103" r="4"/></svg>
     </article>
   </section>
 
-  <!-- THE KIDS AT HOME -->
-  <section class="circle">
-    <h2 class="circle-h">The kids at home</h2>
-    <article class="row red">
+  <section class="circle" id="kids">
+    <h2 class="circle-h">My kids</h2>
+    <article class="row red" id="q-toddler">
       <div class="card-text">
-        <div class="card-title">Homework.</div>
-        <p class="why">86 percent of kids age 9 to 17 use AI, most of them for schoolwork. Barely half have been taught to use it safely, and only a third know it cannot reliably tell fact from fiction. Three quarters say their school has talked about the rules. Far fewer say anyone showed them how it works.</p>
-        <div class="verdict">Have them show you how they use it. Then show them it makes things up.</div>
-        <div class="source">Source: <a href="https://www.commonsensemedia.org/press-releases/common-sense-media-releases-inaugural-annual-study-on-ai-use-by-tweens-and-teens" target="_blank" rel="noopener">Common Sense Media, AI use by tweens and teens, June 2026 ↗</a></div>
+        <div class="card-title">Can a toddler have AI?</div>
+        <p class="why">No. Chatbot toys marketed to three-year-olds were caught discussing knives, fire, and sexual fetishes, and AI-generated toddler videos with cartoon babies swallowing whole grapes are being served to brand-new YouTube accounts. Two hundred organizations asked YouTube to ban them in April. It has not.</p>
+        <div class="verdict">No talking toys this year, and no unsupervised YouTube. A downloaded show, or a person in the room.</div>
+        <div class="source">Sources: <a href="https://techxplore.com/news/2026-06-chatbot-teddies-threeyearolds-ai-toys.html" target="_blank" rel="noopener">Tech Xplore, June 2026 ↗</a> · <a href="https://www.tubefilter.com/2026/04/01/youtube-fairplay-kids-ai-open-letter/" target="_blank" rel="noopener">Tubefilter on the Fairplay open letter, April 2026 ↗</a></div>
       </div>
       <svg class="signal" viewBox="0 0 60 150" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Stoplight, red light on"><rect x="26" y="130" width="8" height="20" fill="#191919"/><rect x="4" y="2" width="52" height="132" rx="10" fill="#161616" stroke="#2a2a2a" stroke-width="1.5"/><path d="M6 20 h48 v6 H6 z" fill="#0a0a0a"/><path d="M6 60 h48 v6 H6 z" fill="#0a0a0a"/><path d="M6 100 h48 v6 H6 z" fill="#0a0a0a"/><circle class="glow r" cx="30" cy="28" r="22"/><circle class="lamp r" cx="30" cy="28" r="15"/><circle class="glow y" cx="30" cy="68" r="22"/><circle class="lamp y" cx="30" cy="68" r="15"/><circle class="glow g" cx="30" cy="108" r="22"/><circle class="lamp g" cx="30" cy="108" r="15"/><circle class="shine" cx="25" cy="23" r="4"/><circle class="shine" cx="25" cy="63" r="4"/><circle class="shine" cx="25" cy="103" r="4"/></svg>
     </article>
-    <article class="row red">
+    <article class="row yellow" id="q-homework">
       <div class="card-text">
-        <div class="card-title">The friend on the phone.</div>
-        <p class="why">In January, Character.AI and Google settled with five families whose kids died by suicide or landed in crisis after months inside a chatbot relationship. A homework helper and a companion app are not the same category, and the app store does not sort them for you.</p>
-        <div class="verdict">Know which one is on their phone. If it has a name and a personality, it is the second kind.</div>
-        <div class="source">Source: <a href="https://www.cnn.com/2026/01/07/business/character-ai-google-settle-teen-suicide-lawsuit" target="_blank" rel="noopener">CNN, January 7, 2026 ↗</a></div>
+        <div class="card-title">Is my kid learning or outsourcing?</div>
+        <p class="why">Both, and you can tip it. 86 percent of kids 9 to 17 use AI, only a third know it makes things up, and the school guidance in most states skips cheating entirely, so the rule is whatever the teacher says. The tools now have a study mode that asks questions instead of handing over answers.</p>
+        <div class="verdict">Turn study mode on and watch them use it once. Then ask the teacher what the rule is in their class. They will be glad somebody asked.</div>
+        <div class="source">Sources: <a href="https://www.commonsensemedia.org/press-releases/common-sense-media-releases-inaugural-annual-study-on-ai-use-by-tweens-and-teens" target="_blank" rel="noopener">Common Sense Media, June 2026 ↗</a> · <a href="https://www.chalkbeat.org/2026/09/02/state-ai-guidance-schools-skirts-cheating-teachers/" target="_blank" rel="noopener">Chalkbeat, September 2026 ↗</a> · <a href="https://openai.com/index/chatgpt-study-mode/" target="_blank" rel="noopener">OpenAI, study mode ↗</a></div>
+      </div>
+      <svg class="signal" viewBox="0 0 60 150" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Stoplight, yellow light on"><rect x="26" y="130" width="8" height="20" fill="#191919"/><rect x="4" y="2" width="52" height="132" rx="10" fill="#161616" stroke="#2a2a2a" stroke-width="1.5"/><path d="M6 20 h48 v6 H6 z" fill="#0a0a0a"/><path d="M6 60 h48 v6 H6 z" fill="#0a0a0a"/><path d="M6 100 h48 v6 H6 z" fill="#0a0a0a"/><circle class="glow r" cx="30" cy="28" r="22"/><circle class="lamp r" cx="30" cy="28" r="15"/><circle class="glow y" cx="30" cy="68" r="22"/><circle class="lamp y" cx="30" cy="68" r="15"/><circle class="glow g" cx="30" cy="108" r="22"/><circle class="lamp g" cx="30" cy="108" r="15"/><circle class="shine" cx="25" cy="23" r="4"/><circle class="shine" cx="25" cy="63" r="4"/><circle class="shine" cx="25" cy="103" r="4"/></svg>
+    </article>
+    <article class="row red" id="q-friend">
+      <div class="card-text">
+        <div class="card-title">Is the "friend" app okay?</div>
+        <p class="why">No. In January, Character.AI and Google settled with five families whose kids died by suicide or landed in crisis after months inside a chatbot relationship. A homework helper and a companion are different products, and the app store does not sort them for you.</p>
+        <div class="verdict">If it has a name and a personality, it is the second kind. Use the pediatricians' three questions at dinner: which ones do you use, is it for fun or for friendship, did it ever say something that bothered you.</div>
+        <div class="source">Sources: <a href="https://www.cnn.com/2026/01/07/business/character-ai-google-settle-teen-suicide-lawsuit" target="_blank" rel="noopener">CNN, January 2026 ↗</a> · <a href="https://lasvegassun.com/news/2026/mar/29/ai-chatbots-pose-plenty-of-danger-few-benefits-for/" target="_blank" rel="noopener">Las Vegas Sun on the American Academy of Pediatrics guidance, March 2026 ↗</a></div>
       </div>
       <svg class="signal" viewBox="0 0 60 150" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Stoplight, red light on"><rect x="26" y="130" width="8" height="20" fill="#191919"/><rect x="4" y="2" width="52" height="132" rx="10" fill="#161616" stroke="#2a2a2a" stroke-width="1.5"/><path d="M6 20 h48 v6 H6 z" fill="#0a0a0a"/><path d="M6 60 h48 v6 H6 z" fill="#0a0a0a"/><path d="M6 100 h48 v6 H6 z" fill="#0a0a0a"/><circle class="glow r" cx="30" cy="28" r="22"/><circle class="lamp r" cx="30" cy="28" r="15"/><circle class="glow y" cx="30" cy="68" r="22"/><circle class="lamp y" cx="30" cy="68" r="15"/><circle class="glow g" cx="30" cy="108" r="22"/><circle class="lamp g" cx="30" cy="108" r="15"/><circle class="shine" cx="25" cy="23" r="4"/><circle class="shine" cx="25" cy="63" r="4"/><circle class="shine" cx="25" cy="103" r="4"/></svg>
     </article>
-    <article class="row yellow">
+    <article class="row yellow" id="q-essay">
       <div class="card-text">
-        <div class="card-title">What the school actually says.</div>
-        <p class="why">Three out of four states have issued AI guidance for schools. Almost none of it says what to do about cheating, so that decision sits with each teacher, and most of them are making it up as they go.</p>
-        <div class="verdict">Ask your kid's teacher what the AI rule is in their class. They will be glad somebody asked.</div>
-        <div class="source">Source: <a href="https://www.chalkbeat.org/2026/09/02/state-ai-guidance-schools-skirts-cheating-teachers/" target="_blank" rel="noopener">Chalkbeat, September 2, 2026 ↗</a></div>
+        <div class="card-title">Can they use it on the college essay?</div>
+        <p class="why">Only the way each school allows, and the schools disagree. Common App treats AI text passed off as your own as application fraud, some schools allow brainstorming and grammar help, and Northwestern dropped the personal statement entirely rather than police it.</p>
+        <div class="verdict">Check each school's stated AI policy before they type a word. It is on the admissions page, or it is not, and both answers tell you something.</div>
+        <div class="source">Source: <a href="https://www.nbcnews.com/tech/tech-news/college-essays-ai-admissions-rcna591688" target="_blank" rel="noopener">NBC News, August 2026 ↗</a></div>
       </div>
       <svg class="signal" viewBox="0 0 60 150" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Stoplight, yellow light on"><rect x="26" y="130" width="8" height="20" fill="#191919"/><rect x="4" y="2" width="52" height="132" rx="10" fill="#161616" stroke="#2a2a2a" stroke-width="1.5"/><path d="M6 20 h48 v6 H6 z" fill="#0a0a0a"/><path d="M6 60 h48 v6 H6 z" fill="#0a0a0a"/><path d="M6 100 h48 v6 H6 z" fill="#0a0a0a"/><circle class="glow r" cx="30" cy="28" r="22"/><circle class="lamp r" cx="30" cy="28" r="15"/><circle class="glow y" cx="30" cy="68" r="22"/><circle class="lamp y" cx="30" cy="68" r="15"/><circle class="glow g" cx="30" cy="108" r="22"/><circle class="lamp g" cx="30" cy="108" r="15"/><circle class="shine" cx="25" cy="23" r="4"/><circle class="shine" cx="25" cy="63" r="4"/><circle class="shine" cx="25" cy="103" r="4"/></svg>
     </article>
-    <article class="row yellow">
+    <article class="row yellow" id="q-firstjob">
       <div class="card-text">
-        <div class="card-title">Glasses that record.</div>
-        <p class="why">Smart glasses shipments grew 167 percent in a year, and Meta's Ray-Bans are about seven in ten of them. They look like glasses. They are a camera and a microphone with an AI attached, and the teenager wearing them may be recording. So may the one across the table.</p>
-        <div class="verdict">Teach them it is fine to ask someone to take them off, and fine to be asked.</div>
-        <div class="source">Source: <a href="https://virtual.reality.news/news/ai-smart-glasses-market-growth-2026-why-shipments-climb/" target="_blank" rel="noopener">IDC Q1 2026 figures via Next Reality ↗</a></div>
-      </div>
-      <svg class="signal" viewBox="0 0 60 150" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Stoplight, yellow light on"><rect x="26" y="130" width="8" height="20" fill="#191919"/><rect x="4" y="2" width="52" height="132" rx="10" fill="#161616" stroke="#2a2a2a" stroke-width="1.5"/><path d="M6 20 h48 v6 H6 z" fill="#0a0a0a"/><path d="M6 60 h48 v6 H6 z" fill="#0a0a0a"/><path d="M6 100 h48 v6 H6 z" fill="#0a0a0a"/><circle class="glow r" cx="30" cy="28" r="22"/><circle class="lamp r" cx="30" cy="28" r="15"/><circle class="glow y" cx="30" cy="68" r="22"/><circle class="lamp y" cx="30" cy="68" r="15"/><circle class="glow g" cx="30" cy="108" r="22"/><circle class="lamp g" cx="30" cy="108" r="15"/><circle class="shine" cx="25" cy="23" r="4"/><circle class="shine" cx="25" cy="63" r="4"/><circle class="shine" cx="25" cy="103" r="4"/></svg>
-    </article>
-    <article class="row green">
-      <div class="card-text">
-        <div class="card-title">Make it the tutor, not the answer key.</div>
-        <p class="why">Common Sense's own census says a third of teens who use AI for schoolwork take the answer and improve it with what they know, rather than copying it. The tools now have a study mode that asks questions and gives hints instead of handing over the answer, and it is on the free plan.</p>
-        <div class="verdict">Turn study mode on and watch them use it once. The kid who argues with the tutor is learning.</div>
-        <div class="source">Sources: <a href="https://www.commonsensemedia.org/press-releases/common-sense-media-releases-inaugural-annual-study-on-ai-use-by-tweens-and-teens" target="_blank" rel="noopener">Common Sense Media, June 2026 ↗</a> · <a href="https://openai.com/index/chatgpt-study-mode/" target="_blank" rel="noopener">OpenAI, introducing study mode ↗</a></div>
-      </div>
-      <svg class="signal" viewBox="0 0 60 150" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Stoplight, green light on"><rect x="26" y="130" width="8" height="20" fill="#191919"/><rect x="4" y="2" width="52" height="132" rx="10" fill="#161616" stroke="#2a2a2a" stroke-width="1.5"/><path d="M6 20 h48 v6 H6 z" fill="#0a0a0a"/><path d="M6 60 h48 v6 H6 z" fill="#0a0a0a"/><path d="M6 100 h48 v6 H6 z" fill="#0a0a0a"/><circle class="glow r" cx="30" cy="28" r="22"/><circle class="lamp r" cx="30" cy="28" r="15"/><circle class="glow y" cx="30" cy="68" r="22"/><circle class="lamp y" cx="30" cy="68" r="15"/><circle class="glow g" cx="30" cy="108" r="22"/><circle class="lamp g" cx="30" cy="108" r="15"/><circle class="shine" cx="25" cy="23" r="4"/><circle class="shine" cx="25" cy="63" r="4"/><circle class="shine" cx="25" cy="103" r="4"/></svg>
-    </article>
-  </section>
-
-  <!-- THE KIDS LAUNCHING -->
-  <section class="circle">
-    <h2 class="circle-h">The kids launching</h2>
-    <article class="row yellow">
-      <div class="card-text">
-        <div class="card-title">The college essay.</div>
-        <p class="why">Colleges cannot agree on the rule. Common App treats submitting AI output as your own work as application fraud, some schools allow brainstorming and grammar help, some say nothing, and Northwestern dropped the personal statement entirely rather than police it.</p>
-        <div class="verdict">Have them check each school's stated AI policy before they type a word of the essay. It is on the admissions page, or it is not, and both answers tell you something.</div>
-        <div class="source">Source: <a href="https://www.nbcnews.com/tech/tech-news/college-essays-ai-admissions-rcna591688" target="_blank" rel="noopener">NBC News, August 12, 2026 ↗</a></div>
-      </div>
-      <svg class="signal" viewBox="0 0 60 150" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Stoplight, yellow light on"><rect x="26" y="130" width="8" height="20" fill="#191919"/><rect x="4" y="2" width="52" height="132" rx="10" fill="#161616" stroke="#2a2a2a" stroke-width="1.5"/><path d="M6 20 h48 v6 H6 z" fill="#0a0a0a"/><path d="M6 60 h48 v6 H6 z" fill="#0a0a0a"/><path d="M6 100 h48 v6 H6 z" fill="#0a0a0a"/><circle class="glow r" cx="30" cy="28" r="22"/><circle class="lamp r" cx="30" cy="28" r="15"/><circle class="glow y" cx="30" cy="68" r="22"/><circle class="lamp y" cx="30" cy="68" r="15"/><circle class="glow g" cx="30" cy="108" r="22"/><circle class="lamp g" cx="30" cy="108" r="15"/><circle class="shine" cx="25" cy="23" r="4"/><circle class="shine" cx="25" cy="63" r="4"/><circle class="shine" cx="25" cy="103" r="4"/></svg>
-    </article>
-    <article class="row red">
-      <div class="card-text">
-        <div class="card-title">Their first job.</div>
-        <p class="why">The first rung is where AI cuts land first, and more than a third of the entry-level postings that remain now ask for AI skills, nearly triple what they asked for last fall. Only 28 percent of this year's graduates got any formal instruction in the tools.</p>
+        <div class="card-title">Will there be a first job?</div>
+        <p class="why">Yes, with a new entry fee. More than a third of entry-level postings now ask for AI skills, nearly triple last fall, and only 28 percent of this year's graduates got any formal instruction in the tools.</p>
         <div class="verdict">Working knowledge of these tools is the new typing class. Make sure they have it before the interview, not after.</div>
-        <div class="source">Sources: <a href="https://www.naceweb.org/job-market/trends-and-predictions/demand-for-ai-skills-in-entry-level-jobs-nearly-triples-since-fall-2025" target="_blank" rel="noopener">NACE, spring 2026 ↗</a> · <a href="https://www.insidehighered.com/news/student-success/life-after-college/2026/04/30/ai-skills-surge-entry-level-jobs-lag" target="_blank" rel="noopener">Inside Higher Ed, April 30, 2026 ↗</a></div>
+        <div class="source">Sources: <a href="https://www.naceweb.org/job-market/trends-and-predictions/demand-for-ai-skills-in-entry-level-jobs-nearly-triples-since-fall-2025" target="_blank" rel="noopener">NACE, spring 2026 ↗</a> · <a href="https://www.insidehighered.com/news/student-success/life-after-college/2026/04/30/ai-skills-surge-entry-level-jobs-lag" target="_blank" rel="noopener">Inside Higher Ed, April 2026 ↗</a></div>
       </div>
-      <svg class="signal" viewBox="0 0 60 150" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Stoplight, red light on"><rect x="26" y="130" width="8" height="20" fill="#191919"/><rect x="4" y="2" width="52" height="132" rx="10" fill="#161616" stroke="#2a2a2a" stroke-width="1.5"/><path d="M6 20 h48 v6 H6 z" fill="#0a0a0a"/><path d="M6 60 h48 v6 H6 z" fill="#0a0a0a"/><path d="M6 100 h48 v6 H6 z" fill="#0a0a0a"/><circle class="glow r" cx="30" cy="28" r="22"/><circle class="lamp r" cx="30" cy="28" r="15"/><circle class="glow y" cx="30" cy="68" r="22"/><circle class="lamp y" cx="30" cy="68" r="15"/><circle class="glow g" cx="30" cy="108" r="22"/><circle class="lamp g" cx="30" cy="108" r="15"/><circle class="shine" cx="25" cy="23" r="4"/><circle class="shine" cx="25" cy="63" r="4"/><circle class="shine" cx="25" cy="103" r="4"/></svg>
+      <svg class="signal" viewBox="0 0 60 150" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Stoplight, yellow light on"><rect x="26" y="130" width="8" height="20" fill="#191919"/><rect x="4" y="2" width="52" height="132" rx="10" fill="#161616" stroke="#2a2a2a" stroke-width="1.5"/><path d="M6 20 h48 v6 H6 z" fill="#0a0a0a"/><path d="M6 60 h48 v6 H6 z" fill="#0a0a0a"/><path d="M6 100 h48 v6 H6 z" fill="#0a0a0a"/><circle class="glow r" cx="30" cy="28" r="22"/><circle class="lamp r" cx="30" cy="28" r="15"/><circle class="glow y" cx="30" cy="68" r="22"/><circle class="lamp y" cx="30" cy="68" r="15"/><circle class="glow g" cx="30" cy="108" r="22"/><circle class="lamp g" cx="30" cy="108" r="15"/><circle class="shine" cx="25" cy="23" r="4"/><circle class="shine" cx="25" cy="63" r="4"/><circle class="shine" cx="25" cy="103" r="4"/></svg>
     </article>
   </section>
 
-  <!-- THE GRANDKIDS -->
-  <section class="circle">
-    <h2 class="circle-h">The grandkids, and the grown kids raising them</h2>
-    <article class="row red">
+  <section class="circle" id="parents">
+    <h2 class="circle-h">My parents</h2>
+    <article class="row red" id="q-phone">
       <div class="card-text">
-        <div class="card-title">The AI teddy bear.</div>
-        <p class="why">Chatbot toys marketed to kids as young as three are on shelves now, and Mattel has an OpenAI deal in the works. Testers found the current ones happy to discuss knives, fire, and sexual fetishes, and everything a toddler says to a "real buddy" becomes training data.</p>
-        <div class="verdict">Not this year. A stuffed animal that talks back is a chatbot with fur, and the chatbot companies themselves say under 13 is not allowed.</div>
-        <div class="source">Sources: <a href="https://techxplore.com/news/2026-06-chatbot-teddies-threeyearolds-ai-toys.html" target="_blank" rel="noopener">Tech Xplore, June 3, 2026 ↗</a> · <a href="https://www.cnn.com/2025/12/01/tech/ai-toys-safety" target="_blank" rel="noopener">CNN, AI-powered children's toys are here, but are they safe? ↗</a></div>
+        <div class="card-title">Can Mom trust the phone?</div>
+        <p class="why">Not without a rule. The FBI counted $893 million lost to AI-assisted scams in 2025, $352 million of it from people over 60, and the voice that sounds exactly like your kid was built from your kid's videos. Meanwhile Social Security answers most 800-number calls by machine after losing more than 8,000 workers.</p>
+        <div class="verdict">Pick a family password and make her use it. For anything with Social Security that is not routine, write down the case number and get a human, in person if you have to.</div>
+        <div class="source">Sources: <a href="https://www.aarp.org/money/scams-fraud/fbi-ftc-report-2025-losses/" target="_blank" rel="noopener">AARP on the FBI 2025 Internet Crime Report ↗</a> · <a href="https://www.cnbc.com/2026/06/10/bisignano-social-security-phone-wait-times.html" target="_blank" rel="noopener">CNBC on Social Security's phone line, June 2026 ↗</a></div>
       </div>
       <svg class="signal" viewBox="0 0 60 150" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Stoplight, red light on"><rect x="26" y="130" width="8" height="20" fill="#191919"/><rect x="4" y="2" width="52" height="132" rx="10" fill="#161616" stroke="#2a2a2a" stroke-width="1.5"/><path d="M6 20 h48 v6 H6 z" fill="#0a0a0a"/><path d="M6 60 h48 v6 H6 z" fill="#0a0a0a"/><path d="M6 100 h48 v6 H6 z" fill="#0a0a0a"/><circle class="glow r" cx="30" cy="28" r="22"/><circle class="lamp r" cx="30" cy="28" r="15"/><circle class="glow y" cx="30" cy="68" r="22"/><circle class="lamp y" cx="30" cy="68" r="15"/><circle class="glow g" cx="30" cy="108" r="22"/><circle class="lamp g" cx="30" cy="108" r="15"/><circle class="shine" cx="25" cy="23" r="4"/><circle class="shine" cx="25" cy="63" r="4"/><circle class="shine" cx="25" cy="103" r="4"/></svg>
     </article>
-    <article class="row red">
+    <article class="row green" id="q-taxi">
       <div class="card-text">
-        <div class="card-title">Baby slop.</div>
-        <p class="why">AI-generated videos aimed at toddlers are flooding YouTube, and the algorithm serves them to brand-new accounts. Reporters found cartoon babies swallowing whole grapes and eating honey. In April, 200 organizations including the American Federation of Teachers asked YouTube to ban AI content from YouTube Kids. It has not.</p>
-        <div class="verdict">If a toddler in your life watches YouTube, someone has to be in the room, or it has to be a downloaded show. There is no third option right now.</div>
-        <div class="source">Source: <a href="https://www.tubefilter.com/2026/04/01/youtube-fairplay-kids-ai-open-letter/" target="_blank" rel="noopener">Tubefilter on the Fairplay open letter, April 1, 2026 ↗</a></div>
-      </div>
-      <svg class="signal" viewBox="0 0 60 150" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Stoplight, red light on"><rect x="26" y="130" width="8" height="20" fill="#191919"/><rect x="4" y="2" width="52" height="132" rx="10" fill="#161616" stroke="#2a2a2a" stroke-width="1.5"/><path d="M6 20 h48 v6 H6 z" fill="#0a0a0a"/><path d="M6 60 h48 v6 H6 z" fill="#0a0a0a"/><path d="M6 100 h48 v6 H6 z" fill="#0a0a0a"/><circle class="glow r" cx="30" cy="28" r="22"/><circle class="lamp r" cx="30" cy="28" r="15"/><circle class="glow y" cx="30" cy="68" r="22"/><circle class="lamp y" cx="30" cy="68" r="15"/><circle class="glow g" cx="30" cy="108" r="22"/><circle class="lamp g" cx="30" cy="108" r="15"/><circle class="shine" cx="25" cy="23" r="4"/><circle class="shine" cx="25" cy="63" r="4"/><circle class="shine" cx="25" cy="103" r="4"/></svg>
-    </article>
-    <article class="row yellow">
-      <div class="card-text">
-        <div class="card-title">Dr. Chatbot, pediatric edition.</div>
-        <p class="why">New parents are asking ChatGPT the 3 a.m. questions, and a 2026 review found the advice mostly accurate but weakest exactly where it matters, on nuanced calls like screen time. Parents also rate AI-written health text as more trustworthy than a doctor's when they do not know who wrote it.</p>
-        <div class="verdict">Fine for "is this normal." Not for "is this an emergency." The nurse line still exists.</div>
-        <div class="source">Sources: <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC13524179/" target="_blank" rel="noopener">Journal of Developmental &amp; Behavioral Pediatrics, 2026 ↗</a> · <a href="https://lifespan.ku.edu/news/article/study-finds-parents-relying-on-chatgpt-for-health-guidance-about-children" target="_blank" rel="noopener">University of Kansas ↗</a></div>
-      </div>
-      <svg class="signal" viewBox="0 0 60 150" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Stoplight, yellow light on"><rect x="26" y="130" width="8" height="20" fill="#191919"/><rect x="4" y="2" width="52" height="132" rx="10" fill="#161616" stroke="#2a2a2a" stroke-width="1.5"/><path d="M6 20 h48 v6 H6 z" fill="#0a0a0a"/><path d="M6 60 h48 v6 H6 z" fill="#0a0a0a"/><path d="M6 100 h48 v6 H6 z" fill="#0a0a0a"/><circle class="glow r" cx="30" cy="28" r="22"/><circle class="lamp r" cx="30" cy="28" r="15"/><circle class="glow y" cx="30" cy="68" r="22"/><circle class="lamp y" cx="30" cy="68" r="15"/><circle class="glow g" cx="30" cy="108" r="22"/><circle class="lamp g" cx="30" cy="108" r="15"/><circle class="shine" cx="25" cy="23" r="4"/><circle class="shine" cx="25" cy="63" r="4"/><circle class="shine" cx="25" cy="103" r="4"/></svg>
-    </article>
-    <article class="row green">
-      <div class="card-text">
-        <div class="card-title">The pediatricians have a script.</div>
-        <p class="why">The American Academy of Pediatrics is not telling parents to ban chatbots. Its guidance is calm and curious: ask which ones they use, whether it is for fun or for friendship, and whether it ever said something that surprised or bothered them. Supervised and talked about is a different thing from secret and unlimited.</p>
-        <div class="verdict">Use those three questions at dinner. They work on a 7-year-old and a 17-year-old.</div>
-        <div class="source">Sources: <a href="https://lasvegassun.com/news/2026/mar/29/ai-chatbots-pose-plenty-of-danger-few-benefits-for/" target="_blank" rel="noopener">Las Vegas Sun on the AAP guidance, March 29, 2026 ↗</a> · <a href="https://publications.aap.org/aapnews/news/33711/Experts-discuss-potential-benefits-harms" target="_blank" rel="noopener">AAP News ↗</a></div>
-      </div>
-      <svg class="signal" viewBox="0 0 60 150" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Stoplight, green light on"><rect x="26" y="130" width="8" height="20" fill="#191919"/><rect x="4" y="2" width="52" height="132" rx="10" fill="#161616" stroke="#2a2a2a" stroke-width="1.5"/><path d="M6 20 h48 v6 H6 z" fill="#0a0a0a"/><path d="M6 60 h48 v6 H6 z" fill="#0a0a0a"/><path d="M6 100 h48 v6 H6 z" fill="#0a0a0a"/><circle class="glow r" cx="30" cy="28" r="22"/><circle class="lamp r" cx="30" cy="28" r="15"/><circle class="glow y" cx="30" cy="68" r="22"/><circle class="lamp y" cx="30" cy="68" r="15"/><circle class="glow g" cx="30" cy="108" r="22"/><circle class="lamp g" cx="30" cy="108" r="15"/><circle class="shine" cx="25" cy="23" r="4"/><circle class="shine" cx="25" cy="63" r="4"/><circle class="shine" cx="25" cy="103" r="4"/></svg>
-    </article>
-  </section>
-
-  <!-- OUR PARENTS -->
-  <section class="circle">
-    <h2 class="circle-h">Our parents</h2>
-    <article class="row red">
-      <div class="card-text">
-        <div class="card-title">The 2 a.m. call.</div>
-        <p class="why">The FBI counted $893 million lost in 2025 to scams that used AI, and $352 million of it came from people 60 and older. The voice on the phone sounds exactly like your kid because it was built from your kid's videos.</p>
-        <div class="verdict">Pick a family password. If "your grandson" calls in a panic, ask for it.</div>
-        <div class="source">Source: <a href="https://www.aarp.org/money/scams-fraud/fbi-ftc-report-2025-losses/" target="_blank" rel="noopener">AARP on the FBI 2025 Internet Crime Report, April 2026 ↗</a></div>
-      </div>
-      <svg class="signal" viewBox="0 0 60 150" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Stoplight, red light on"><rect x="26" y="130" width="8" height="20" fill="#191919"/><rect x="4" y="2" width="52" height="132" rx="10" fill="#161616" stroke="#2a2a2a" stroke-width="1.5"/><path d="M6 20 h48 v6 H6 z" fill="#0a0a0a"/><path d="M6 60 h48 v6 H6 z" fill="#0a0a0a"/><path d="M6 100 h48 v6 H6 z" fill="#0a0a0a"/><circle class="glow r" cx="30" cy="28" r="22"/><circle class="lamp r" cx="30" cy="28" r="15"/><circle class="glow y" cx="30" cy="68" r="22"/><circle class="lamp y" cx="30" cy="68" r="15"/><circle class="glow g" cx="30" cy="108" r="22"/><circle class="lamp g" cx="30" cy="108" r="15"/><circle class="shine" cx="25" cy="23" r="4"/><circle class="shine" cx="25" cy="63" r="4"/><circle class="shine" cx="25" cy="103" r="4"/></svg>
-    </article>
-    <article class="row yellow">
-      <div class="card-text">
-        <div class="card-title">Getting a human on the phone.</div>
-        <p class="why">Social Security has lost more than 8,000 workers since January 2025 and now answers most 800-number calls by machine. The wait times are genuinely down. The bot is fine for a simple question and bad at the complicated one, and the complicated one is usually the reason your mother is calling.</p>
-        <div class="verdict">For anything that is not routine, write down the case number and get a human, in person if you have to.</div>
-        <div class="source">Sources: <a href="https://www.cnbc.com/2026/06/10/bisignano-social-security-phone-wait-times.html" target="_blank" rel="noopener">CNBC, June 10, 2026 ↗</a> · <a href="https://www.aarp.org/social-security/ai-customer-service/" target="_blank" rel="noopener">AARP, how AI is changing Social Security customer service ↗</a></div>
-      </div>
-      <svg class="signal" viewBox="0 0 60 150" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Stoplight, yellow light on"><rect x="26" y="130" width="8" height="20" fill="#191919"/><rect x="4" y="2" width="52" height="132" rx="10" fill="#161616" stroke="#2a2a2a" stroke-width="1.5"/><path d="M6 20 h48 v6 H6 z" fill="#0a0a0a"/><path d="M6 60 h48 v6 H6 z" fill="#0a0a0a"/><path d="M6 100 h48 v6 H6 z" fill="#0a0a0a"/><circle class="glow r" cx="30" cy="28" r="22"/><circle class="lamp r" cx="30" cy="28" r="15"/><circle class="glow y" cx="30" cy="68" r="22"/><circle class="lamp y" cx="30" cy="68" r="15"/><circle class="glow g" cx="30" cy="108" r="22"/><circle class="lamp g" cx="30" cy="108" r="15"/><circle class="shine" cx="25" cy="23" r="4"/><circle class="shine" cx="25" cy="63" r="4"/><circle class="shine" cx="25" cy="103" r="4"/></svg>
-    </article>
-    <article class="row yellow">
-      <div class="card-text">
-        <div class="card-title">Asking it about a symptom.</div>
-        <p class="why">In an Oxford trial of about 1,300 people, asking a chatbot about symptoms was no better than the old ways of looking things up, and it missed cases that needed urgent help. It will sound completely sure the whole time.</p>
-        <div class="verdict">Use it to prepare for the appointment, not to replace it. "What should I ask my doctor about this" is the good prompt.</div>
-        <div class="source">Source: <a href="https://www.ox.ac.uk/news/2026-02-10-new-study-warns-risks-ai-chatbots-giving-medical-advice" target="_blank" rel="noopener">University of Oxford, February 10, 2026 ↗</a></div>
-      </div>
-      <svg class="signal" viewBox="0 0 60 150" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Stoplight, yellow light on"><rect x="26" y="130" width="8" height="20" fill="#191919"/><rect x="4" y="2" width="52" height="132" rx="10" fill="#161616" stroke="#2a2a2a" stroke-width="1.5"/><path d="M6 20 h48 v6 H6 z" fill="#0a0a0a"/><path d="M6 60 h48 v6 H6 z" fill="#0a0a0a"/><path d="M6 100 h48 v6 H6 z" fill="#0a0a0a"/><circle class="glow r" cx="30" cy="28" r="22"/><circle class="lamp r" cx="30" cy="28" r="15"/><circle class="glow y" cx="30" cy="68" r="22"/><circle class="lamp y" cx="30" cy="68" r="15"/><circle class="glow g" cx="30" cy="108" r="22"/><circle class="lamp g" cx="30" cy="108" r="15"/><circle class="shine" cx="25" cy="23" r="4"/><circle class="shine" cx="25" cy="63" r="4"/><circle class="shine" cx="25" cy="103" r="4"/></svg>
-    </article>
-    <article class="row green">
-      <div class="card-text">
-        <div class="card-title">The memory workup.</div>
-        <p class="why">Blood tests are catching up to brain scans. A Washington University tool reads 15 proteins in a blood sample and tells Alzheimer's, Parkinson's, frontotemporal dementia, and Lewy body dementia apart, including when two are happening at once, with about 92 percent accuracy in the study.</p>
-        <div class="verdict">If a parent is being worked up for memory loss, ask whether a blood biomarker test is an option before the expensive scan.</div>
-        <div class="source">Source: <a href="https://source.washu.edu/2026/05/blood-test-powered-by-ai-could-transform-diagnosis-of-dementia/" target="_blank" rel="noopener">Washington University in St. Louis, May 21, 2026 ↗</a></div>
-      </div>
-      <svg class="signal" viewBox="0 0 60 150" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Stoplight, green light on"><rect x="26" y="130" width="8" height="20" fill="#191919"/><rect x="4" y="2" width="52" height="132" rx="10" fill="#161616" stroke="#2a2a2a" stroke-width="1.5"/><path d="M6 20 h48 v6 H6 z" fill="#0a0a0a"/><path d="M6 60 h48 v6 H6 z" fill="#0a0a0a"/><path d="M6 100 h48 v6 H6 z" fill="#0a0a0a"/><circle class="glow r" cx="30" cy="28" r="22"/><circle class="lamp r" cx="30" cy="28" r="15"/><circle class="glow y" cx="30" cy="68" r="22"/><circle class="lamp y" cx="30" cy="68" r="15"/><circle class="glow g" cx="30" cy="108" r="22"/><circle class="lamp g" cx="30" cy="108" r="15"/><circle class="shine" cx="25" cy="23" r="4"/><circle class="shine" cx="25" cy="63" r="4"/><circle class="shine" cx="25" cy="103" r="4"/></svg>
-    </article>
-    <article class="row green">
-      <div class="card-text">
-        <div class="card-title">The night Dad shouldn't drive.</div>
-        <p class="why">Waymo now runs in 14 US cities, adding Denver, San Diego, and Tampa this month, and Tesla's Cybercab started taking riders in Austin on September 4. The real use case is not the tech demo. It is the parent who has given up the keys and still wants to get to dinner.</p>
+        <div class="card-title">Can Dad take a robotaxi?</div>
+        <p class="why">Yes, in 14 cities and counting. Waymo added Denver, San Diego, and Tampa this month, and Tesla's Cybercab started carrying riders in Austin on September 4. The real use case is not the tech demo. It is the parent who gave up the keys and still wants to get to dinner.</p>
         <div class="verdict">If one is in their city, take a ride with them before it is an emergency.</div>
-        <div class="source">Source: <a href="https://techcrunch.com/2026/09/01/waymo-accelerates-robotaxi-expansion-with-launches-in-denver-san-diego-and-tampa/" target="_blank" rel="noopener">TechCrunch, September 1, 2026 ↗</a></div>
+        <div class="source">Source: <a href="https://techcrunch.com/2026/09/01/waymo-accelerates-robotaxi-expansion-with-launches-in-denver-san-diego-and-tampa/" target="_blank" rel="noopener">TechCrunch, September 2026 ↗</a></div>
       </div>
       <svg class="signal" viewBox="0 0 60 150" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Stoplight, green light on"><rect x="26" y="130" width="8" height="20" fill="#191919"/><rect x="4" y="2" width="52" height="132" rx="10" fill="#161616" stroke="#2a2a2a" stroke-width="1.5"/><path d="M6 20 h48 v6 H6 z" fill="#0a0a0a"/><path d="M6 60 h48 v6 H6 z" fill="#0a0a0a"/><path d="M6 100 h48 v6 H6 z" fill="#0a0a0a"/><circle class="glow r" cx="30" cy="28" r="22"/><circle class="lamp r" cx="30" cy="28" r="15"/><circle class="glow y" cx="30" cy="68" r="22"/><circle class="lamp y" cx="30" cy="68" r="15"/><circle class="glow g" cx="30" cy="108" r="22"/><circle class="lamp g" cx="30" cy="108" r="15"/><circle class="shine" cx="25" cy="23" r="4"/><circle class="shine" cx="25" cy="63" r="4"/><circle class="shine" cx="25" cy="103" r="4"/></svg>
     </article>
-    <article class="row green">
+    <article class="row yellow" id="q-medicine">
       <div class="card-text">
-        <div class="card-title">Ask what phase it's in.</div>
-        <p class="why">The first drug designed by AI entered a Phase III trial in July, for a fatal lung-scarring disease called idiopathic pulmonary fibrosis. That is real progress. It is also true that no AI-designed drug has been approved anywhere yet, and Phase III is where most drugs still fail.</p>
-        <div class="verdict">When a headline says AI cured something, ask what phase it is in. Three is the one right before approval.</div>
-        <div class="source">Source: <a href="https://insilico.com/news/xmjsn4l091-insilico-initiates-phase-iii-clinical-tr" target="_blank" rel="noopener">Insilico Medicine, July 7, 2026 ↗</a></div>
+        <div class="card-title">Is AI medicine real yet?</div>
+        <p class="why">Partly. A Washington University blood test now tells four dementias apart with about 92 percent accuracy, including when two overlap. But the first AI-designed drug only reached a Phase III trial in July, and no AI-designed drug has been approved anywhere.</p>
+        <div class="verdict">If a parent is being worked up for memory loss, ask about a blood biomarker test before the expensive scan. When a headline says AI cured something, ask what phase it is in.</div>
+        <div class="source">Sources: <a href="https://source.washu.edu/2026/05/blood-test-powered-by-ai-could-transform-diagnosis-of-dementia/" target="_blank" rel="noopener">Washington University, May 2026 ↗</a> · <a href="https://insilico.com/news/xmjsn4l091-insilico-initiates-phase-iii-clinical-tr" target="_blank" rel="noopener">Insilico Medicine, July 2026 ↗</a></div>
       </div>
-      <svg class="signal" viewBox="0 0 60 150" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Stoplight, green light on"><rect x="26" y="130" width="8" height="20" fill="#191919"/><rect x="4" y="2" width="52" height="132" rx="10" fill="#161616" stroke="#2a2a2a" stroke-width="1.5"/><path d="M6 20 h48 v6 H6 z" fill="#0a0a0a"/><path d="M6 60 h48 v6 H6 z" fill="#0a0a0a"/><path d="M6 100 h48 v6 H6 z" fill="#0a0a0a"/><circle class="glow r" cx="30" cy="28" r="22"/><circle class="lamp r" cx="30" cy="28" r="15"/><circle class="glow y" cx="30" cy="68" r="22"/><circle class="lamp y" cx="30" cy="68" r="15"/><circle class="glow g" cx="30" cy="108" r="22"/><circle class="lamp g" cx="30" cy="108" r="15"/><circle class="shine" cx="25" cy="23" r="4"/><circle class="shine" cx="25" cy="63" r="4"/><circle class="shine" cx="25" cy="103" r="4"/></svg>
+      <svg class="signal" viewBox="0 0 60 150" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Stoplight, yellow light on"><rect x="26" y="130" width="8" height="20" fill="#191919"/><rect x="4" y="2" width="52" height="132" rx="10" fill="#161616" stroke="#2a2a2a" stroke-width="1.5"/><path d="M6 20 h48 v6 H6 z" fill="#0a0a0a"/><path d="M6 60 h48 v6 H6 z" fill="#0a0a0a"/><path d="M6 100 h48 v6 H6 z" fill="#0a0a0a"/><circle class="glow r" cx="30" cy="28" r="22"/><circle class="lamp r" cx="30" cy="28" r="15"/><circle class="glow y" cx="30" cy="68" r="22"/><circle class="lamp y" cx="30" cy="68" r="15"/><circle class="glow g" cx="30" cy="108" r="22"/><circle class="lamp g" cx="30" cy="108" r="15"/><circle class="shine" cx="25" cy="23" r="4"/><circle class="shine" cx="25" cy="63" r="4"/><circle class="shine" cx="25" cy="103" r="4"/></svg>
     </article>
   </section>
 
-  <!-- OUTSIDE THE HOUSE -->
-  <section class="circle">
-    <h2 class="circle-h">Outside the house</h2>
-    <article class="row red">
+  <section class="circle" id="world">
+    <h2 class="circle-h">The world outside</h2>
+    <article class="row yellow" id="q-trust">
       <div class="card-text">
-        <div class="card-title">Your electric bill is the AI story.</div>
-        <p class="why">The data center buildout is now a measurable slice of US growth by the Fed's own accounting. New Jersey, Arizona, and Virginia have pulled or paused the tax breaks that brought the buildings in, and more states are lining up.</p>
-        <div class="verdict">Look at your utility bill and your state's November ballot. AI is on both, without the word AI anywhere.</div>
-        <div class="source">Sources: <a href="https://www.federalreserve.gov/econres/notes/feds-notes/the-ai-buildout-and-the-economy-publicly-available-data-to-assess-ais-impact-20260717.html" target="_blank" rel="noopener">Federal Reserve, the AI buildout and the economy ↗</a> · <a href="https://news.bloombergtax.com/daily-tax-report-state/data-center-tax-breaks-at-risk-as-states-rethink-cost-and-impact" target="_blank" rel="noopener">Bloomberg Tax, data center tax breaks at risk ↗</a></div>
-      </div>
-      <svg class="signal" viewBox="0 0 60 150" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Stoplight, red light on"><rect x="26" y="130" width="8" height="20" fill="#191919"/><rect x="4" y="2" width="52" height="132" rx="10" fill="#161616" stroke="#2a2a2a" stroke-width="1.5"/><path d="M6 20 h48 v6 H6 z" fill="#0a0a0a"/><path d="M6 60 h48 v6 H6 z" fill="#0a0a0a"/><path d="M6 100 h48 v6 H6 z" fill="#0a0a0a"/><circle class="glow r" cx="30" cy="28" r="22"/><circle class="lamp r" cx="30" cy="28" r="15"/><circle class="glow y" cx="30" cy="68" r="22"/><circle class="lamp y" cx="30" cy="68" r="15"/><circle class="glow g" cx="30" cy="108" r="22"/><circle class="lamp g" cx="30" cy="108" r="15"/><circle class="shine" cx="25" cy="23" r="4"/><circle class="shine" cx="25" cy="63" r="4"/><circle class="shine" cx="25" cy="103" r="4"/></svg>
-    </article>
-    <article class="row yellow">
-      <div class="card-text">
-        <div class="card-title">Deepfakes and the midterms.</div>
-        <p class="why">Real, spreading, and regulators are behind. Audio is the easiest to fake.</p>
-        <div class="verdict">If a clip makes you furious, wait an hour before you share it.</div>
-        <div class="source">Source: <a href="https://www.rstreet.org/commentary/ai-and-elections-what-to-watch-for-in-2026/" target="_blank" rel="noopener">R Street, AI and elections: what to watch for in 2026 ↗</a></div>
+        <div class="card-title">Can I trust what I see and hear?</div>
+        <p class="why">Less than you did. Audio is the easiest thing to fake and regulators are behind heading into the midterms. More than half of the tracks uploaded to Deezer on a peak day are AI-made. And the glasses across the table may be recording; Meta's are seven in ten of the ones sold.</p>
+        <div class="verdict">If a clip makes you furious, wait an hour before you share it. It is fine to ask someone to take the glasses off.</div>
+        <div class="source">Sources: <a href="https://www.rstreet.org/commentary/ai-and-elections-what-to-watch-for-in-2026/" target="_blank" rel="noopener">R Street, AI and elections in 2026 ↗</a> · <a href="https://newsroom-deezer.com/2026/07/ai-music-exceeds-50-percent-daily-uploads-deezer/" target="_blank" rel="noopener">Deezer, July 2026 ↗</a> · <a href="https://virtual.reality.news/news/ai-smart-glasses-market-growth-2026-why-shipments-climb/" target="_blank" rel="noopener">IDC smart glasses figures, 2026 ↗</a></div>
       </div>
       <svg class="signal" viewBox="0 0 60 150" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Stoplight, yellow light on"><rect x="26" y="130" width="8" height="20" fill="#191919"/><rect x="4" y="2" width="52" height="132" rx="10" fill="#161616" stroke="#2a2a2a" stroke-width="1.5"/><path d="M6 20 h48 v6 H6 z" fill="#0a0a0a"/><path d="M6 60 h48 v6 H6 z" fill="#0a0a0a"/><path d="M6 100 h48 v6 H6 z" fill="#0a0a0a"/><circle class="glow r" cx="30" cy="28" r="22"/><circle class="lamp r" cx="30" cy="28" r="15"/><circle class="glow y" cx="30" cy="68" r="22"/><circle class="lamp y" cx="30" cy="68" r="15"/><circle class="glow g" cx="30" cy="108" r="22"/><circle class="lamp g" cx="30" cy="108" r="15"/><circle class="shine" cx="25" cy="23" r="4"/><circle class="shine" cx="25" cy="63" r="4"/><circle class="shine" cx="25" cy="103" r="4"/></svg>
     </article>
-    <article class="row yellow">
+    <article class="row yellow" id="q-economy">
       <div class="card-text">
-        <div class="card-title">The money.</div>
-        <p class="why">Trillions are committed to the buildout. If it slows, US growth slows with it.</p>
-        <div class="verdict">Don't confuse the stock chart with the product.</div>
-        <div class="source">Source: <a href="https://www.goldmansachs.com/insights/articles/tracking-trillions-the-assumptions-shaping-scale-of-the-ai-build-out" target="_blank" rel="noopener">Goldman Sachs, tracking trillions ↗</a></div>
+        <div class="card-title">Is the AI economy my problem?</div>
+        <p class="why">Yes, quietly. The data center buildout is a measurable slice of US growth by the Fed's own accounting, and New Jersey, Arizona, and Virginia have pulled or paused the tax breaks that brought the buildings in. If the buildout slows, growth slows with it. And "may represent AGI" is a marketing sentence.</p>
+        <div class="verdict">Look at your utility bill and your state's November ballot. AI is on both, without the word AI anywhere. Don't confuse the stock chart with the product.</div>
+        <div class="source">Sources: <a href="https://www.federalreserve.gov/econres/notes/feds-notes/the-ai-buildout-and-the-economy-publicly-available-data-to-assess-ais-impact-20260717.html" target="_blank" rel="noopener">Federal Reserve, July 2026 ↗</a> · <a href="https://news.bloombergtax.com/daily-tax-report-state/data-center-tax-breaks-at-risk-as-states-rethink-cost-and-impact" target="_blank" rel="noopener">Bloomberg Tax on state tax breaks ↗</a> · <a href="https://www.axios.com/2026/09/03/openai-astra-gpt-6-agi-brockman" target="_blank" rel="noopener">Axios on the AGI claim, September 2026 ↗</a></div>
       </div>
       <svg class="signal" viewBox="0 0 60 150" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Stoplight, yellow light on"><rect x="26" y="130" width="8" height="20" fill="#191919"/><rect x="4" y="2" width="52" height="132" rx="10" fill="#161616" stroke="#2a2a2a" stroke-width="1.5"/><path d="M6 20 h48 v6 H6 z" fill="#0a0a0a"/><path d="M6 60 h48 v6 H6 z" fill="#0a0a0a"/><path d="M6 100 h48 v6 H6 z" fill="#0a0a0a"/><circle class="glow r" cx="30" cy="28" r="22"/><circle class="lamp r" cx="30" cy="28" r="15"/><circle class="glow y" cx="30" cy="68" r="22"/><circle class="lamp y" cx="30" cy="68" r="15"/><circle class="glow g" cx="30" cy="108" r="22"/><circle class="lamp g" cx="30" cy="108" r="15"/><circle class="shine" cx="25" cy="23" r="4"/><circle class="shine" cx="25" cy="63" r="4"/><circle class="shine" cx="25" cy="103" r="4"/></svg>
     </article>
-    <article class="row yellow">
+    <article class="row green" id="q-forecast">
       <div class="card-text">
-        <div class="card-title">The word AGI.</div>
-        <p class="why">OpenAI said GPT-6 Astra "may represent AGI." That is a marketing sentence.</p>
-        <div class="verdict">Nothing about your Monday changes because of a definition.</div>
-        <div class="source">Source: <a href="https://www.axios.com/2026/09/03/openai-astra-gpt-6-agi-brockman" target="_blank" rel="noopener">Axios, September 3, 2026 ↗</a></div>
-      </div>
-      <svg class="signal" viewBox="0 0 60 150" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Stoplight, yellow light on"><rect x="26" y="130" width="8" height="20" fill="#191919"/><rect x="4" y="2" width="52" height="132" rx="10" fill="#161616" stroke="#2a2a2a" stroke-width="1.5"/><path d="M6 20 h48 v6 H6 z" fill="#0a0a0a"/><path d="M6 60 h48 v6 H6 z" fill="#0a0a0a"/><path d="M6 100 h48 v6 H6 z" fill="#0a0a0a"/><circle class="glow r" cx="30" cy="28" r="22"/><circle class="lamp r" cx="30" cy="28" r="15"/><circle class="glow y" cx="30" cy="68" r="22"/><circle class="lamp y" cx="30" cy="68" r="15"/><circle class="glow g" cx="30" cy="108" r="22"/><circle class="lamp g" cx="30" cy="108" r="15"/><circle class="shine" cx="25" cy="23" r="4"/><circle class="shine" cx="25" cy="63" r="4"/><circle class="shine" cx="25" cy="103" r="4"/></svg>
-    </article>
-    <article class="row green">
-      <div class="card-text">
-        <div class="card-title">The hurricane cone.</div>
-        <p class="why">Google DeepMind's weather model beat the National Hurricane Center's own track forecasts by up to 30 percent at five days this season, the second year in a row. The cone on your phone is better than it was two years ago.</p>
+        <div class="card-title">Can I trust the forecast?</div>
+        <p class="why">More than you used to. Google DeepMind's weather model beat the National Hurricane Center's own track forecasts by up to 30 percent at five days this season, the second year in a row, and the Center now folds it into the official forecast.</p>
         <div class="verdict">Trust the five-day cone more than you used to. Still leave when they tell you to.</div>
-        <div class="source">Sources: <a href="https://www.local10.com/weather/hurricane/2026/09/10/the-ai-hurricane-model-that-continues-to-blow-away-the-competition/" target="_blank" rel="noopener">Local 10 Miami, September 10, 2026 ↗</a> · <a href="https://deepmind.google/blog/weathernext-ai-model-achieves-breakthrough-in-forecasting-cyclones/" target="_blank" rel="noopener">Google DeepMind, August 6, 2026 ↗</a></div>
+        <div class="source">Sources: <a href="https://www.local10.com/weather/hurricane/2026/09/10/the-ai-hurricane-model-that-continues-to-blow-away-the-competition/" target="_blank" rel="noopener">Local 10 Miami, September 2026 ↗</a> · <a href="https://deepmind.google/blog/weathernext-ai-model-achieves-breakthrough-in-forecasting-cyclones/" target="_blank" rel="noopener">Google DeepMind, August 2026 ↗</a></div>
       </div>
       <svg class="signal" viewBox="0 0 60 150" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Stoplight, green light on"><rect x="26" y="130" width="8" height="20" fill="#191919"/><rect x="4" y="2" width="52" height="132" rx="10" fill="#161616" stroke="#2a2a2a" stroke-width="1.5"/><path d="M6 20 h48 v6 H6 z" fill="#0a0a0a"/><path d="M6 60 h48 v6 H6 z" fill="#0a0a0a"/><path d="M6 100 h48 v6 H6 z" fill="#0a0a0a"/><circle class="glow r" cx="30" cy="28" r="22"/><circle class="lamp r" cx="30" cy="28" r="15"/><circle class="glow y" cx="30" cy="68" r="22"/><circle class="lamp y" cx="30" cy="68" r="15"/><circle class="glow g" cx="30" cy="108" r="22"/><circle class="lamp g" cx="30" cy="108" r="15"/><circle class="shine" cx="25" cy="23" r="4"/><circle class="shine" cx="25" cy="63" r="4"/><circle class="shine" cx="25" cy="103" r="4"/></svg>
     </article>
