@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The AI Stoplight Report · AI for GenX</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --brand-black: #000000;
+  --brand-teal: #3C7F72;
+  --brand-rust: #992800;
+  --brand-red-orange: #D34A23;
+  --brand-amber: #FFAF00;
+  --brand-cream: #EFE2DD;
+  --brand-sage: #6D9E8F;
+  --brand-burnt-orange: #C86701;
+  --brand-coral: #ED8042;
+  --brand-soft-gold: #FDD476;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  background: var(--brand-black);
+  color: var(--brand-cream);
+  font-family: 'Poppins', system-ui, sans-serif;
+  font-weight: 300;
+  line-height: 1.55;
+}
+.stripe-bar {
+  background: linear-gradient(to bottom,
+    #3C7F72 25%, #992800 25% 50%, #D34A23 50% 75%, #FFAF00 75%);
+  height: 14px;
+  width: 100%;
+}
+.wrap { max-width: 820px; margin: 0 auto; padding: 0 18px 80px; }
+
+/* ---------- header (same as model-map) ---------- */
+header { padding: 36px 0 10px; }
+.kicker {
+  font-size: 12px; letter-spacing: 2.5px; text-transform: uppercase;
+  color: var(--brand-sage); font-weight: 500;
+}
+h1 {
+  font-family: 'Abril Fatface', serif;
+  font-weight: 400;
+  font-size: clamp(38px, 8vw, 56px);
+  color: #fff;
+  margin: 6px 0 14px;
+  line-height: 1.05;
+}
+.intro {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 20px;
+  color: var(--brand-cream);
+  max-width: 60ch;
+}
+.intro strong { color: var(--brand-amber); font-weight: 600; }
+.asof {
+  display: inline-block;
+  margin-top: 16px;
+  border: 1px solid var(--brand-teal);
+  color: var(--brand-teal);
+  font-size: 12px; letter-spacing: 1.5px; text-transform: uppercase;
+  padding: 5px 12px; border-radius: 999px; font-weight: 500;
+}
+
+/* ---------- stoplight sections ---------- */
+.light { margin-top: 34px; }
+.light-h {
+  display: flex; align-items: center; gap: 12px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 12px; letter-spacing: 1.5px; text-transform: uppercase;
+  font-weight: 600; color: #fff;
+  margin: 0 0 14px;
+}
+.light-h .dot {
+  width: 18px; height: 18px; border-radius: 50%; flex: 0 0 18px;
+  box-shadow: 0 0 0 4px #111, 0 0 18px 2px currentColor;
+  background: currentColor;
+}
+.light-h .cue { color: var(--brand-sage); font-weight: 500; }
+.light.red .light-h { color: var(--brand-red-orange); }
+.light.yellow .light-h { color: var(--brand-amber); }
+.light.green .light-h { color: var(--brand-teal); }
+
+/* ---------- cards (same surface as model-map rows) ---------- */
+.row {
+  border: 1px solid #2a2a2a;
+  border-radius: 10px;
+  margin-bottom: 8px;
+  background: #0d0d0d;
+  overflow: hidden;
+  padding: 16px 18px 18px;
+  border-left-width: 3px;
+  transition: border-color .15s ease;
+}
+.red .row { border-left-color: var(--brand-red-orange); }
+.yellow .row { border-left-color: var(--brand-amber); }
+.green .row { border-left-color: var(--brand-teal); }
+.row:hover { border-color: var(--brand-teal); }
+.red .row:hover { border-left-color: var(--brand-red-orange); }
+.yellow .row:hover { border-left-color: var(--brand-amber); }
+.card-title { font-size: 15px; font-weight: 500; color: #fff; margin-bottom: 8px; }
+.sec-label {
+  font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase;
+  color: var(--brand-sage); font-weight: 500;
+  margin: 12px 0 4px;
+}
+.happening { font-size: 13.5px; color: var(--brand-cream); line-height: 1.55; }
+.verdict {
+  margin-top: 4px;
+  font-size: 13.5px;
+  color: var(--brand-soft-gold);
+}
+.verdict::before { content: '→ '; color: var(--brand-teal); }
+.source { font-size: 11.5px; color: #999; margin-top: 12px; }
+.source a { color: var(--brand-teal); text-decoration: none; }
+.source a:hover { color: var(--brand-sage); text-decoration: underline; }
+
+/* ---------- footer (same as model-map) ---------- */
+.footnote {
+  margin-top: 36px;
+  padding-top: 20px;
+  border-top: 1px solid #2a2a2a;
+  font-size: 13px;
+  color: #999;
+  max-width: 66ch;
+}
+.footnote a { color: var(--brand-teal); }
+.closing {
+  display: block;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 20px;
+  color: #fff;
+  margin-bottom: 12px;
+}
+.mic { text-align: right; font-size: 22px; margin-top: 24px; }
+
+/* ---------- mobile ---------- */
+@media (max-width: 600px) {
+  .row { padding: 14px 14px 16px; }
+  .light-h { flex-wrap: wrap; row-gap: 2px; }
+}
+</style>
+</head>
+<body>
+
+<div class="stripe-bar"></div>
+
+<div class="wrap">
+  <header>
+    <div class="kicker">AI for GenX · From the Lab</div>
+    <h1>The AI Stoplight Report</h1>
+    <p class="intro">A 1990s management-consultant stoplight on what's actually going on in AI and what you should do about it. Three colors. Eight things. Updated when it changes.</p>
+    <span class="asof">Snapshot · Verified September 11, 2026</span>
+  </header>
+
+  <!-- RED -->
+  <section class="light red">
+    <h2 class="light-h"><span class="dot"></span><span class="word">Red.</span><span class="cue">Pay attention now.</span></h2>
+
+    <article class="row">
+      <div class="card-title">Agents with logins.</div>
+      <div class="sec-label">What's happening</div>
+      <p class="happening">In July 2026, over 1,200 OpenAI agents on a cybersecurity test built a message board in a shared cache, escaped their sandbox, found working Hugging Face credentials, and broke in to steal the test answers. Hugging Face's alert fired and failed to reach the on-call team.</p>
+      <div class="sec-label">What to do</div>
+      <div class="verdict">Before you hand any AI your email, files, or computer, know exactly which doors that login opens.</div>
+      <div class="source">Source: <a href="https://huggingface.co/blog/agent-intrusion-technical-timeline" target="_blank" rel="noopener">Hugging Face, agent intrusion technical timeline ↗</a></div>
+    </article>
+
+    <article class="row">
+      <div class="card-title">Your electric bill is the AI story.</div>
+      <div class="sec-label">What's happening</div>
+      <p class="happening">The data center buildout is now a measurable slice of US growth by the Fed's own accounting. New Jersey, Arizona, and Virginia have pulled or paused the tax breaks that brought the buildings in, and more states are lining up.</p>
+      <div class="sec-label">What to do</div>
+      <div class="verdict">Look at your utility bill and your state's November ballot. AI is on both, without the word AI anywhere.</div>
+      <div class="source">Sources: <a href="https://www.federalreserve.gov/econres/notes/feds-notes/the-ai-buildout-and-the-economy-publicly-available-data-to-assess-ais-impact-20260717.html" target="_blank" rel="noopener">Federal Reserve, the AI buildout and the economy ↗</a> and <a href="https://news.bloombergtax.com/daily-tax-report-state/data-center-tax-breaks-at-risk-as-states-rethink-cost-and-impact" target="_blank" rel="noopener">Bloomberg Tax, data center tax breaks at risk ↗</a></div>
+    </article>
+  </section>
+
+  <!-- YELLOW -->
+  <section class="light yellow">
+    <h2 class="light-h"><span class="dot"></span><span class="word">Yellow.</span><span class="cue">Watch, don't panic.</span></h2>
+
+    <article class="row">
+      <div class="card-title">Deepfakes and the midterms.</div>
+      <div class="sec-label">What's happening</div>
+      <p class="happening">Real, spreading, and regulators are behind. Audio is the easiest to fake.</p>
+      <div class="sec-label">What to do</div>
+      <div class="verdict">If a clip makes you furious, wait an hour before you share it.</div>
+      <div class="source">Source: <a href="https://www.rstreet.org/commentary/ai-and-elections-what-to-watch-for-in-2026/" target="_blank" rel="noopener">R Street, AI and elections: what to watch for in 2026 ↗</a></div>
+    </article>
+
+    <article class="row">
+      <div class="card-title">The word AGI.</div>
+      <div class="sec-label">What's happening</div>
+      <p class="happening">OpenAI said GPT-6 Astra "may represent AGI." That is a marketing sentence.</p>
+      <div class="sec-label">What to do</div>
+      <div class="verdict">Nothing about your Monday changes because of a definition.</div>
+      <div class="source">Source: <a href="https://www.axios.com/2026/09/03/openai-astra-gpt-6-agi-brockman" target="_blank" rel="noopener">Axios, OpenAI's Astra and the AGI question ↗</a></div>
+    </article>
+
+    <article class="row">
+      <div class="card-title">The money.</div>
+      <div class="sec-label">What's happening</div>
+      <p class="happening">Trillions are committed to the buildout. If it slows, US growth slows with it.</p>
+      <div class="sec-label">What to do</div>
+      <div class="verdict">Don't confuse the stock chart with the product.</div>
+      <div class="source">Source: <a href="https://www.goldmansachs.com/insights/articles/tracking-trillions-the-assumptions-shaping-scale-of-the-ai-build-out" target="_blank" rel="noopener">Goldman Sachs, tracking trillions ↗</a></div>
+    </article>
+  </section>
+
+  <!-- GREEN -->
+  <section class="light green">
+    <h2 class="light-h"><span class="dot"></span><span class="word">Green.</span><span class="cue">Go.</span></h2>
+
+    <article class="row">
+      <div class="card-title">The models work now.</div>
+      <div class="sec-label">What's happening</div>
+      <p class="happening">Every major model got dramatically better in the last year, including at multi-step jobs.</p>
+      <div class="sec-label">What to do</div>
+      <div class="verdict">Re-run the task that fell apart on you last spring, unchanged.</div>
+      <div class="source">Source: <a href="https://openai.com/index/gpt-6-astra/" target="_blank" rel="noopener">OpenAI, introducing GPT-6 Astra ↗</a></div>
+    </article>
+
+    <article class="row">
+      <div class="card-title">ELI10.</div>
+      <div class="sec-label">What's happening</div>
+      <p class="happening">Models pontificate by default.</p>
+      <div class="sec-label">What to do</div>
+      <div class="verdict">Tell it "explain it like I'm 10" and it will.</div>
+      <!-- TODO: replace href="#" with the Substack ELI10 article URL once it is live -->
+      <div class="source">Source: <a href="#">The ELI10 article on Substack (coming soon) ↗</a></div>
+    </article>
+
+    <article class="row">
+      <div class="card-title">Ask your admin, not the internet.</div>
+      <div class="sec-label">What's happening</div>
+      <p class="happening">On Business and Enterprise plans the new models are off by default until an admin switches them on.</p>
+      <div class="sec-label">What to do</div>
+      <div class="verdict">If you don't see it at work, someone at your company has a switch. Go find them.</div>
+      <div class="source">Source: <a href="https://openai.com/index/gpt-6-astra/" target="_blank" rel="noopener">OpenAI, introducing GPT-6 Astra ↗</a></div>
+    </article>
+  </section>
+
+  <p class="footnote">
+    <span class="closing">New model, same rule. You're not behind. You're on time.</span>
+    Need the names behind the headlines? The engines, the prices, and which ones you could own are on
+    <a href="../model-map/">The Model Map</a>.
+  </p>
+  <div class="mic">🎙️</div>
+</div>
+
+</body>
+</html>
