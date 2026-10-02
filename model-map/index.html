@@ -317,7 +317,7 @@ h1 {
       <div><span class="ht-ico">⚙️</span><strong>The engines</strong> are the models inside (Astra, Fable, Flash). They upgrade themselves; you mostly just benefit.</div>
       <div><span class="ht-ico">🔑</span><strong>Lease or own:</strong> most cars you lease monthly on their computers. Open models are engines anyone can download and own.</div>
     </div>
-    <span class="asof">Snapshot · Verified September 10, 2026</span>
+    <span class="asof">Snapshot · Verified October 2, 2026</span>
     <div class="strawman" style="color: var(--brand-sage);">Every price, engine name, and plan mapping checked against the companies' own pricing and release pages on the date above. They change monthly; the date stamp is your grain of salt.</div>
   </header>
 
@@ -373,63 +373,66 @@ const FAV = {
   "mistral.ai": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAAZlBMVEVHcEzJARnhBAbqOAj/hgP/rwHTAhHHABrEAB36TA//gwP/rgH/rQH7UA/7UA//ggPEAB3FABz/rwH/qALhAgDhBQDFABzEAB37UA//ggThBQD/sAH/hAPgAAD/fwTjBQD/qAL6TA+p1uSXAAAAF3RSTlMA/iQZKzFlMNj+32XaZDBkOOUO/tPWvRzaX7wAAACjSURBVDiN1Y7bDoIwEEQrXWxVVMAbeC3//5PONm2cGF8wvHBeZmdzmq0xs6EtAS8EvaVe3gALFfpmWiEcQrAiEu+L2AoLFuQJeqBljdS+Z6FPZEEZJ9wTUUgzC7thFRk6kOctC90PphXcA+igaZFH5JKFK9BBs0CekKOE4gWyEE+gZ8E13vsFQPgCnFPXvUr1hdAXnvp/QvMlmNp9iJ8irJkFbxmrHyZu/8BmAAAAAElFTkSuQmCC"
 };
 
-// Verified against each company's own pricing and release pages, 2026-09-10.
+// Verified against each company's own pricing and release pages, 2026-10-02.
 // Full source list in the verification brief. Update the date stamp when editing.
 const MODELS = [
   { fav:"chatgpt.com", flag:"\u{1F1FA}\u{1F1F8}", co:"OpenAI", model:"ChatGPT", best:"Doing tasks for you",
     cats:["everyday","writing","coding"], free:true, ladderShort:"$0 \u2192 $100+",
-    honest:"The one your coworkers mean when they say 'the AI.' Since September 4 the flagship engine is GPT-6 Astra, and the plain-English version is that it stopped answering and started doing. Hand it the form, the spreadsheet, the tedious multi-step thing, and it works the job while you refill your coffee. It also still gets about one hands-on task in four wrong, with total confidence. It drives, you approve.",
+    honest:"The one your coworkers mean when they say 'the AI.' The flagship engine is still GPT-6 Astra, the one that stopped answering and started doing. Hand it the form, the spreadsheet, the tedious multi-step thing, and it works the job while you refill your coffee. The September news sits right under it: GPT-6.1 Sol does nearly the same work for a fifth of the price, which is OpenAI admitting most errands never needed the V8. Astra still gets about one hands-on task in four wrong, with total confidence. It drives, you approve.",
     ladder:[
-      {amt:"$0", plan:"Free", note:"GPT-5.6 Luna, unlimited text chats. No Astra."},
-      {amt:"$8", plan:"Go", note:"Same engine, more messages. May include ads. No Astra."},
-      {amt:"$20", plan:"Plus", note:"Adds GPT-6 Astra and the 5.6 reasoning engines. Rolling out; you may see it in Work and Codex before the chat picker."},
-      {amt:"$100+", plan:"Pro", note:"$100 or $200 by usage. Adds Astra Pro (shows as 'GPT-6 Pro') and Sol Pro."}
+      {amt:"$0", plan:"Free", note:"GPT-5.6 Luna, unlimited text chats. No GPT-6 engines."},
+      {amt:"$8", plan:"Go", note:"Same engine, more messages. May include ads. No GPT-6 engines."},
+      {amt:"$20", plan:"Plus", note:"Adds the GPT-6 engines: Astra for the big jobs, 6.1 Sol and GPT-6 Luna for the everyday ones. The two newer ones show up in Work and Codex first, not the regular chat window."},
+      {amt:"$100+", plan:"Pro", note:"Starts at $100, with three usage tiers. Adds Pro reasoning on Astra, Sol Pro, and Dots, the always-on agents."}
     ],
-    verdict:"Stay free until you hit the wall. If Astra is why you are upgrading, that is a $20 Plus decision, not a $100 one.",
+    verdict:"Stay free until you hit the wall. If the GPT-6 engines are why you are upgrading, that is a $20 Plus decision, not a $100 one.",
     decoder:[
-      ["GPT-6 Astra","The new flagship, live September 4. Built to finish multi-step jobs: run your computer, fill in forms, build the doc, deck, or spreadsheet, write and fix code. Makes up facts about half as often as Sol did.","Plus and up"],
-      ["GPT-6 Astra Pro","Astra with more thinking time, for the hardest problems. Appears as 'GPT-6 Pro' in the picker and is rationed weekly.","Pro and up"],
-      ["GPT-5.6 Luna","The everyday workhorse. Unlimited text chat, even on Free.","Free and up"],
-      ["GPT-5.6 Sol","Last month's flagship, still in the picker. Fine for hard questions when you do not need it to drive.","Plus and up"],
+      ["GPT-6 Astra","The flagship. Built to finish multi-step jobs: run your computer, fill in forms, build the doc, deck, or spreadsheet, write and fix code. The one to pick when the job is hard and getting it right matters.","Plus and up"],
+      ["GPT-6.1 Sol","New September 29. The sensible sedan: nearly Astra's skill at coding, documents, and computer tasks for a fifth of the price. Lives in Work and Codex so far, not regular chat.","Plus and up"],
+      ["GPT-6 Luna","New September 22. The small, quick GPT-6, for fast jobs at pocket-change prices. Also Work and Codex only for now.","Plus and up"],
+      ["Pro reasoning","Astra with extra thinking time, for the hardest problems.","Pro only"],
+      ["GPT-5.6 Luna","The everyday chat engine. Unlimited text chat, even on Free.","Free and up"],
+      ["GPT-5.6 Sol","July's flagship, still in the picker. Fine for hard questions when you do not need it to drive.","Plus and up"],
       ["GPT-5.6 Terra","Balanced and cheaper. Lives in Work, Codex, and the API.","Limited on Free, more on Plus"],
+      ["Dots","Not an engine, a chauffeur. An always-on agent that runs on Astra, has its own cloud computer, and keeps working while you are away. Still rolling out.","Pro only"],
       ["GPT-Realtime-2.1","The voice engine. Listens and talks at the same time.","All plans"]
     ],
-    open:false, tokens:"$10 in / $50 out per M (Astra). Sol is $4 / $20.", speed:"Fast for chat. Give Astra a real job and it takes minutes, not seconds.",
+    open:false, tokens:"$10 in / $50 out per M (Astra). GPT-6.1 Sol is $2 / $10. GPT-6 Luna is $0.10 / $0.50.", speed:"Fast for chat. Give Astra a real job and it takes minutes, not seconds.",
     launch:{label:"Open ChatGPT", url:"https://chatgpt.com"} },
 
   { fav:"claude.ai", flag:"\u{1F1FA}\u{1F1F8}", co:"Anthropic", model:"Claude", best:"Writing, coding, long jobs",
     cats:["writing","coding","everyday"], free:true, ladderShort:"$0 \u2192 $100+",
-    honest:"The careful one. Strong writer, strong coder, will tell you when it is not sure. Its top engine moved to Fable 5.1 on September 1, the same morning as our last snapshot, so it missed the board by hours.",
+    honest:"The careful one. Strong writer, strong coder, will tell you when it is not sure. September swapped two engines under the hood. Opus 5.5 now keeps pace with top-shelf Fable on most work at well under half the per-token price, and Sonnet 5.5 is the new daily driver. The fine print moved too: on the $20 plan, Fable is now pay-as-you-go instead of included.",
     ladder:[
       {amt:"$0", plan:"Free", note:"Haiku and Sonnet, daily limits"},
-      {amt:"$20", plan:"Pro", note:"Adds Opus and Fable 5.1 (Fable capped at half your weekly limit)"},
-      {amt:"$100+", plan:"Max", note:"$100 or $200 by usage. Same engines, 5x or 20x the room."}
+      {amt:"$20", plan:"Pro", note:"Adds Opus 5.5 and a lot more room. Fable 5.1 costs extra here, billed as you go. $17 a month if you pay yearly."},
+      {amt:"$100+", plan:"Max", note:"$100 or $200 by usage. 5x or 20x the room, and Fable 5.1 is included, up to half your weekly limit."}
     ],
-    verdict:"Free tier is generous. Pay $20 only when the limits start biting.",
+    verdict:"Free tier is generous. Pay $20 when the limits start biting. With Opus 5.5 on that plan, most people will never miss Fable.",
     decoder:[
       ["Haiku 4.5","Small and fast, for quick answers.","Free and up"],
-      ["Sonnet 5","The daily driver. Most people live here.","Free and up"],
-      ["Opus 5","The deep one, for hard reasoning and long work.","Pro and up"],
-      ["Fable 5.1","The top end, refreshed September 1. Built for hours-long coding and research jobs, and for taking a question all the way to a finished doc, spreadsheet, or deck. Says no less often than Fable 5 did.","Pro and up, half your weekly limit"]
+      ["Sonnet 5.5","The daily driver, new September 28. Quicker than Sonnet 5 and finishes the same job in fewer steps. Most people live here.","Free and up"],
+      ["Opus 5.5","The deep one, new September 22. Built for long coding and research jobs, and it keeps up with Fable on most of them.","Pro and up"],
+      ["Fable 5.1","The top end. For the hardest reasoning and for jobs that run for hours, all the way to a finished doc, spreadsheet, or deck.","Max, or pay-as-you-go on Pro"]
     ],
-    open:false, tokens:"$2 in / $10 out per M (Sonnet 5). Fable 5.1 is $10 / $50.", speed:"Fast enough you won't notice",
+    open:false, tokens:"$2 in / $10 out per M (Sonnet 5.5). Opus 5.5 is $4 / $20. Fable 5.1 is $10 / $50.", speed:"Fast enough you won't notice",
     launch:{label:"Open Claude", url:"https://claude.ai"} },
 
   { fav:"gemini.google.com", flag:"\u{1F1FA}\u{1F1F8}", co:"Google", model:"Gemini", best:"Research, long docs",
     cats:["research","everyday"], free:true, ladderShort:"$0 \u2192 $100+",
-    honest:"Lives inside everything Google you already use. Huge memory for long documents. Four new Flash engines since May and still no new Pro flagship, which tells you where Google's head is.",
+    honest:"Lives inside everything Google you already use. Huge memory for long documents. The 3.5 Pro flagship promised since June never arrived. On September 30 Google announced Gemini 4 Argon instead, and so far only security researchers have the keys. In the app, nothing moved.",
     ladder:[
       {amt:"$0", plan:"Free", note:"3.6 Flash, plus a taste of 3.1 Pro"},
       {amt:"$4.99", plan:"AI Plus", note:"The cheap seat. More Pro access."},
-      {amt:"$19.99", plan:"AI Pro", note:"4x the Pro engine, the new 3.8 Flash, Spark, Gmail and Docs tie-ins"},
-      {amt:"$99.99+", plan:"AI Ultra", note:"$100 or $200 by usage. Deep Think modes."}
+      {amt:"$19.99", plan:"AI Pro", note:"4x the Pro engine, 3.8 Flash, Spark, Gmail and Docs tie-ins"},
+      {amt:"$99.99+", plan:"AI Ultra", note:"$99.99 or $199.99 by usage. Deep Think modes."}
     ],
     verdict:"The $4.99 tier is the sneaky value play nobody advertises.",
     decoder:[
       ["Gemini 3.6 Flash","Fast and free. The default.","All plans"],
-      ["Gemini 3.8 Flash","The newest engine, September 2. Built for long coding and agent jobs. Slow to start talking, thorough once it does.","AI Pro and Ultra"],
+      ["Gemini 3.8 Flash","The newest engine you can actually drive, from September 2. Built for long coding and agent jobs. Slow to start talking, thorough once it does.","AI Pro and Ultra"],
       ["Gemini 3.7 Flash","The August workhorse, and what Spark (Google's 24/7 agent) runs on.","AI Pro and Ultra"],
-      ["Gemini 3.1 Pro","Stronger reasoning. Even Free gets a taste. The 3.5 Pro it was supposed to hand off to is still 'coming soon.'","More on paid plans"],
+      ["Gemini 3.1 Pro","Stronger reasoning. Even Free gets a taste. Still the top engine in the app while Gemini 4 Argon waits in the garage.","More on paid plans"],
       ["Deep Think","The heavy research mode.","Ultra only"]
     ],
     open:false, tokens:"$2 in / $12 out per M (3.1 Pro). 3.8 Flash is $0.75 / $3.75 through Dec 31.", speed:"Fast enough you won't notice",
@@ -437,19 +440,21 @@ const MODELS = [
 
   { fav:"grok.com", flag:"\u{1F1FA}\u{1F1F8}", co:"SpaceXAI", model:"Grok", best:"News, current events",
     cats:["everyday","research"], free:true, ladderShort:"$0 \u2192 $100+", darkLogo:true,
-    honest:"Wired into X, so it knows what happened an hour ago. Comes with attitude, for better or worse. Grok 4.7 is promised for mid-September; it is not on the board until it ships.",
+    honest:"Wired into X, so it knows what happened an hour ago. Comes with attitude, for better or worse. Grok 4.7 finally shipped on September 21, but it went to the workshop first: it runs Grok Build and the developer API, while the chat window still says 4.6.",
     ladder:[
       {amt:"$0", plan:"Free", note:"Free to start, weekly limits"},
-      {amt:"$30", plan:"SuperGrok", note:"Full engines, bigger weekly pool"},
-      {amt:"$100", plan:"SuperGrok Plus", note:"Much higher usage, priority access"}
+      {amt:"$30", plan:"SuperGrok", note:"Full engines, 5x longer chats, and Grok Bot, a helper with its own computer. A cheaper Lite tier sits below this one."},
+      {amt:"$100", plan:"SuperGrok Plus", note:"Much higher usage, priority access. A Heavy tier sits above it for people who never log off."}
     ],
     verdict:"Only worth paying for if breaking news is your thing.",
     decoder:[
-      ["Grok 4.6","The flagship. Leads on coding and agent work.","SuperGrok and up"],
+      ["Grok 4.7","The new flagship, September 21. Works longer on hard coding and office jobs and checks its own homework. In Grok Build and the API so far.","Grok Build and API"],
+      ["Grok 4.6","What the chat window runs today. Strong on coding and agent work.","SuperGrok and up"],
+      ["Grok Bot","Not an engine, a helper. Signs into your tools, runs the errand, and comes back with it finished.","SuperGrok and up"],
       ["Grok Voice","Realtime voice mode, on every plan.","Free and up"],
       ["Imagine","Image and video generation.","SuperGrok and up"]
     ],
-    open:false, tokens:"$2 in / $6 out per M (Grok 4.6)", speed:"Fast",
+    open:false, tokens:"$2 in / $6 out per M (Grok 4.7, same as 4.6)", speed:"Fast",
     launch:{label:"Open Grok", url:"https://grok.com"} },
 
   { fav:"copilot.microsoft.com", flag:"\u{1F1FA}\u{1F1F8}", co:"Microsoft", model:"Copilot", best:"Office, Windows",
@@ -478,7 +483,7 @@ const MODELS = [
     verdict:"The sleeper move: one sub gets you engines from seven different companies, including both new flagships.",
     decoder:[
       ["Sonar 2","Perplexity's own search engine.","Free and up"],
-      ["The guest engines","GPT-5.6 Terra, Claude Sonnet 5, Gemini 3.7 Flash, Grok 4.6, Kimi K3, GLM 5.3, Nemotron 3 Ultra, pickable per question. Max adds GPT-5.6 Sol and Claude Opus 5.","Pro and up"],
+      ["The guest engines","GPT-5.6 Terra, Claude Sonnet 5, Gemini 3.7 Flash, Grok 4.6, Kimi K3, GLM 5.3, Nemotron 3 Ultra, pickable per question. Max adds GPT-5.6 Sol and Claude Opus 5. The guest list has not caught up to September's releases yet, so some guests are a model year behind their home cars.","Pro and up"],
       ["Computer mode","The long-job agent. Runs GPT-6 Astra or Claude Fable 5.1, on credits.","Pro and up"]
     ],
     open:false, tokens:"Not really a per-token product", speed:"Fast",
@@ -501,10 +506,12 @@ const MODELS = [
     download:{label:"Hugging Face", url:"https://huggingface.co/meta-llama"} },
 
   { fav:"kimi.com", flag:"\u{1F1E8}\u{1F1F3}", co:"Moonshot", model:"Kimi", best:"Cheap power at volume",
-    cats:["coding","open"], free:true, ladderShort:"$0 / cheap API",
+    cats:["coding","open"], free:true, ladderShort:"$0 → $19+",
     honest:"Top three among open models, priced well under the US flagships. Cheaper to run or strategically underpriced? Nobody outside the company knows.",
     ladder:[
       {amt:"$0", plan:"Web chat", note:"Chat free at kimi.com"},
+      {amt:"$19", plan:"Plus", note:"More agent credits, Deep Research, documents and slides. $15 a month if you pay yearly."},
+      {amt:"$39+", plan:"Pro, Max, Ultra", note:"$39, $99, or $199 by usage. More agent credits at every step."},
       {amt:"$0.95", plan:"API", note:"K2.6 per-million in, $4 out. K3 costs more."}
     ],
     verdict:"The price gap is the story here. Read the article for why.",
@@ -519,17 +526,17 @@ const MODELS = [
 
   { fav:"deepseek.com", flag:"\u{1F1E8}\u{1F1F3}", co:"DeepSeek", model:"DeepSeek", best:"Math, cheap reasoning",
     cats:["coding","research","open"], free:true, ladderShort:"$0 / cheap API",
-    honest:"The one that spooked Wall Street in '25. Startlingly good at reasoning for the price.",
+    honest:"The one that spooked Wall Street in '25. Startlingly good at reasoning for the price. On September 10 its new small engine, V4.1-Flash, out-drove the big V4-Pro, so DeepSeek is retiring the Pro and cutting prices again.",
     ladder:[
       {amt:"$0", plan:"Web chat", note:"Free at chat.deepseek.com"},
-      {amt:"pennies", plan:"API", note:"V4-Flash from $0.22 in / $0.66 out per million"}
+      {amt:"pennies", plan:"API", note:"V4.1-Flash from $0.15 in / $0.60 out per million off-peak. Double at peak hours."}
     ],
     verdict:"Free, capable, and Chinese-run. Weigh all three words equally.",
     decoder:[
-      ["V4-Flash","The everyday engine, absurdly cheap.","Free and up"],
-      ["V4-Pro","The big reasoner. Thinking on by default.","Free and up"]
+      ["V4.1-Flash","The whole lineup right now, new September 10. Quick, absurdly cheap, reads images, and it beat the old Pro on DeepSeek's own tests.","API and download"],
+      ["V4-Pro","The old big reasoner, on its way out. Its requests get handed to V4.1-Flash until a V4.1-Pro arrives.","Being retired"]
     ],
-    open:true, tokens:"$0.22\u2013$1.32 in / $0.66\u2013$3.96 out per M", speed:"Slower, reasons more",
+    open:true, tokens:"$0.15\u2013$0.30 in / $0.60\u2013$1.20 out per M (V4.1-Flash, off-peak to peak)", speed:"Fast",
     launch:{label:"Open DeepSeek", url:"https://chat.deepseek.com"},
     download:{label:"Ollama", url:"https://ollama.com/search?q=deepseek"} },
 
@@ -594,7 +601,11 @@ const WATCHLIST = [
   { name:"NVIDIA \u00b7 Nemotron", flag:"\u{1F1FA}\u{1F1F8}",
     why:"The chip company builds open models too. Nemotron shows up as a pickable engine inside Perplexity, and the smaller Nano weights are downloadable.",
     status:"Engine only. Nemotron 3 Ultra is in Perplexity's picker now, but there is still no app of its own, so no row.",
-    url:"https://huggingface.co/nvidia" }
+    url:"https://huggingface.co/nvidia" },
+  { name:"Google · Gemini 4 Argon", flag:"\u{1F1FA}\u{1F1F8}",
+    why:"Google's next flagship, announced September 30. Built for long coding jobs, legal and finance work, and finding security holes before the bad guys do.",
+    status:"Announced, not drivable. Only vetted security researchers have it, and there is no date for the Gemini app. It joins the Gemini row the day a normal person can open it.",
+    url:"https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-4-argon/" }
 ];
 
 // ---------------------------------------------------------------------------
@@ -602,6 +613,17 @@ const WATCHLIST = [
 // Keep to the changes a reader would actually feel. Two entries is plenty.
 // ---------------------------------------------------------------------------
 const CHANGELOG = [
+  { date:"October 2, 2026", since:"since the September 10 snapshot", items:[
+    "<strong>The mid-priced engines caught up to the flagships.</strong> That is the story of this update. Three companies shipped a cheaper engine that does most of what their expensive one does. If you have been paying for the top tier out of habit, this is the month to check.",
+    "<strong>Claude swapped two engines.</strong> Opus 5.5 (September 22) keeps pace with Fable 5.1 on most work at $4 in / $20 out per million, against Fable's $10 / $50. Sonnet 5.5 (September 28) is the new daily driver, same price as before and quicker. One thing to watch: on the $20 Pro plan, Fable is now pay-as-you-go. It is included only on Max.",
+    "<strong>ChatGPT got GPT-6.1 Sol on September 29.</strong> Nearly Astra's skill for a fifth of the price. It and the small GPT-6 Luna are on Plus ($20) and up, but only in Work and Codex for now, not the regular chat window. Free and Go still run GPT-5.6 Luna. Pro, which starts at $100, added Dots: always-on agents with their own cloud computer.",
+    "<strong>Grok 4.7 finally shipped, on September 21.</strong> Same price as 4.6, better at long coding jobs and office work. It landed in Grok Build and the developer API first, and the chat window still runs 4.6. SuperGrok ($30) now comes with Grok Bot, a helper that signs into your tools and runs the errand.",
+    "<strong>DeepSeek's small engine beat its big one.</strong> V4.1-Flash arrived September 10, outscored V4-Pro on DeepSeek's own tests, and came with a price cut. The Pro is being retired until a new one is ready.",
+    "<strong>Google announced Gemini 4 Argon on September 30,</strong> and you cannot drive it. Only vetted security researchers have it so far. The 3.5 Pro promised since June never arrived. The Gemini app's engines and prices did not move, so Argon goes on the watchlist below.",
+    "<strong>Kimi's price ladder got filled in.</strong> The chat is still free. There are also paid memberships from $19 a month that this map had not listed.",
+    "<strong>The scoreboard.</strong> On Artificial Analysis's independent index, Opus 5.5 now sits alone at the top, with Fable 5.1, Astra, and the not-yet-released Argon tied just behind it.",
+    "<strong>Held steady:</strong> Copilot, Perplexity, Meta, Qwen, GLM, and Vibe. Perplexity's guest engines have not caught up to the September releases yet."
+  ]},
   { date:"September 10, 2026", since:"since the September 1 snapshot", items:[
     "<strong>ChatGPT got a new flagship: GPT-6 Astra, live September 4.</strong> This is the one to understand. The old engines answered questions; Astra is built to do jobs. It can run your computer, fill in forms, and hand back a finished doc, deck, or spreadsheet. It is on Plus ($20) and up, so Free and Go do not get it. Pro adds an Astra Pro setting that shows up as 'GPT-6 Pro' and is rationed weekly. On a real hands-on task it still fails about one time in four, so it drives and you approve.",
     "<strong>Claude's top engine is now Fable 5.1.</strong> It shipped September 1, hours after our last check. Same sticker price, better at hours-long coding and research jobs and at finishing documents and spreadsheets, and it refuses ordinary requests less often. On the independent scoreboard it and Astra are neck and neck: Astra ahead on doing, Fable ahead on thinking.",
