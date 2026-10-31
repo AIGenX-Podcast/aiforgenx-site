@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<meta name="referrer" content="no-referrer">
+<title>Supper &amp; Sips · Admin</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root { --bg: #070707; --ink: #f3ece0; --muted: #a39d93; --line: #2a2723; --card: #121110; --gold: #FDD476; --gold-dark: #8A6420; --red: #e98a6a; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bg); color: var(--ink); font-family: 'Poppins', sans-serif; font-size: 14px; -webkit-font-smoothing: antialiased; }
+  main { max-width: 760px; margin: 0 auto; padding: 32px 16px 64px; }
+  h1 { font-family: 'Playfair Display', serif; font-weight: 400; font-size: 30px; color: var(--gold); }
+  h2 { margin: 32px 0 12px; font-size: 11px; font-weight: 600; letter-spacing: 0.25em; text-transform: uppercase; color: var(--muted); }
+  .bar { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; margin-top: 10px; color: var(--muted); }
+  .bar .spacer { flex: 1; }
+  button { font: inherit; cursor: pointer; border-radius: 2px; }
+  .gold { padding: 9px 16px; border: 0; background: linear-gradient(100deg, #8A6420, #FDD476 55%, #8A6420); color: #14100a; font-weight: 600; font-size: 12px; letter-spacing: 0.08em; }
+  .ghost { padding: 6px 10px; border: 1px solid var(--line); background: transparent; color: var(--muted); font-size: 12px; }
+  .ghost:hover { color: var(--ink); border-color: var(--muted); }
+  .danger:hover { color: var(--red); border-color: var(--red); }
+  .card { display: grid; grid-template-columns: 1fr auto; gap: 6px 16px; padding: 14px 16px; margin-bottom: 8px; background: var(--card); border: 1px solid var(--line); border-radius: 3px; }
+  .card .name { font-family: 'Playfair Display', serif; font-size: 18px; }
+  .card .meta { color: var(--muted); font-size: 13px; line-height: 1.6; word-break: break-word; }
+  .card .meta a { color: inherit; }
+  .card .diet { color: var(--gold); }
+  .actions { display: flex; flex-direction: column; align-items: flex-end; gap: 8px; }
+  .paid { display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--muted); cursor: pointer; user-select: none; }
+  .paid input { width: 18px; height: 18px; accent-color: #C9993F; cursor: pointer; }
+  .paid.on { color: var(--gold); }
+  .row-btns { display: flex; gap: 6px; }
+  .empty { color: var(--muted); font-style: italic; padding: 8px 0; }
+  .msg { margin-top: 24px; color: var(--red); }
+</style>
+</head>
+<body>
+<main>
+  <h1>Supper &amp; Sips · No. 1</h1>
+  <div class="bar" id="bar" hidden>
+    <span id="summary"></span>
+    <span class="spacer"></span>
+    <button class="ghost" id="refresh">Refresh</button>
+    <button class="gold" id="csv">Export CSV</button>
+  </div>
+  <p class="msg" id="msg"></p>
+
+  <section id="lists" hidden>
+    <h2 id="seats-h">Seats</h2>
+    <div id="seats"></div>
+    <h2 id="wait-h">Waitlist</h2>
+    <div id="wait"></div>
+  </section>
+</main>
+
+<script>
+  const API = '/api/salon';
+  const key = new URLSearchParams(location.search).get('key') || '';
+  const msg = document.getElementById('msg');
+  let rows = [];
+  let seats = 10;
+
+  async function call(method, path, body) {
+    const res = await fetch(API + path, {
+      method,
+      cache: 'no-store',
+      headers: { 'x-admin-key': key, 'content-type': 'application/json' },
+      body: body ? JSON.stringify(body) : undefined,
+    });
+    const out = await res.json().catch(() => ({}));
+    if (res.status === 401) throw new Error('That key did not work. Open this page as /salon/admin?key=YOUR-KEY.');
+    if (!res.ok) throw new Error(out.error || 'Something went wrong.');
+    return out;
+  }
+
+  async function load() {
+    msg.textContent = '';
+    try {
+      const out = await call('GET', '?admin=1');
+      rows = out.rsvps;
+      seats = out.seats;
+      render();
+    } catch (err) {
+      msg.textContent = err.message;
+    }
+  }
+
+  const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+  const when = (iso) => new Date(iso).toLocaleString('en-US', { month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' });
+
+  function card(r, open) {
+    return `
+      <div class="card">
+        <div>
+          <div class="name">${esc(r.name)}</div>
+          <div class="meta">
+            <a href="mailto:${esc(r.email)}">${esc(r.email)}</a> · <a href="sms:${esc(r.phone)}">${esc(r.phone)}</a><br>
+            ${r.diet ? `<span class="diet">${esc(r.diet)}</span><br>` : ''}
+            RSVP’d ${when(r.createdAt)}
+          </div>
+        </div>
+        <div class="actions">
+          <label class="paid ${r.paid ? 'on' : ''}"><input type="checkbox" data-paid="${r.id}" ${r.paid ? 'checked' : ''}> Paid</label>
+          <div class="row-btns">
+            ${r.waitlist && open ? `<button class="ghost" data-seat="${r.id}">Give seat</button>` : ''}
+            <button class="ghost danger" data-del="${r.id}">Delete</button>
+          </div>
+        </div>
+      </div>`;
+  }
+
+  function render() {
+    const taken = rows.filter((r) => !r.waitlist);
+    const waiting = rows.filter((r) => r.waitlist);
+    const paid = taken.filter((r) => r.paid).length;
+    const open = taken.length < seats;
+    document.getElementById('summary').textContent = `${taken.length} of ${seats} seats taken · ${paid} paid · ${waiting.length} waiting`;
+    document.getElementById('seats-h').textContent = `Seats (${taken.length})`;
+    document.getElementById('wait-h').textContent = `Waitlist (${waiting.length})`;
+    document.getElementById('seats').innerHTML = taken.map((r) => card(r, open)).join('') || '<p class="empty">No RSVPs yet.</p>';
+    document.getElementById('wait').innerHTML = waiting.map((r) => card(r, open)).join('') || '<p class="empty">Nobody waiting.</p>';
+    document.getElementById('bar').hidden = false;
+    document.getElementById('lists').hidden = false;
+  }
+
+  document.addEventListener('change', async (e) => {
+    const id = e.target.dataset.paid;
+    if (!id) return;
+    try {
+      await call('PATCH', '', { id, paid: e.target.checked });
+      rows.find((r) => r.id === id).paid = e.target.checked;
+      render();
+    } catch (err) { msg.textContent = err.message; e.target.checked = !e.target.checked; }
+  });
+
+  document.addEventListener('click', async (e) => {
+    const { del, seat } = e.target.dataset;
+    try {
+      if (del) {
+        const r = rows.find((x) => x.id === del);
+        if (!confirm(`Delete ${r.name}? This can’t be undone.`)) return;
+        await call('DELETE', '?id=' + encodeURIComponent(del));
+        rows = rows.filter((x) => x.id !== del);
+        render();
+      } else if (seat) {
+        await call('PATCH', '', { id: seat, waitlist: false });
+        rows.find((x) => x.id === seat).waitlist = false;
+        render();
+      }
+    } catch (err) { msg.textContent = err.message; }
+  });
+
+  document.getElementById('refresh').addEventListener('click', load);
+
+  document.getElementById('csv').addEventListener('click', () => {
+    const cols = ['name', 'email', 'phone', 'diet', 'status', 'paid', 'createdAt'];
+    const cell = (v) => `"${String(v ?? '').replace(/"/g, '""')}"`;
+    const lines = [cols.join(',')].concat(rows.map((r) =>
+      [r.name, r.email, r.phone, r.diet, r.waitlist ? 'waitlist' : 'seat', r.paid ? 'yes' : 'no', r.createdAt].map(cell).join(',')
+    ));
+    const url = URL.createObjectURL(new Blob([lines.join('\n')], { type: 'text/csv' }));
+    const a = Object.assign(document.createElement('a'), { href: url, download: 'supper-and-sips-rsvps.csv' });
+    a.click();
+    URL.revokeObjectURL(url);
+  });
+
+  if (!key) msg.textContent = 'Add your key to the address: /salon/admin?key=YOUR-KEY';
+  else load();
+</script>
+</body>
+</html>

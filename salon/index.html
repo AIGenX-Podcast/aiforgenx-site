@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Supper &amp; Sips · An AI Salon</title>
+<meta name="description" content="Supper & Sips, An AI Salon, No. 1. Thursday, November 19, Lafayette.">
+<!-- Vercel Web Analytics -->
+<script>
+  window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+</script>
+<script defer src="/_vercel/insights/script.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Pinyon+Script&family=Playfair+Display:ital,wght@0,400;0,500;1,400;1,500&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #070707;
+    --ink: #f3ece0;
+    --muted: #a39d93;
+    --line: #2a2723;
+    --field: #141312;
+    --gold-dark: #8A6420;
+    --gold-light: #FDD476;
+    --gold: linear-gradient(100deg, #8A6420 0%, #C9993F 30%, #FDD476 55%, #C9993F 78%, #8A6420 100%);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { background: var(--bg); }
+  body {
+    min-height: 100vh;
+    min-height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    color: var(--ink);
+    font-family: 'Playfair Display', Georgia, serif;
+    background:
+      radial-gradient(ellipse 90% 55% at 50% 22%, rgba(253, 212, 118, 0.07), transparent 70%),
+      radial-gradient(ellipse 120% 80% at 50% 0%, #161412 0%, var(--bg) 65%);
+    background-color: var(--bg);
+    -webkit-font-smoothing: antialiased;
+  }
+  main { flex: 1; width: 100%; max-width: 440px; margin: 0 auto; padding: 0 28px 48px; text-align: center; }
+
+  .label {
+    font-family: 'Poppins', sans-serif;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+  }
+  .foil {
+    background: var(--gold);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  /* Header */
+  .hero { position: relative; padding-top: 28px; }
+  .emboss {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 200px;
+    line-height: 0.86;
+    letter-spacing: 0.02em;
+    color: #0c0c0c;
+    text-shadow:
+      -1px -1px 0 rgba(255, 255, 255, 0.07),
+      1px 1px 0 rgba(0, 0, 0, 0.9),
+      3px 5px 12px rgba(0, 0, 0, 0.85);
+    user-select: none;
+  }
+  .title {
+    position: relative;
+    margin-top: -46px;
+    font-size: 40px;
+    font-weight: 400;
+    line-height: 1.1;
+    filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.6));
+  }
+  .subtitle { margin-top: 14px; color: var(--ink); font-size: 11px; font-weight: 600; letter-spacing: 0.3em; }
+  .date { margin-top: 22px; font-size: 19px; line-height: 1.35; }
+  .date em { font-style: italic; }
+  .intro { margin-top: 14px; font-size: 16px; line-height: 1.5; color: #e6dfd3; }
+
+  .seats {
+    display: flex; align-items: center; gap: 14px;
+    margin: 24px 0 26px;
+    color: var(--gold-light);
+    font-weight: 600;
+  }
+  .seats::before, .seats::after { content: ''; flex: 1; height: 1px; background: linear-gradient(90deg, transparent, var(--gold-dark)); }
+  .seats::after { background: linear-gradient(90deg, var(--gold-dark), transparent); }
+
+  /* Form */
+  form { text-align: left; }
+  .field { margin-bottom: 18px; }
+  .field label { display: block; margin-bottom: 9px; color: var(--muted); font-size: 9.5px; }
+  .field input {
+    width: 100%;
+    padding: 13px 15px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 16px;
+    color: var(--ink);
+    background: var(--field);
+    border: 1px solid var(--line);
+    border-radius: 2px;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  .field input::placeholder { color: #6e6a64; }
+  .field input:focus { border-color: var(--gold-dark); }
+  .hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+
+  .btn {
+    display: block;
+    width: 100%;
+    margin-top: 8px;
+    padding: 18px 16px;
+    border: 0;
+    border-radius: 2px;
+    background: var(--gold);
+    color: #14100a;
+    font-family: 'Poppins', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    text-decoration: none;
+    text-align: center;
+    cursor: pointer;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.5);
+    transition: filter 0.2s, transform 0.1s;
+  }
+  .btn:hover { filter: brightness(1.06); }
+  .btn:active { transform: translateY(1px); }
+  .btn[disabled] { opacity: 0.6; cursor: wait; }
+  .fine { margin-top: 16px; text-align: center; font-size: 14px; font-style: italic; color: #cfc8bc; }
+  .error { margin-top: 14px; text-align: center; font-size: 14px; color: #e98a6a; min-height: 1em; }
+
+  /* Confirmation */
+  .done { display: none; padding-top: 72px; }
+  .done .eyebrow { color: var(--muted); }
+  .script {
+    margin-top: 22px;
+    font-family: 'Pinyon Script', cursive;
+    font-weight: 400;
+    font-size: 64px;
+    line-height: 1.15;
+  }
+  .wait .script { font-size: 46px; }
+  .divider { width: 1px; height: 40px; margin: 22px auto 28px; background: linear-gradient(180deg, transparent, var(--gold-light), transparent); }
+  .thanks { font-size: 18px; line-height: 1.5; }
+  .done .btn { margin-top: 28px; }
+  .handle { margin-top: 14px; font-family: 'Poppins', sans-serif; font-size: 13px; color: var(--muted); }
+  .rule { height: 1px; margin: 32px 0 28px; background: var(--line); }
+  .when { font-size: 18px; font-style: italic; }
+  .addr { margin-top: 4px; font-size: 16px; color: #e6dfd3; }
+  .cal-label { margin: 26px 0 14px; color: var(--muted); }
+  .cal { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .cal a {
+    display: flex; align-items: center; justify-content: center; gap: 8px;
+    padding: 15px 8px;
+    border: 1px solid var(--gold-dark);
+    border-radius: 2px;
+    color: var(--gold-light);
+    font-family: 'Poppins', sans-serif;
+    font-size: 12.5px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-decoration: none;
+    transition: background 0.2s;
+  }
+  .cal a:hover { background: rgba(253, 212, 118, 0.06); }
+  .cal svg { width: 14px; height: 14px; flex: none; }
+
+  /* Footer */
+  footer { text-align: center; }
+  footer .label { display: block; padding: 0 16px 18px; color: #bdb6aa; letter-spacing: 0.4em; }
+  .stripes { display: flex; flex-direction: column; }
+  .stripes span { height: 3px; }
+
+  body.is-done .form-view { display: none; }
+  body.is-done .done { display: block; }
+  .wait-only, .wait .paid-only { display: none; }
+  .wait .wait-only { display: block; }
+</style>
+</head>
+<body>
+
+<main>
+  <section class="form-view">
+    <div class="hero">
+      <div class="emboss" aria-hidden="true">AI</div>
+      <h1 class="title foil">Supper &amp; Sips</h1>
+      <p class="label subtitle">An AI Salon · No. 1</p>
+    </div>
+
+    <p class="date"><em>Thursday, November 19</em><br>Six to nine · Lafayette</p>
+    <p class="intro">Dinner and wine are my treat. The $100 covers the workshop on personal AI agents, plus a take-home setup guide.</p>
+
+    <p class="label seats" id="seats" aria-live="polite">10 of 10 seats left</p>
+
+    <form id="rsvp" novalidate>
+      <div class="field">
+        <label class="label" for="name">Name</label>
+        <input id="name" name="name" type="text" autocomplete="name" placeholder="Your name" required>
+      </div>
+      <div class="field">
+        <label class="label" for="email">Email</label>
+        <input id="email" name="email" type="email" autocomplete="email" placeholder="you@email.com" required>
+      </div>
+      <div class="field">
+        <label class="label" for="phone">Phone</label>
+        <input id="phone" name="phone" type="tel" autocomplete="tel" placeholder="For day-of texts" required>
+      </div>
+      <div class="field">
+        <label class="label" for="diet">Anything you don’t eat? (optional)</label>
+        <input id="diet" name="diet" type="text" placeholder="Allergies, no shellfish, vegetarian…">
+      </div>
+      <div class="hp" aria-hidden="true">
+        <label for="website">Website</label>
+        <input id="website" name="website" type="text" tabindex="-1" autocomplete="off">
+      </div>
+      <button class="btn" type="submit" id="submit">Save my seat</button>
+      <p class="fine" id="fine">You’ll pay by Venmo on the next screen.</p>
+      <p class="error" id="error" role="alert"></p>
+    </form>
+  </section>
+
+  <section class="done" id="done" aria-live="polite">
+    <p class="label eyebrow">Supper &amp; Sips · No. 1</p>
+    <h1 class="script foil paid-only">You’re in</h1>
+    <h1 class="script foil wait-only">You’re on the waitlist</h1>
+    <div class="divider"></div>
+
+    <div class="paid-only">
+      <p class="thanks">Thank you, <span class="who"></span>. Your seat is held as soon as your $100 comes through on Venmo.</p>
+      <a class="btn" href="https://venmo.com/Marisa-wilson27?txn=pay&amp;amount=100&amp;note=Supper%20%26%20Sips%20No.%201" target="_blank" rel="noopener">Pay $100 on Venmo</a>
+      <p class="handle">@Marisa-wilson27</p>
+
+      <div class="rule"></div>
+      <p class="when">Thursday, November 19, six o’clock</p>
+      <p class="addr">I’ll text you the address the week of.</p>
+
+      <p class="label cal-label">Add to your calendar</p>
+      <div class="cal">
+        <a href="/salon/supper-and-sips.ics">
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3" aria-hidden="true"><rect x="2" y="3" width="12" height="11" rx="1.5"/><path d="M2 6.5h12M5.5 1.5v3M10.5 1.5v3"/></svg>
+          Apple · Outlook
+        </a>
+        <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=Supper%20%26%20Sips%2C%20An%20AI%20Salon&amp;dates=20261120T020000Z%2F20261120T050000Z&amp;ctz=America%2FLos_Angeles&amp;location=Lafayette%2C%20CA&amp;details=Dinner%2C%20wine%2C%20and%20personal%20AI%20agents.%20Address%20by%20text%20the%20week%20of." target="_blank" rel="noopener">
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3" aria-hidden="true"><rect x="2" y="3" width="12" height="11" rx="1.5"/><path d="M2 6.5h12M5.5 1.5v3M10.5 1.5v3"/></svg>
+          Google
+        </a>
+      </div>
+    </div>
+
+    <p class="thanks wait-only">Thank you, <span class="who"></span>. All ten seats are spoken for. I’ll text you if a seat opens.</p>
+  </section>
+</main>
+
+<footer>
+  <span class="label" id="footer-text">AI for GenX</span>
+  <div class="stripes" aria-hidden="true">
+    <span style="background:#3C7F72"></span>
+    <span style="background:#992800"></span>
+    <span style="background:#D34A23"></span>
+    <span style="background:#FFAF00"></span>
+  </div>
+</footer>
+
+<script>
+  const API = '/api/salon';
+  const seatsEl = document.getElementById('seats');
+  const form = document.getElementById('rsvp');
+  const btn = document.getElementById('submit');
+  const errorEl = document.getElementById('error');
+
+  function showSeats(left) {
+    seatsEl.textContent = left > 0 ? left + ' of 10 seats left' : 'Full · join the waitlist';
+    btn.textContent = left > 0 ? 'Save my seat' : 'Join the waitlist';
+    document.getElementById('fine').textContent = left > 0
+      ? 'You’ll pay by Venmo on the next screen.'
+      : 'I’ll text you if a seat opens.';
+  }
+
+  async function refreshSeats() {
+    try {
+      const res = await fetch(API, { cache: 'no-store' });
+      if (res.ok) showSeats((await res.json()).left);
+    } catch (e) { /* keep the last count */ }
+  }
+
+  function showDone(status, name) {
+    document.querySelectorAll('.who').forEach((el) => { el.textContent = name || 'friend'; });
+    document.getElementById('done').classList.toggle('wait', status === 'waitlist');
+    document.getElementById('footer-text').textContent = 'aiforgenxpodcast.com';
+    document.body.classList.add('is-done');
+    window.scrollTo(0, 0);
+  }
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    errorEl.textContent = '';
+    const data = Object.fromEntries(new FormData(form));
+    if (!data.name.trim() || !data.email.trim() || !data.phone.trim()) {
+      errorEl.textContent = 'Please add your name, email, and phone.';
+      return;
+    }
+    btn.disabled = true;
+    try {
+      const res = await fetch(API, {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify(data),
+      });
+      const out = await res.json();
+      if (!res.ok) throw new Error(out.error || 'Something went wrong.');
+      showDone(out.status, out.name);
+    } catch (err) {
+      errorEl.textContent = err.message || 'Something went wrong. Please try again.';
+    } finally {
+      btn.disabled = false;
+    }
+  });
+
+  refreshSeats();
+  setInterval(() => { if (!document.hidden && !document.body.classList.contains('is-done')) refreshSeats(); }, 20000);
+</script>
+</body>
+</html>
