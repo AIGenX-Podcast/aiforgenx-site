@@ -1,6 +1,7 @@
 {
   "redirects": [
     { "source": "/salon", "destination": "/salons/2026-11-personal-agents/", "permanent": true },
+    { "source": "/salon/", "destination": "/salons/2026-11-personal-agents/", "permanent": true },
     { "source": "/salon/:path*", "destination": "/salons/2026-11-personal-agents/:path*", "permanent": true }
   ]
 }
