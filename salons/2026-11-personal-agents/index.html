@@ -8,9 +8,9 @@
 <meta name="description" content="Supper & Sips, An AI Salon, No. 1. Thursday, November 19, Lafayette.">
 <meta property="og:title" content="Supper &amp; Sips · An AI Salon, No. 1">
 <meta property="og:description" content="How to set up a personal AI agent, covering Dots, Muse, Duet, Instinct, and Fo. Thursday, November 19, six to nine in Lafayette. Dinner and wine on me. Ten seats.">
-<meta property="og:url" content="https://www.aiforgenxpodcast.com/salon">
+<meta property="og:url" content="https://www.aiforgenxpodcast.com/salons/2026-11-personal-agents/">
 <meta property="og:type" content="website">
-<meta property="og:image" content="https://www.aiforgenxpodcast.com/salon/og.png?v=2">
+<meta property="og:image" content="https://www.aiforgenxpodcast.com/salons/2026-11-personal-agents/og.png?v=2">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
@@ -87,6 +87,9 @@
     filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.6));
   }
   .subtitle { margin-top: 14px; color: var(--ink); font-size: 11px; font-weight: 600; letter-spacing: 0.3em; }
+  .subtitle span { display: block; }
+  .subtitle span + span { margin-top: 8px; }
+  .subtitle .sr-sep { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); margin: 0; }
   .date { margin-top: 22px; font-size: 19px; line-height: 1.35; }
   .date em { font-style: italic; }
   .intro { margin-top: 14px; font-size: 16px; line-height: 1.5; color: #e6dfd3; }
@@ -146,6 +149,32 @@
   .fine { margin-top: 16px; text-align: center; font-size: 14px; font-style: italic; color: #cfc8bc; }
   .error { margin-top: 14px; text-align: center; font-size: 14px; color: #e98a6a; min-height: 1em; }
 
+  /* What the evening covers */
+  html { scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+  #rsvp { scroll-margin-top: 96px; }
+  .jump {
+    display: inline-block;
+    margin-top: 26px;
+    color: #cfc8bc;
+    font-size: 15px;
+    font-style: italic;
+    text-decoration: underline;
+    text-decoration-color: rgba(207, 200, 188, 0.35);
+    text-underline-offset: 4px;
+    transition: color 0.2s;
+  }
+  .jump:hover { color: var(--ink); }
+  .jump .arrow { font-family: -apple-system, system-ui, sans-serif; font-style: normal; }
+  .covers { margin-top: 72px; scroll-margin-top: 24px; text-align: left; }
+  .covers h2 { text-align: center; font-size: 28px; font-weight: 400; line-height: 1.2; }
+  .covers .hair { height: 1px; margin: 40px 0; background: linear-gradient(90deg, transparent, var(--gold-dark) 30%, var(--gold-dark) 70%, transparent); }
+  .covers h3 { margin-bottom: 16px; color: var(--muted); font-size: 10px; }
+  .covers p { font-size: 16px; line-height: 1.7; color: #e6dfd3; }
+  .covers p + p { margin-top: 14px; }
+  .covers .tool { color: var(--gold-light); font-weight: 500; }
+  .covers .back { margin-top: 0; text-align: center; }
+
   /* Confirmation */
   .done { display: none; padding-top: 72px; }
   .done .eyebrow { color: var(--muted); }
@@ -201,7 +230,7 @@
     <div class="hero">
       <div class="emboss" aria-hidden="true">AI</div>
       <h1 class="title foil">Supper &amp; Sips</h1>
-      <p class="label subtitle">An AI Salon · No. 1</p>
+      <p class="label subtitle"><span>An AI Salon · No. 1</span><span class="sr-sep"> · </span><span>Thursday, November 19, 2026</span></p>
     </div>
 
     <p class="date"><em>Thursday, November 19</em><br>Six to nine · Lafayette</p>
@@ -234,6 +263,47 @@
       <p class="fine" id="fine">You’ll pay by Venmo on the next screen.</p>
       <p class="error" id="error" role="alert"></p>
     </form>
+
+    <a class="jump" href="#covers">What the evening covers <span class="arrow" aria-hidden="true">↓</span></a>
+
+    <section class="covers" id="covers" aria-labelledby="covers-h">
+      <h2 id="covers-h">What the evening covers</h2>
+
+      <div class="hair"></div>
+      <h3 class="label">Who it’s for</h3>
+      <p>This is for you if you’ve asked ChatGPT a question or two, maybe had it rescue an awkward email, and have a nagging feeling there’s a whole next chapter everyone else seems to have already read. You don’t need a laptop, a tech background, or any idea yet what an agent is. You just need to be curious and willing to ask the question you think is dumb, which I promise at least three other people in the room are quietly wondering too.</p>
+
+      <div class="hair"></div>
+      <h3 class="label">What we’ll cover</h3>
+      <p>How we got here. The short version of how we went from asking a chatbot questions to handing an assistant the grocery list.</p>
+      <p>What an agent actually is, in plain English, and how it differs from the chat window you already know.</p>
+      <p>Meet the five. I’ve been living with Dots, Muse, Duet, Instinct, and Fo for a while now, and I’ll show you each one on screen so you can see how it looks and feels before you sign up for anything.</p>
+      <p>Safety, before the fun part. What to think about before you let any of them near your email, your calendar, or your money.</p>
+      <p>Real life. The ways I actually use mine, including at least one that is mildly embarrassing.</p>
+
+      <div class="hair"></div>
+      <h3 class="label">Meet the five</h3>
+      <p><strong class="tool">Dots</strong> is for the over-scheduled mom who wants one place that remembers everything, and who’d like to be able to call it from the car line.</p>
+      <p><strong class="tool">Muse</strong> is for anyone whose life already runs through Facebook and Instagram and wants a helper that lives where she does and actually gets her.</p>
+      <p><strong class="tool">Duet</strong> is for small business owners and solopreneurs who need their work kept in separate compartments and want something that can really think through a hard problem.</p>
+      <p><strong class="tool">Instinct</strong> is for the minimalist who wants a really good assistant on call with zero friction.</p>
+      <p><strong class="tool">Fo</strong> is for the person who thinks best out loud and just wants to talk through the to-do list.</p>
+
+      <div class="hair"></div>
+      <h3 class="label">What you’ll leave with</h3>
+      <p>A one-page guide for setting up whichever one you choose, at your own kitchen table and on your own time, plus invites to Instinct, and a much clearer sense of which of these fits your life, including full permission to decide that none of them do yet.</p>
+
+      <div class="hair"></div>
+      <h3 class="label">What we won’t do</h3>
+      <p>Nobody connects a real account that night. You’ll watch me do it on my screen, with my inbox, so the only person risking embarrassment is me.</p>
+
+      <div class="hair"></div>
+      <h3 class="label">The evening</h3>
+      <p>Dinner at six is my treat, we move to the living room after, and we wrap at nine, which gets everyone home well before anyone sends a search party. The $100 covers the workshop and the take-home guide.</p>
+
+      <div class="hair"></div>
+      <p class="back"><a class="jump" href="#rsvp">Save my seat <span class="arrow" aria-hidden="true">↑</span></a></p>
+    </section>
   </section>
 
   <section class="done" id="done" aria-live="polite">
@@ -253,7 +323,7 @@
 
       <p class="label cal-label">Add to your calendar</p>
       <div class="cal">
-        <a href="/salon/supper-and-sips.ics">
+        <a href="/salons/2026-11-personal-agents/supper-and-sips.ics">
           <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3" aria-hidden="true"><rect x="2" y="3" width="12" height="11" rx="1.5"/><path d="M2 6.5h12M5.5 1.5v3M10.5 1.5v3"/></svg>
           Apple · Outlook
         </a>

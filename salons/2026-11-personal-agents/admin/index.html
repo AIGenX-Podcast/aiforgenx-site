@@ -71,7 +71,7 @@
       body: body ? JSON.stringify(body) : undefined,
     });
     const out = await res.json().catch(() => ({}));
-    if (res.status === 401) throw new Error('That key did not work. Open this page as /salon/admin?key=YOUR-KEY.');
+    if (res.status === 401) throw new Error('That key did not work. Open this page as /salons/2026-11-personal-agents/admin?key=YOUR-KEY.');
     if (!res.ok) throw new Error(out.error || 'Something went wrong.');
     return out;
   }
@@ -167,7 +167,7 @@
     URL.revokeObjectURL(url);
   });
 
-  if (!key) msg.textContent = 'Add your key to the address: /salon/admin?key=YOUR-KEY';
+  if (!key) msg.textContent = 'Add your key to the address: /salons/2026-11-personal-agents/admin?key=YOUR-KEY';
   else load();
 </script>
 </body>
